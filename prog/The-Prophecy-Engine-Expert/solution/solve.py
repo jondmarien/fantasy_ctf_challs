@@ -19,8 +19,8 @@ Discovery approach (how a player would figure this out):
 
 from pwn import *
 
-HOST = "localhost"
-PORT = 1337
+HOST = "0.cloud.chals.io"
+PORT = 26408
 
 # Constants deduced from probing the oracle
 STAGE1_MULT = 7

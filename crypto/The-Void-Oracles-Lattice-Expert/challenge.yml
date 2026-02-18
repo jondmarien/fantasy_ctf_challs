@@ -5,8 +5,6 @@ description: |
   Beyond the veil of the material plane, the Void Oracle communicates across dimensions using an ancient RSA key exchange. To reduce latency, the Oracle chose a private exponent that is far too small.
 
   Intercept the Oracle's sealed message and recover its contents.
-
-  **Hint:** When d is small relative to n, the continued fraction expansion of e/n reveals it.
 value: 1000
 type: dynamic
 extra:

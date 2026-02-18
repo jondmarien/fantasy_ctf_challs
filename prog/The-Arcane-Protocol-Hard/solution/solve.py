@@ -5,8 +5,8 @@ from pwn import *
 import hmac
 import hashlib
 
-HOST = "localhost"
-PORT = 1337
+HOST = "0.cloud.chals.io"
+PORT = 12292
 
 # Key extracted from arcane_server.py source code
 ARCANE_KEY = b"ObsidianCitadel_S3cretKey_2024"

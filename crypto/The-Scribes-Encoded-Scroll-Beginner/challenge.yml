@@ -5,8 +5,6 @@ description: |
   A dusty scroll was recovered from the ruins of the Arcane Library. The scribe who wrote it was known for his love of obfuscation — layering one encoding atop another to hide his secrets.
 
   The scroll's contents have been intercepted. Decode them to reveal the hidden message.
-
-  **Hint:** The scribe always encoded first, then encoded again.
 value: 100
 type: dynamic
 extra:

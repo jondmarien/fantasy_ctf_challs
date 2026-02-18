@@ -5,8 +5,6 @@ description: |
   A dungeon map was recovered from the pack of a fallen adventurer. Each chamber has a toll — the cost in gold to pass through. The treasure door only opens when fed the exact minimum cost to traverse from entrance to exit.
 
   Find the cheapest path through the dungeon.
-
-  **Hint:** Model the grid as a weighted graph. Movement is up, down, left, right only.
 value: 400
 type: dynamic
 extra:

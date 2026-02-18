@@ -5,8 +5,6 @@ description: |-
   The Lich guards his vault with an enchanted oracle that issues access tokens. You have been issued a guest token — but the vault only opens for admins.
 
   The oracle uses AES-CBC encryption. Study the token format and find a way to forge admin access without knowing the key.
-
-  **Hint:** In CBC mode, each plaintext block is XORed with the previous ciphertext block before encryption.
 value: 600
 type: dynamic
 

@@ -3,8 +3,8 @@
 
 from pwn import *
 
-HOST = "localhost"
-PORT = 1337
+HOST = "0.cloud.chals.io"
+PORT = 21874
 
 
 def solve():
@@ -32,7 +32,7 @@ def solve():
     #   new_iv[j] = iv[j] XOR original_byte XOR target_byte
 
     original_pt = b"role=guest;name="
-    target_pt   = b"role=admin;name="
+    target_pt = b"role=admin;name="
 
     new_iv = bytearray(iv)
     for i in range(len(original_pt)):
