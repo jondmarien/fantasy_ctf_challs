@@ -1,0 +1,28 @@
+name: "The Guild Ledger"
+author: "ISSessions"
+category: prog
+description: |
+  The Guild Ledger holds records of every adventurer who has passed through the Guild Hall. But one entry is a fraud — a cunning infiltrator hid a secret message in the notes field of a most unusual transaction.
+
+  Parse the ledger and find the odd one out.
+
+  **Hint:** Not all bounties are created equal. Some are... indivisible.
+value: 100
+type: dynamic
+extra:
+  initial: 100
+  minimum: 30
+  decay: 30
+flags:
+  - type: static
+    content: "FantasyCTF{pr1m3_b0unty_unm4sks_th3_fr4ud}"
+    case_sensitive: false
+files:
+  - challenge/ledger.txt
+hints:
+  - content: "Not all bounties are created equal. Some are... indivisible."
+    cost: 0
+  - content: "Find the entry with a prime gold amount and decode its notes field."
+    cost: 25
+state: hidden
+version: "0.1"

@@ -1,0 +1,27 @@
+name: "The Runic Vault"
+author: "ISSessions"
+category: prog
+description: |
+  Deep beneath the Runekeeper's Tower lies a vault sealed by an ancient four-letter word of power. The vault keeper encrypted its contents with a repeating-key XOR cipher using this word — four lowercase letters, no more, no less.
+
+  Break the seal and claim what lies within.
+value: 250
+type: dynamic
+extra:
+  initial: 250
+  minimum: 30
+  decay: 30
+flags:
+  - type: static
+    content: "FantasyCTF{run3s_x0r_th3_v4ult_0p3n}"
+    case_sensitive: false
+files:
+  - challenge/vault_locked.bin
+  - challenge/encrypt.py
+hints:
+  - content: "The vault's key is a real word, but you don't need to know which one — just try them all."
+    cost: 25
+  - content: "XOR the ciphertext against every 4-letter lowercase combo. Check for a known flag prefix."
+    cost: 50
+state: hidden
+version: "0.1"

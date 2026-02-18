@@ -1,0 +1,29 @@
+name: "The Scribe's Encoded Scroll"
+author: "ISSessions"
+category: crypto
+description: |
+  A dusty scroll was recovered from the ruins of the Arcane Library. The scribe who wrote it was known for his love of obfuscation — layering one encoding atop another to hide his secrets.
+
+  The scroll's contents have been intercepted. Decode them to reveal the hidden message.
+
+  **Hint:** The scribe always encoded first, then encoded again.
+value: 100
+type: dynamic
+extra:
+  initial: 100
+  minimum: 30
+  decay: 30
+flags:
+  - type: static
+    content: "FantasyCTF{th3_scrib3s_r0tation_b3tray3d_h1m}"
+    case_sensitive: false
+files:
+  - challenge/encoded.txt
+  - challenge/encrypt.py
+hints:
+  - content: "Two common encodings, applied one after the other. The outer one is very common on the web."
+    cost: 0
+  - content: "Base64 decode it first, then think about letter rotation."
+    cost: 25
+state: hidden
+version: "0.1"

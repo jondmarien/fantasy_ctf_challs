@@ -1,0 +1,29 @@
+name: "The Dragon's Sealed Proclamation"
+author: "ISSessions"
+category: crypto
+description: |
+  The Dragon-King sealed his royal proclamation with an RSA cipher, trusting his court wizard to generate secure keys. But the wizard, in his laziness, used a deterministic and predictable method to choose his primes.
+
+  The public parameters and ciphertext are provided. Break the seal.
+
+  **Hint:** The wizard's prime generation method is documented in the encryption script.
+value: 400
+type: dynamic
+extra:
+  initial: 400
+  minimum: 30
+  decay: 30
+flags:
+  - type: static
+    content: "FantasyCTF{sm4ll_pr1m3s_cr4ck_th3_s3al}"
+    case_sensitive: false
+files:
+  - challenge/params.txt
+  - challenge/encrypt.py
+hints:
+  - content: "The wizard didn't use random primes. He used a formula. Read the encryption script carefully."
+    cost: 50
+  - content: "Regenerate p and q using the same nextprime() calls in encrypt.py. Then compute d and decrypt."
+    cost: 100
+state: hidden
+version: "0.1"

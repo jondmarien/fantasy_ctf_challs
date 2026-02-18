@@ -1,0 +1,29 @@
+name: "The Goblin Messenger's Cipher"
+author: "ISSessions"
+category: crypto
+description: |
+  A goblin courier was captured carrying an encrypted message between enemy camps. The goblins are known to use a simple keyword cipher — and rumour has it the key is the name of their warlord.
+
+  Decrypt the message to uncover their plans.
+
+  **Hint:** The cipher shifts each letter by the corresponding letter of a repeating keyword.
+value: 250
+type: dynamic
+extra:
+  initial: 250
+  minimum: 30
+  decay: 30
+flags:
+  - type: static
+    content: "FantasyCTF{g0bl1n_sp1es_f4ll_t0_k4rzul}"
+    case_sensitive: false
+files:
+  - challenge/ciphertext.txt
+  - challenge/encrypt.py
+hints:
+  - content: "The goblins named their cipher after their warlord. What is his name?"
+    cost: 25
+  - content: "The key is KARZUL. Now implement Vigenère decryption."
+    cost: 75
+state: hidden
+version: "0.1"
