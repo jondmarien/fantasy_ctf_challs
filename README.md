@@ -66,7 +66,7 @@ All challenges use **dynamic scoring** — points decrease as more teams solve t
 
 All flags follow the format:
 
-```
+```bash
 FantasyCTF{...}
 ```
 
