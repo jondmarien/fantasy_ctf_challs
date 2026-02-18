@@ -23,7 +23,7 @@ files:
 hints:
   - content: "The goblins named their cipher after their warlord. What is his name?"
     cost: 25
-  - content: "The key is KARZUL. Now implement Vigenère decryption."
+  - content: "The cipher is a Vigenère. The key is the warlord's name — it appears in the ciphertext header."
     cost: 75
 state: hidden
 version: "0.1"
