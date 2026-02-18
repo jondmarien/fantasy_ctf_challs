@@ -24,6 +24,7 @@ hints:
     cost: 100
   - content: "Each stage is independently reversible. Isolate them one at a time."
     cost: 125
+image: .
 connection_info: "nc <host> 1337"
 requirements:
   - "The Arcane Protocol"

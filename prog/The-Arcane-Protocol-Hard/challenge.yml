@@ -24,6 +24,7 @@ hints:
     cost: 75
   - content: "The seal is a keyed hash. The algorithm and key are both visible in the server source."
     cost: 100
+image: .
 connection_info: "nc <host> 1337"
 requirements:
   - "The Dungeon Cartographer"

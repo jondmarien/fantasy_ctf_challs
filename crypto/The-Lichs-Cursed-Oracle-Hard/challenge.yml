@@ -25,6 +25,7 @@ hints:
     cost: 75
   - content: "XOR the IV bytes at the right positions to change 'guest' to 'admin' in the decrypted token."
     cost: 125
+image: .
 connection_info: "nc <host> 1337"
 requirements:
   - "The Dragon's Sealed Proclamation"
