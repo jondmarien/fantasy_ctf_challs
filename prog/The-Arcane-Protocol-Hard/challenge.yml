@@ -1,32 +1,42 @@
-name: "The Arcane Protocol"
-author: "ISSessions"
+name: The Arcane Protocol
+author: ISSessions
 category: prog
-description: |
+description: |-
   The Arcane Server guards a sealed door deep within the Obsidian Citadel. It speaks a binary tongue of keys and echoes — always beginning with a whisper and ending with a seal.
 
   Connect to the server, study its protocol from the provided source, and send the correct response to receive the flag.
 value: 600
 type: dynamic
+
 extra:
   initial: 600
   minimum: 30
   decay: 30
-flags:
-  - type: static
-    content: "FantasyCTF{k3ys_4nd_3ch03s_uns34l_th3_d00r}"
-    case_sensitive: false
-files:
-  - challenge/arcane_server.py
-hints:
-  - content: "The server always sends something first. Listen before speaking."
-    cost: 50
-  - content: "The server's seal is keyed. Check the server source for the key."
-    cost: 75
-  - content: "The seal is a keyed hash. The algorithm and key are both visible in the server source."
-    cost: 100
+
 image: .
-connection_info: "nc <host> 1337"
+connection_info: issessionsctf-the-arcane-protocol.chals.io
+
+flags:
+- type: static
+  content: FantasyCTF{k3ys_4nd_3ch03s_uns34l_th3_d00r}
+  case_sensitive: false
+
+files:
+- challenge/arcane_server.py
+
+hints:
+- content: The server always sends something first. Listen before speaking.
+  cost: 50
+- content: The server's seal is keyed. Check the server source for the key.
+  cost: 75
+- content: >-
+    The seal is a keyed hash. The algorithm and key are both visible in the server
+    source.
+  cost: 100
+
 requirements:
-  - "The Dungeon Cartographer"
+- The Dungeon Cartographer
+
 state: hidden
-version: "0.1"
+
+version: '0.1'

@@ -1,7 +1,7 @@
-name: "The Lich's Cursed Oracle"
-author: "ISSessions"
+name: The Lich's Cursed Oracle
+author: ISSessions
 category: crypto
-description: |
+description: |-
   The Lich guards his vault with an enchanted oracle that issues access tokens. You have been issued a guest token — but the vault only opens for admins.
 
   The oracle uses AES-CBC encryption. Study the token format and find a way to forge admin access without knowing the key.
@@ -9,25 +9,35 @@ description: |
   **Hint:** In CBC mode, each plaintext block is XORed with the previous ciphertext block before encryption.
 value: 600
 type: dynamic
+
 extra:
   initial: 600
   minimum: 30
   decay: 30
-flags:
-  - type: static
-    content: "FantasyCTF{bl0ck_by_bl0ck_th3_ch41n_br34ks}"
-    case_sensitive: false
-files:
-  - challenge/oracle.py
-  - challenge/challenge.txt
-hints:
-  - content: "You can modify the IV to flip specific bits in the first decrypted block."
-    cost: 75
-  - content: "XOR the IV bytes at the right positions to change 'guest' to 'admin' in the decrypted token."
-    cost: 125
+
 image: .
-connection_info: "nc <host> 1337"
+connection_info: issessionsctf-the-lich-s-cursed-oracle.chals.io
+
+flags:
+- type: static
+  content: FantasyCTF{bl0ck_by_bl0ck_th3_ch41n_br34ks}
+  case_sensitive: false
+
+files:
+- challenge/oracle.py
+- challenge/challenge.txt
+
+hints:
+- content: You can modify the IV to flip specific bits in the first decrypted block.
+  cost: 75
+- content: >-
+    XOR the IV bytes at the right positions to change 'guest' to 'admin' in the decrypted
+    token.
+  cost: 125
+
 requirements:
-  - "The Dragon's Sealed Proclamation"
+- The Dragon's Sealed Proclamation
+
 state: hidden
-version: "0.1"
+
+version: '0.1'
