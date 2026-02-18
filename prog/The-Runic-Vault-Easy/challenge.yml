@@ -23,5 +23,7 @@ hints:
     cost: 25
   - content: "XOR the ciphertext against every 4-letter lowercase combo. Check for a known flag prefix."
     cost: 50
+requirements:
+  - "The Guild Ledger"
 state: hidden
 version: "0.1"

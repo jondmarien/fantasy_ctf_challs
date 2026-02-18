@@ -25,5 +25,7 @@ hints:
     cost: 25
   - content: "The key is a name. It's written right there in the intercepted file."
     cost: 75
+requirements:
+  - "The Scribe's Encoded Scroll"
 state: hidden
 version: "0.1"

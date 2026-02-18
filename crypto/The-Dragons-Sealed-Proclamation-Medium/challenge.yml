@@ -25,5 +25,7 @@ hints:
     cost: 50
   - content: "The primes are deterministic. If you run the same keygen code, you get the same primes every time."
     cost: 100
+requirements:
+  - "The Goblin Messenger's Cipher"
 state: hidden
 version: "0.1"

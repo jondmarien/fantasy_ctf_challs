@@ -27,5 +27,7 @@ hints:
     cost: 100
   - content: "Implement convergents of the continued fraction of e/n. Check each candidate d."
     cost: 125
+requirements:
+  - "The Lich's Cursed Oracle"
 state: hidden
 version: "0.1"
