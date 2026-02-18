@@ -14,7 +14,8 @@ extra:
   decay: 30
 
 image: .
-connection_info: issessionsctf-the-prophecy-engine.chals.io
+protocol: tcp
+connection_info: nc 0.cloud.chals.io 26408
 
 flags:
 - type: static

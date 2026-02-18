@@ -16,7 +16,8 @@ extra:
   decay: 30
 
 image: .
-connection_info: issessionsctf-the-lich-s-cursed-oracle.chals.io
+protocol: tcp
+connection_info: nc 0.cloud.chals.io 21874
 
 flags:
 - type: static
