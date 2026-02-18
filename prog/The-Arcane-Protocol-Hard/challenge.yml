@@ -22,7 +22,7 @@ hints:
     cost: 50
   - content: "The server's seal is keyed. Check the server source for the key."
     cost: 75
-  - content: "Compute HMAC-SHA256 of the nonce using the hardcoded key. Send the hex digest."
+  - content: "The seal is a keyed hash. The algorithm and key are both visible in the server source."
     cost: 100
 connection_info: "nc <host> 1337"
 state: hidden

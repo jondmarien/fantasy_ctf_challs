@@ -22,7 +22,7 @@ files:
 hints:
   - content: "Not all bounties are created equal. Some are... indivisible."
     cost: 0
-  - content: "Find the entry with a prime gold amount and decode its notes field."
+  - content: "Once you find the unusual entry, its notes aren't plain text — they're encoded in a very common format."
     cost: 25
 state: hidden
 version: "0.1"

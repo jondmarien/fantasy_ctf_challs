@@ -23,7 +23,7 @@ files:
 hints:
   - content: "Two common encodings, applied one after the other. The outer one is very common on the web."
     cost: 0
-  - content: "Base64 decode it first, then think about letter rotation."
+  - content: "The outer encoding uses an alphabet of 64 characters. The inner one rotates each letter by 13."
     cost: 25
 state: hidden
 version: "0.1"

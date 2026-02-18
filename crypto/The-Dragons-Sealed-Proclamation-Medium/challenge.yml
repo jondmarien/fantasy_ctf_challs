@@ -23,7 +23,7 @@ files:
 hints:
   - content: "The wizard didn't use random primes. He used a formula. Read the encryption script carefully."
     cost: 50
-  - content: "Regenerate p and q using the same nextprime() calls in encrypt.py. Then compute d and decrypt."
+  - content: "The primes are deterministic. If you run the same keygen code, you get the same primes every time."
     cost: 100
 state: hidden
 version: "0.1"
