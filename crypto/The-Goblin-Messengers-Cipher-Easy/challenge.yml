@@ -21,9 +21,9 @@ files:
   - challenge/ciphertext.txt
   - challenge/encrypt.py
 hints:
-  - content: "The goblins named their cipher after their warlord. What is his name?"
+  - content: "The goblins use a polyalphabetic substitution cipher — each letter of the key shifts the corresponding plaintext letter."
     cost: 25
-  - content: "The cipher is a Vigenère. The key is the warlord's name — it appears in the ciphertext header."
+  - content: "The key is a name. It's written right there in the intercepted file."
     cost: 75
 state: hidden
 version: "0.1"
