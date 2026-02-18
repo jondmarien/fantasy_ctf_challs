@@ -1,0 +1,28 @@
+name: "The Cartographer's Lost Map"
+author: "ISSessions"
+category: osint
+description: |
+  A tattered map fragment was recovered from the ruins of the Arcane Library. The cartographer who drew it vanished years ago, but the map depicts a real-world fortress that fantasy legends were built upon.
+
+  The fortress sits where three great waters meet, on an isle in the highlands of the old world. Identify the castle and submit its name.
+
+  Flag format: FantasyCTF{castle_name_with_underscores}
+value: 100
+type: dynamic
+extra:
+  initial: 100
+  minimum: 30
+  decay: 30
+flags:
+  - type: static
+    content: "FantasyCTF{eilean_donan_castle}"
+    case_sensitive: false
+files:
+  - challenge/lost_map.jpg
+hints:
+  - content: "A reverse image search is the cartographer's best friend."
+    cost: 0
+  - content: "This fortress guards a Scottish loch where three waters converge."
+    cost: 25
+state: hidden
+version: "0.1"

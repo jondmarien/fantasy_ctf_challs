@@ -1,0 +1,32 @@
+name: "The Spy's Cipher Journal"
+author: "ISSessions"
+category: osint
+description: |
+  A spy for the Shadow Council was captured, but not before hiding their journal. The journal page they carried contains more than meets the eye — secrets are woven into the very fabric of the image.
+
+  Examine the journal page carefully. Not all secrets are visible to the naked eye.
+
+  Flag format: FantasyCTF{...}
+value: 400
+type: dynamic
+extra:
+  initial: 400
+  minimum: 30
+  decay: 30
+flags:
+  - type: static
+    content: "FantasyCTF{sh4d0w_c0unc1l_3xp0s3d}"
+    case_sensitive: false
+files:
+  - challenge/journal_page.jpg
+hints:
+  - content: "Not all secrets are visible. Some are hidden in the data about the data."
+    cost: 0
+  - content: "The spy encoded their drop location in Base64. Check the image's metadata fields."
+    cost: 50
+  - content: "The final message uses one of the oldest ciphers known — a rotation of 13."
+    cost: 100
+requirements:
+  - "The Herald's Forgotten Broadcast"
+state: hidden
+version: "0.1"

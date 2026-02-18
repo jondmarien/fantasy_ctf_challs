@@ -1,0 +1,30 @@
+name: "The Herald's Forgotten Broadcast"
+author: "ISSessions"
+category: osint
+description: |
+  The Royal Herald was tasked with broadcasting a secret decree across the realm. He scattered fragments of the message across the public notice boards of the land. Only those who can trace his identity and follow his trail will recover the full decree.
+
+  A scrap of parchment was found bearing the herald's alias. Track him down and recover the sealed decree.
+
+  Flag format: FantasyCTF{...}
+value: 250
+type: dynamic
+extra:
+  initial: 250
+  minimum: 30
+  decay: 30
+flags:
+  - type: static
+    content: "FantasyCTF{th3_h3r4ld_sp34ks_thr0ugh_t1m3}"
+    case_sensitive: false
+files:
+  - challenge/herald_note.txt
+hints:
+  - content: "The herald's name is also his identity on the world's largest code forge."
+    cost: 0
+  - content: "The decree was written, then erased. Git never truly forgets."
+    cost: 50
+requirements:
+  - "The Cartographer's Lost Map"
+state: hidden
+version: "0.1"

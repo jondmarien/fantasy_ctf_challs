@@ -1,0 +1,12 @@
+=== INTERCEPTED PARCHMENT ===
+
+This fragment was recovered from a dead drop near the Guild Hall's eastern gate.
+The handwriting matches that of the Royal Herald — a figure known to operate
+under the alias:
+
+    FantasyCTF-Herald-2026
+
+The Herald is known to post public notices across the realm's notice boards.
+Track down his identity and recover the sealed decree.
+
+— Intelligence Division, Guild Hall
