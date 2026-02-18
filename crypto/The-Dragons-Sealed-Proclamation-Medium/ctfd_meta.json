@@ -1,0 +1,19 @@
+{
+  "name": "The Dragon's Sealed Proclamation",
+  "category": "crypto",
+  "description": "## Lore\n\nThe Dragon Warlord has sealed his war plans using an ancient mathematical enchantment — a lock forged from the product of two prime stones. His court wizard, known for his *small* and *efficient* enchantments, assured the Warlord that the seal was unbreakable.\n\nBut whispers in the taverns say otherwise. The wizard's primes were dangerously small, chosen for speed over strength. Crack the seal and lay the Warlord's plans bare.\n\n## Your Task\n\nFactor the modulus, recover the private key, and decrypt the ciphertext.\n\n## Flag Format\n\nThe flag is in the format: `FantasyCTF{...}`",
+  "type": "dynamic",
+  "initial": 400,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{sm4ll_pr1m3s_cr4ck_th3_s3al}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "The Dragon's seal is only as strong as its smallest stone.", "cost": 25 },
+    { "content": "factordb.com may know this dragon's weakness.", "cost": 50 },
+    { "content": "After factoring, compute phi(n) = (p-1)(q-1), then d = inverse(e, phi).", "cost": 75 }
+  ],
+  "files": ["challenge/params.txt", "challenge/encrypt.py"]
+}

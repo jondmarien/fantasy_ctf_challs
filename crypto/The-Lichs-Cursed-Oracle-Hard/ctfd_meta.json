@@ -1,0 +1,20 @@
+{
+  "name": "The Lich's Cursed Oracle",
+  "category": "crypto",
+  "description": "## Lore\n\nDeep within the Crypt of Endless Night, the Lich guards access to his vault with an enchanted token system. Each visitor receives an encrypted access token, but only those bearing the mark of `role=admin` may enter.\n\nThe Lich's memory is *block* by *block*, each piece *chained* to the last. He trusts his oracle implicitly — it will tell you if your token is valid, but nothing more.\n\nYou have intercepted a token issued to a lowly `role=guest`. Forge it into one worthy of the vault.\n\n## Your Task\n\nConnect to the oracle, receive your guest token, and modify it so that it decrypts to `role=admin`. Submit the forged token to receive the flag.\n\n## Flag Format\n\nThe flag is in the format: `FantasyCTF{...}`",
+  "type": "dynamic",
+  "initial": 600,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "connection_info": "nc <host> 1337",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{bl0ck_by_bl0ck_th3_ch41n_br34ks}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "The Lich stores access in blocks, each protecting the next.", "cost": 50 },
+    { "content": "What happens when you flip a bit in one block? What changes in the next?", "cost": 75 },
+    { "content": "XOR the byte you want to change in C[i-1] with the original byte and your target byte.", "cost": 100 }
+  ],
+  "files": ["challenge/oracle.py", "challenge/challenge.txt"]
+}

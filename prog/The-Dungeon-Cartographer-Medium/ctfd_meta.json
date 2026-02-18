@@ -1,0 +1,19 @@
+{
+  "name": "The Dungeon Cartographer",
+  "category": "prog",
+  "description": "## Lore\n\nA dungeon map was recovered from the pack of a fallen adventurer at the edge of the Abyssal Caverns. The map reveals a grid of chambers, each marked with a toll — the cost in gold to pass through. The treasure chamber lies at the far corner, but its door does not care for bravery, only for the *shortest* toll from entrance to exit.\n\n## Your Task\n\nFind the minimum-cost path from the top-left corner (0,0) to the bottom-right corner (N-1,N-1) of the weighted grid. Movement is up, down, left, or right only. The cost includes all cells traversed (start and end).\n\nThe flag is `FantasyCTF{<minimum_cost>}`.\n\n## Flag Format\n\nThe flag is in the format: `FantasyCTF{<number>}`",
+  "type": "dynamic",
+  "initial": 400,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{1638}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "The dungeon respects efficiency. Find the cheapest route.", "cost": 25 },
+    { "content": "Model the grid as a graph. Each cell is a node; weights are the cell values. Use Dijkstra.", "cost": 50 },
+    { "content": "Use Python's heapq with Dijkstra's algorithm from (0,0) to (N-1,N-1).", "cost": 75 }
+  ],
+  "files": ["challenge/dungeon.txt", "challenge/challenge.py"]
+}

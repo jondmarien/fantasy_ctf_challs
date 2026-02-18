@@ -1,0 +1,20 @@
+{
+  "name": "The Prophecy Engine",
+  "category": "prog",
+  "description": "## Lore\n\nThe Prophecy Engine sees all outcomes. It sits at the heart of the Astral Sanctum, a device of unfathomable complexity built by the Archons of the First Age. Feed it the right vision, and it will reveal the final seal. But its sight is not given freely — you must first learn how it sees.\n\nThe Engine transforms what you give it, step by step, in ways both ancient and recursive. Many have tried to understand its inner workings by probing it with carefully chosen inputs.\n\n## Your Task\n\nConnect to the Prophecy Engine. Use the ORACLE command to probe the transformation with chosen inputs. Deduce the multi-stage function, then use the CHALLENGE command to receive a target output. Compute the input that produces it.\n\n## Flag Format\n\nThe flag is in the format: `FantasyCTF{...}`",
+  "type": "dynamic",
+  "initial": 1000,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "connection_info": "nc <host> 1337",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{r3v3rs3_th3_pr0ph3cy_3ng1n3}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "Send simple inputs first. 0, 1, 2. Watch what comes back.", "cost": 75 },
+    { "content": "The engine applies transformations left to right. Reverse each step from right to left.", "cost": 100 },
+    { "content": "Each stage is independently reversible. Isolate them one at a time by holding other inputs constant.", "cost": 125 }
+  ],
+  "files": ["challenge/prophecy_engine.py"]
+}

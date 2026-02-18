@@ -1,0 +1,18 @@
+{
+  "name": "The Goblin Messenger's Cipher",
+  "category": "crypto",
+  "description": "## Lore\n\nA goblin spy was intercepted at the border of the Whispering Marshes, carrying a sealed parchment meant for the Dark Council. The message is encrypted in a cipher known only to the goblin clans — a polyalphabetic substitution passed down through generations of their war-scribes.\n\nIntelligence reports suggest the fortress of Karzul guards its secrets well, and the goblins have long used names of power as keys to their ciphers.\n\n## Your Task\n\nDecrypt the intercepted message to recover the hidden flag.\n\n## Flag Format\n\nThe flag is in the format: `FantasyCTF{...}`",
+  "type": "dynamic",
+  "initial": 250,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{g0bl1n_sp1es_f4ll_t0_k4rzul}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "The goblin king always named his tools after his home.", "cost": 25 },
+    { "content": "Try the fortress name as the cipher key.", "cost": 50 }
+  ],
+  "files": ["challenge/ciphertext.txt", "challenge/encrypt.py"]
+}

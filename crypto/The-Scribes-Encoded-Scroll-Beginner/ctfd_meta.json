@@ -1,0 +1,18 @@
+{
+  "name": "The Scribe's Encoded Scroll",
+  "category": "crypto",
+  "description": "## Lore\n\nIn the dim archives beneath the Guild Hall, a traitorous scribe was discovered passing secrets to the enemy. Before his capture, he encoded one final message using two ancient glyphs — techniques passed down through sixty-four runes of an old alphabet, followed by a mysterious rOtation of letters that only the initiated would recognise.\n\nThe scroll was recovered, but its contents remain unreadable.\n\n## Your Task\n\nDecode the scribe's encoded scroll to recover the hidden message.\n\n## Flag Format\n\nThe flag is in the format: `FantasyCTF{...}`",
+  "type": "dynamic",
+  "initial": 100,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{th3_scrib3s_r0tation_b3tray3d_h1m}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "Ancient scribes loved encoding before encrypting.", "cost": 0 },
+    { "content": "Two steps: first 64, then spin.", "cost": 25 }
+  ],
+  "files": ["challenge/encoded.txt", "challenge/encrypt.py"]
+}

@@ -1,0 +1,121 @@
+name,quest,gold_amount,notes
+Ilyana,Clear the Goblin Camp,4606,Solo completion
+Corwin,Deliver the Royal Decree,1779,Hazard pay included
+Lyra,Forge the Dragonbane Sword,7012,Minor injuries sustained
+Daria,Retrieve the Lost Amulet,3682,Solo completion
+Rosalind,Decode the Ancient Tablet,534,Hazard pay included
+Zephyr,Rescue the Kidnapped Child,6973,Solo completion
+Jorik,Forge the Dragonbane Sword,206,Delayed by weather
+Ragnar,Guard the Caravan Route,5674,Team of three
+Theron,Defend the Village Gate,5614,Partial completion
+Lyra,Map the Underground River,1684,Report filed late
+Kellan,Recover Stolen Grain,9991,Team of three
+Fiora,Escort the Merchant,7627,Hazard pay included
+Petra,Map the Underground River,1391,Hazard pay included
+Leander,Decode the Ancient Tablet,6025,Training mission for recruit
+Yara,Retrieve the Lost Amulet,850,Solo completion
+Ambrose,Patrol the Northern Border,1407,Solo completion
+Merlin,Clear the Goblin Camp,6327,Team of three
+Katarina,Recover Stolen Grain,2764,Report filed late
+Ulric,Defend the Village Gate,4474,Bonus awarded for speed
+Elara,Scout the Dark Forest,8851,Solo completion
+Ursa,Purify the Cursed Well,6316,Team of three
+Ilyana,Rescue the Kidnapped Child,3698,Supplies consumed en route
+Jocasta,Escort the Merchant,3852,Minor injuries sustained
+Fiora,Hunt the Dire Wolf Pack,6672,Team of three
+Ivor,Defend the Village Gate,9392,Supplies consumed en route
+Blythe,Negotiate with the Elves,6582,No casualties reported
+Sable,Gather Moonbloom Herbs,2387,Solo completion
+Xerxes,Rescue the Kidnapped Child,8930,Team of three
+Xerxes,Forge the Dragonbane Sword,7119,Training mission for recruit
+Delphine,Recover Stolen Grain,3693,Excellent performance
+Stellan,Negotiate with the Elves,1589,Minor injuries sustained
+Merlin,Clear the Goblin Camp,2604,Delayed by weather
+Drusilla,Guard the Caravan Route,1140,Witness testimony recorded
+Alaric,Decode the Ancient Tablet,7768,Overpayment corrected
+Gideon,Rescue the Kidnapped Child,288,Partial completion
+Oswin,Rescue the Kidnapped Child,4471,Supplies consumed en route
+Orin,Patrol the Northern Border,7223,Delayed by weather
+Katarina,Slay the Cave Troll,4415,Overpayment corrected
+Zariel,Scout the Dark Forest,8417,Partial completion
+Nimue,Patrol the Northern Border,8417,Routine patrol logged
+Zephyr,Deliver the Royal Decree,6226,Delayed by weather
+Wolfram,Sabotage the Enemy Bridge,9913,Supplies consumed en route
+Ondine,Slay the Cave Troll,1932,Report filed late
+Oberon,Patrol the Northern Border,4023,Minor injuries sustained
+Emeric,Forge the Dragonbane Sword,1390,Bonus awarded for speed
+Varek,Negotiate with the Elves,1233,Hazard pay included
+Ambrose,Deliver the Royal Decree,7887,Hazard pay included
+Valen,Gather Moonbloom Herbs,8745,Routine patrol logged
+Griselda,Defend the Village Gate,8935,Required backup from Guild
+Tormund,Patrol the Northern Border,6218,No casualties reported
+Sigrid,Sabotage the Enemy Bridge,7497,Partial completion
+Freya,Investigate the Haunted Mine,1149,Supplies consumed en route
+Cedric,Forge the Dragonbane Sword,9175,Solo completion
+Callum,Investigate the Haunted Mine,217,Bonus awarded for speed
+Seraphina,Escort the Merchant,3850,Bonus awarded for speed
+Sigrid,Escort the Merchant,5513,Bonus awarded for speed
+Stellan,Investigate the Haunted Mine,4662,Bounty disputed by client
+Blythe,Rescue the Kidnapped Child,9455,Training mission for recruit
+Morgana,Investigate the Haunted Mine,7849,Artifact recovered intact
+Yara,Clear the Goblin Camp,1688,Artifact recovered intact
+Ulric,Guard the Caravan Route,6835,No casualties reported
+Merlin,Escort the Merchant,1712,Minor injuries sustained
+Delphine,Hunt the Dire Wolf Pack,1890,Solo completion
+Yara,Defend the Village Gate,8886,No casualties reported
+Rowan,Guard the Caravan Route,3106,Team of three
+Lucian,Investigate the Haunted Mine,1335,No casualties reported
+Fiora,Rescue the Kidnapped Child,1704,Minor injuries sustained
+Keiran,Rescue the Kidnapped Child,341,Bonus awarded for speed
+Yvaine,Investigate the Haunted Mine,2824,Artifact recovered intact
+Ondine,Negotiate with the Elves,3602,Witness testimony recorded
+Sigrid,Escort the Merchant,6309,Completed without incident
+Brigid,Gather Moonbloom Herbs,7554,Commendation from the King
+Griselda,Rescue the Kidnapped Child,8073,Excellent performance
+Yara,Patrol the Northern Border,7879,RmFudGFzeUNURntwcjFtM19iMHVudHlfdW5tNHNrc190aDNfZnI0dWR9
+Blythe,Escort the Merchant,9589,Hazard pay included
+Helena,Hunt the Dire Wolf Pack,1036,Minor injuries sustained
+Beatrix,Negotiate with the Elves,8338,Overpayment corrected
+Ursa,Escort the Merchant,8420,Bonus awarded for speed
+Kellan,Scout the Dark Forest,1222,Routine patrol logged
+Ivor,Investigate the Haunted Mine,6715,Partial completion
+Pandora,Forge the Dragonbane Sword,9585,Routine patrol logged
+Fiona,Decode the Ancient Tablet,1443,Artifact recovered intact
+Liora,Forge the Dragonbane Sword,9360,Overpayment corrected
+Ophelia,Gather Moonbloom Herbs,3446,Supplies consumed en route
+Emeric,Gather Moonbloom Herbs,6584,Excellent performance
+Matthias,Patrol the Northern Border,5280,Bonus awarded for speed
+Brenna,Purify the Cursed Well,9324,Partial completion
+Jasmine,Rescue the Kidnapped Child,3592,Overpayment corrected
+Hilda,Deliver the Royal Decree,5818,Bonus awarded for speed
+Oberon,Investigate the Haunted Mine,6154,Commendation from the King
+Ursa,Purify the Cursed Well,9000,Commendation from the King
+Finnian,Sabotage the Enemy Bridge,228,Hazard pay included
+Mira,Clear the Goblin Camp,2300,Team of three
+Orin,Clear the Goblin Camp,9164,Excellent performance
+Isolde,Patrol the Northern Border,3550,Supplies consumed en route
+Ashwin,Gather Moonbloom Herbs,8380,Bounty disputed by client
+Gideon,Escort the Merchant,1612,Artifact recovered intact
+Idris,Gather Moonbloom Herbs,822,Completed without incident
+Rhea,Deliver the Royal Decree,2747,No casualties reported
+Ximena,Guard the Caravan Route,9289,Completed without incident
+Orin,Retrieve the Lost Amulet,2542,Hazard pay included
+Elmund,Recover Stolen Grain,9152,Excellent performance
+Hadrian,Deliver the Royal Decree,785,Commendation from the King
+Vesper,Escort the Merchant,5962,Required backup from Guild
+Oswin,Investigate the Haunted Mine,1784,Report filed late
+Brunhilde,Rescue the Kidnapped Child,6758,Routine patrol logged
+Xerxes,Deliver the Royal Decree,3978,Delayed by weather
+Eamon,Scout the Dark Forest,6855,Completed without incident
+Wren,Hunt the Dire Wolf Pack,6845,Solo completion
+Isolde,Scout the Dark Forest,734,Bounty disputed by client
+Corwin,Defend the Village Gate,7641,Report filed late
+Nolan,Investigate the Haunted Mine,3752,Completed without incident
+Liora,Defend the Village Gate,6628,Supplies consumed en route
+Jareth,Retrieve the Lost Amulet,5853,Overpayment corrected
+Delphine,Rescue the Kidnapped Child,5525,Completed without incident
+Orin,Gather Moonbloom Herbs,3025,Training mission for recruit
+Hilda,Escort the Merchant,1876,Routine patrol logged
+Hadrian,Recover Stolen Grain,5239,Artifact recovered intact
+Elara,Sabotage the Enemy Bridge,1994,Witness testimony recorded
+Sigrid,Forge the Dragonbane Sword,3214,Team of three

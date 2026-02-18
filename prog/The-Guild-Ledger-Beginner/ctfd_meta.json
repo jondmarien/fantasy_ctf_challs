@@ -1,0 +1,18 @@
+{
+  "name": "The Guild Ledger",
+  "category": "prog",
+  "description": "## Lore\n\nThe Guild Ledger holds records of every adventurer who has passed through the Guild Hall — their names, their quests, and their bounties. But one entry is a fraud. A cunning infiltrator slipped a forged record into the ledger, hiding a secret message in the notes field.\n\nThe Guild Master suspects the forgery lies in a most unusual transaction — only a prime adventurer could spot this entry among the hundreds of mundane records.\n\n## Your Task\n\nParse the Guild Ledger and find the entry whose `gold_amount` is a prime number. Decode the `notes` field of that entry to recover the flag.\n\n## Flag Format\n\nThe flag is in the format: `FantasyCTF{...}`",
+  "type": "dynamic",
+  "initial": 100,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{pr1m3_b0unty_unm4sks_th3_fr4ud}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "Not all bounties are created equal. Some are... indivisible.", "cost": 0 },
+    { "content": "Find the entry with a prime gold amount and read its notes.", "cost": 25 }
+  ],
+  "files": ["challenge/ledger.txt"]
+}

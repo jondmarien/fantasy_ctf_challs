@@ -1,0 +1,10 @@
+The Lich's Oracle issues encrypted access tokens over a network connection.
+
+Connect to the oracle to receive your guest token (IV + ciphertext).
+Forge the token so that it decrypts to contain "role=admin" instead of "role=guest".
+Submit your forged token in the format: <iv_hex>:<ct_hex>
+
+The plaintext format is: role=guest;name=adventurer;access=vault
+
+Hint: The token is encrypted with AES-CBC. Think about what happens to the
+plaintext when you modify a byte in the ciphertext or IV.

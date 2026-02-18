@@ -1,0 +1,20 @@
+{
+  "name": "The Arcane Protocol",
+  "category": "prog",
+  "description": "## Lore\n\nThe Arcane Server guards a sealed door deep within the Obsidian Citadel. It speaks a language no adventurer has heard — a binary tongue of keys and echoes, always beginning with a whisper and ending with a seal.\n\nMany have tried to speak to it, but none have answered correctly.\n\n## Your Task\n\nConnect to the Arcane Server. It will send you a nonce. Study the server source code to understand the protocol, compute the correct response, and send it back to receive the flag.\n\n## Flag Format\n\nThe flag is in the format: `FantasyCTF{...}`",
+  "type": "dynamic",
+  "initial": 600,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "connection_info": "nc <host> 1337",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{k3ys_4nd_3ch03s_uns34l_th3_d00r}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "The server always sends something first. Listen before speaking.", "cost": 50 },
+    { "content": "The server's seal is keyed. Check the server binary for the key.", "cost": 75 },
+    { "content": "Compute HMAC-SHA256 of the nonce using the hardcoded key. Send the hex digest.", "cost": 100 }
+  ],
+  "files": ["challenge/arcane_server.py"]
+}

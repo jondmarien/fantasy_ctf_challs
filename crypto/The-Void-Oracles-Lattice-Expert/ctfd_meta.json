@@ -1,0 +1,19 @@
+{
+  "name": "The Void Oracle's Lattice",
+  "category": "crypto",
+  "description": "## Lore\n\nBeyond the veil of the material plane, the Void Oracle communicates across dimensions using an ancient RSA key exchange. For aeons, its messages were impenetrable — until a flaw was discovered.\n\nThe Oracle's private whisper is *brief*, almost unnaturally so, for a being of infinite knowledge. To reduce the latency of cross-dimensional communication, the Oracle chose a private exponent that is far too small.\n\nIntercept the Oracle's sealed message and recover its contents.\n\n## Your Task\n\nExploit the weakness in the RSA parameters to recover the private key and decrypt the message.\n\n## Flag Format\n\nThe flag is in the format: `FantasyCTF{...}`",
+  "type": "dynamic",
+  "initial": 1000,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{w13n3rs_4tt4ck_br34ks_th3_v01d}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "What attack exploits a private exponent that is *too small*?", "cost": 75 },
+    { "content": "Wiener's attack uses continued fraction expansion of e/n.", "cost": 100 },
+    { "content": "Use the `owiener` Python library or implement continued fractions manually on e/n.", "cost": 125 }
+  ],
+  "files": ["challenge/params.txt", "challenge/encrypt.py"]
+}
