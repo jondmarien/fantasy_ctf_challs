@@ -25,6 +25,7 @@ hints:
     cost: 100
 requirements:
   - "The Goblin Messenger's Cipher"
+next: "The Lich's Cursed Oracle"
 tags:
   - rsa
   - medium

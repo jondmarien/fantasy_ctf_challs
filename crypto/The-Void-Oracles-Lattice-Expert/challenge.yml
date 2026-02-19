@@ -27,6 +27,7 @@ hints:
     cost: 125
 requirements:
   - "The Lich's Cursed Oracle"
+next: null
 tags:
   - rsa
   - expert

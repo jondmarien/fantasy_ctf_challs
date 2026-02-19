@@ -27,6 +27,7 @@ hints:
     cost: 75
 requirements:
   - "The Scribe's Encoded Scroll"
+next: "The Dragon's Sealed Proclamation"
 tags:
   - classical-crypto
   - easy

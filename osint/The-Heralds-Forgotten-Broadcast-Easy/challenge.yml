@@ -26,6 +26,7 @@ hints:
     cost: 50
 requirements:
   - "The Cartographer's Lost Map"
+next: "The Spy's Cipher Journal"
 tags:
   - osint
   - social-media

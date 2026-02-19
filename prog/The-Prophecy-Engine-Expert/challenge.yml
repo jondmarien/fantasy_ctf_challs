@@ -36,6 +36,7 @@ hints:
 requirements:
 - The Arcane Protocol
 
+next: null
 tags:
 - network
 - reversing

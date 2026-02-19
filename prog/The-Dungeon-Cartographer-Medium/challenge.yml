@@ -28,6 +28,7 @@ hints:
 requirements:
   - "The Runic Vault"
   - "The Cartographer's Lost Map"
+next: "The Arcane Protocol"
 tags:
   - algorithms
   - medium

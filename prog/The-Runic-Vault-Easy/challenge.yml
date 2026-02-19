@@ -25,6 +25,7 @@ hints:
     cost: 50
 requirements:
   - "The Guild Ledger"
+next: "The Dungeon Cartographer"
 tags:
   - xor
   - brute-force

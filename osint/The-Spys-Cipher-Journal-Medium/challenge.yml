@@ -28,6 +28,7 @@ hints:
     cost: 100
 requirements:
   - "The Herald's Forgotten Broadcast"
+next: null
 tags:
   - osint
   - metadata
