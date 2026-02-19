@@ -20,7 +20,7 @@ files:
   - challenge/encrypt.py
 hints:
   - content: "What attack exploits a private exponent that is *too small*?"
-    cost: 75
+    cost: 50
   - content: "Wiener's attack uses continued fraction expansion of e/n."
     cost: 100
   - content: "Implement convergents of the continued fraction of e/n. Check each candidate d."

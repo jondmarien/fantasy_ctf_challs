@@ -21,7 +21,7 @@ hints:
   - content: "Not all bounties are created equal. Some are... indivisible."
     cost: 0
   - content: "Once you find the unusual entry, its notes aren't plain text — they're encoded in a very common format."
-    cost: 25
+    cost: 15
 next: "The Runic Vault"
 tags:
   - parsing

@@ -20,11 +20,11 @@ files:
   - challenge/challenge.py
 hints:
   - content: "The dungeon respects efficiency. Find the cheapest route."
-    cost: 25
+    cost: 20
   - content: "Model the grid as a graph. Each cell is a node; weights are the cell values. Use Dijkstra."
-    cost: 50
+    cost: 40
   - content: "Use Python's heapq with Dijkstra's algorithm from (0,0) to (N-1,N-1)."
-    cost: 75
+    cost: 60
 requirements:
   - "The Runic Vault"
   - "The Cartographer's Lost Map"

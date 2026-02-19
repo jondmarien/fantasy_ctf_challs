@@ -23,7 +23,7 @@ hints:
   - content: "The herald's name is also his identity on the world's largest code forge."
     cost: 0
   - content: "The decree was written, then erased. Git never truly forgets."
-    cost: 50
+    cost: 25
 requirements:
   - "The Cartographer's Lost Map"
 next: "The Spy's Cipher Journal"

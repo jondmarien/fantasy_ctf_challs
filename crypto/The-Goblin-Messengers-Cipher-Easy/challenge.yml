@@ -22,9 +22,9 @@ files:
   - challenge/encrypt.py
 hints:
   - content: "The goblins use a polyalphabetic substitution cipher — each letter of the key shifts the corresponding plaintext letter."
-    cost: 25
+    cost: 15
   - content: "The key is a name. It's written right there in the intercepted file."
-    cost: 75
+    cost: 35
 requirements:
   - "The Scribe's Encoded Scroll"
 next: "The Dragon's Sealed Proclamation"

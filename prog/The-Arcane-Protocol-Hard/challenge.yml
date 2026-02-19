@@ -27,7 +27,7 @@ files:
 
 hints:
 - content: The server always sends something first. Listen before speaking.
-  cost: 50
+  cost: 35
 - content: The server's seal is keyed. Check the server source for the key.
   cost: 75
 - content: >-

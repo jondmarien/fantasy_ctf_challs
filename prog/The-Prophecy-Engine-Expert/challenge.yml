@@ -25,7 +25,7 @@ files:
 
 hints:
 - content: Send simple inputs first. 0, 1, 2. Watch what comes back.
-  cost: 75
+  cost: 50
 - content: >-
     The engine applies transformations left to right. Reverse each step from right
     to left.

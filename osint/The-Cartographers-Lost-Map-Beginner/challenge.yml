@@ -23,7 +23,7 @@ hints:
   - content: "A reverse image search is the cartographer's best friend."
     cost: 0
   - content: "This fortress guards a Scottish loch where three waters converge."
-    cost: 25
+    cost: 15
 next: "The Herald's Forgotten Broadcast"
 tags:
   - osint

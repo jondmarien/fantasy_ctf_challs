@@ -20,9 +20,9 @@ files:
   - challenge/encrypt.py
 hints:
   - content: "The wizard didn't use random primes. He used a formula. Read the encryption script carefully."
-    cost: 50
+    cost: 25
   - content: "The primes are deterministic. If you run the same keygen code, you get the same primes every time."
-    cost: 100
+    cost: 50
 requirements:
   - "The Goblin Messenger's Cipher"
 next: "The Lich's Cursed Oracle"

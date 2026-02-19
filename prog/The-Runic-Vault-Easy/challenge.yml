@@ -20,9 +20,9 @@ files:
   - challenge/encrypt.py
 hints:
   - content: "The vault's key is a real word, but you don't need to know which one — just try them all."
-    cost: 25
+    cost: 15
   - content: "XOR the ciphertext against every 4-letter lowercase combo. Check for a known flag prefix."
-    cost: 50
+    cost: 35
 requirements:
   - "The Guild Ledger"
 next: "The Dungeon Cartographer"

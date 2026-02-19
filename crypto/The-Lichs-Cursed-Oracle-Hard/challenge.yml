@@ -28,11 +28,11 @@ files:
 
 hints:
 - content: You can modify the IV to flip specific bits in the first decrypted block.
-  cost: 75
+  cost: 35
 - content: >-
     XOR the IV bytes at the right positions to change 'guest' to 'admin' in the decrypted
     token.
-  cost: 125
+  cost: 75
 
 requirements:
 - The Dragon's Sealed Proclamation
