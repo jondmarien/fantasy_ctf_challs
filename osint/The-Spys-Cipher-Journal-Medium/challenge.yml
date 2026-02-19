@@ -7,12 +7,12 @@ description: |
   Examine the journal page carefully. Not all secrets are visible to the naked eye.
 
   Flag format: FantasyCTF{...}
-value: 400
+value: 200
 type: dynamic
 extra:
-  initial: 400
+  initial: 200
   minimum: 30
-  decay: 30
+  decay: 20
 flags:
   - type: static
     content: "FantasyCTF{sh4d0w_c0unc1l_3xp0s3d}"

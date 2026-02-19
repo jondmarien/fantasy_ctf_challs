@@ -5,12 +5,12 @@ description: |
   The Dragon-King sealed his royal proclamation with an RSA cipher, trusting his court wizard to generate secure keys. But the wizard, in his laziness, used a deterministic and predictable method to choose his primes.
 
   The public parameters and ciphertext are provided. Break the seal.
-value: 400
+value: 200
 type: dynamic
 extra:
-  initial: 400
+  initial: 200
   minimum: 30
-  decay: 30
+  decay: 20
 flags:
   - type: static
     content: "FantasyCTF{sm4ll_pr1m3s_cr4ck_th3_s3al}"

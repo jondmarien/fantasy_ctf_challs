@@ -3,13 +3,13 @@ author: ISSessions
 category: prog
 description: |-
   The Prophecy Engine transforms what you give it, step by step, in ways both ancient and recursive. Connect to it, probe it with the ORACLE command, deduce the multi-stage transformation, then use the CHALLENGE command to receive a target output and compute the input that produces it.
-value: 1000
+value: 250
 type: dynamic
 
 extra:
-  initial: 1000
+  initial: 250
   minimum: 30
-  decay: 30
+  decay: 20
 
 image: .
 protocol: tcp

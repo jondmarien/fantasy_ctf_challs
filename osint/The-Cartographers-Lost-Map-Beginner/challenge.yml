@@ -12,7 +12,7 @@ type: dynamic
 extra:
   initial: 100
   minimum: 30
-  decay: 30
+  decay: 20
 flags:
   - type: static
     content: "FantasyCTF{eilean_donan_castle}"

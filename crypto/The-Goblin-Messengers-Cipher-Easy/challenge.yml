@@ -7,12 +7,12 @@ description: |
   Decrypt the message to uncover their plans.
 
   **Hint:** The cipher shifts each letter by the corresponding letter of a repeating keyword.
-value: 250
+value: 150
 type: dynamic
 extra:
-  initial: 250
+  initial: 150
   minimum: 30
-  decay: 30
+  decay: 20
 flags:
   - type: static
     content: "FantasyCTF{g0bl1n_sp1es_f4ll_t0_k4rzul}"

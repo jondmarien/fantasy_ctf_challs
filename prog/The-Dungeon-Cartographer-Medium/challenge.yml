@@ -5,12 +5,12 @@ description: |
   A dungeon map was recovered from the pack of a fallen adventurer. Each chamber has a toll — the cost in gold to pass through. The treasure door only opens when fed the exact minimum cost to traverse from entrance to exit.
 
   Find the cheapest path through the dungeon.
-value: 400
+value: 200
 type: dynamic
 extra:
-  initial: 400
+  initial: 200
   minimum: 30
-  decay: 30
+  decay: 20
 flags:
   - type: static
     content: "FantasyCTF{1638}"

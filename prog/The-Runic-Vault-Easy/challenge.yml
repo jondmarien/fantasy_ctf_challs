@@ -5,12 +5,12 @@ description: |
   Deep beneath the Runekeeper's Tower lies a vault sealed by an ancient four-letter word of power. The vault keeper encrypted its contents with a repeating-key XOR cipher using this word — four lowercase letters, no more, no less.
 
   Break the seal and claim what lies within.
-value: 250
+value: 150
 type: dynamic
 extra:
-  initial: 250
+  initial: 150
   minimum: 30
-  decay: 30
+  decay: 20
 flags:
   - type: static
     content: "FantasyCTF{run3s_x0r_th3_v4ult_0p3n}"

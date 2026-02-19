@@ -7,12 +7,12 @@ description: |
   A scrap of parchment was found bearing the herald's alias. Track him down and recover the sealed decree.
 
   Flag format: FantasyCTF{...}
-value: 250
+value: 150
 type: dynamic
 extra:
-  initial: 250
+  initial: 150
   minimum: 30
-  decay: 30
+  decay: 20
 flags:
   - type: static
     content: "FantasyCTF{th3_h3r4ld_sp34ks_thr0ugh_t1m3}"
