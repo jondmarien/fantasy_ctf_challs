@@ -12,7 +12,7 @@ type: dynamic
 extra:
   initial: 200
   minimum: 30
-  decay: 20
+  decay: 30
 flags:
   - type: static
     content: "FantasyCTF{sh4d0w_c0unc1l_3xp0s3d}"

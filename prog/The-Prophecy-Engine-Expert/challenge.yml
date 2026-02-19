@@ -9,7 +9,7 @@ type: dynamic
 extra:
   initial: 250
   minimum: 30
-  decay: 20
+  decay: 30
 
 image: .
 protocol: tcp
