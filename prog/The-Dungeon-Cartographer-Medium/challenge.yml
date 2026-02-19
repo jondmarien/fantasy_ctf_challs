@@ -27,5 +27,6 @@ hints:
     cost: 75
 requirements:
   - "The Runic Vault"
+  - "The Cartographer's Lost Map"
 state: hidden
 version: "0.1"
