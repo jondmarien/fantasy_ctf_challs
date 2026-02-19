@@ -1,5 +1,5 @@
 name: "The Dragon's Sealed Proclamation"
-author: "ISSessions"
+author: "Jon Marien"
 category: crypto
 description: |
   The Dragon-King sealed his royal proclamation with an RSA cipher, trusting his court wizard to generate secure keys. But the wizard, in his laziness, used a deterministic and predictable method to choose his primes.
@@ -25,5 +25,12 @@ hints:
     cost: 100
 requirements:
   - "The Goblin Messenger's Cipher"
+tags:
+  - rsa
+  - medium
+topics:
+  - weak-primes
+  - factorization
+  - rsa
 state: hidden
 version: "0.1"

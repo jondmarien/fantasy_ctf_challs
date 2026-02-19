@@ -1,5 +1,5 @@
 name: "The Dungeon Cartographer"
-author: "ISSessions"
+author: "Jon Marien"
 category: prog
 description: |
   A dungeon map was recovered from the pack of a fallen adventurer. Each chamber has a toll — the cost in gold to pass through. The treasure door only opens when fed the exact minimum cost to traverse from entrance to exit.
@@ -28,5 +28,12 @@ hints:
 requirements:
   - "The Runic Vault"
   - "The Cartographer's Lost Map"
+tags:
+  - algorithms
+  - medium
+topics:
+  - dijkstra
+  - graph-theory
+  - shortest-path
 state: hidden
 version: "0.1"

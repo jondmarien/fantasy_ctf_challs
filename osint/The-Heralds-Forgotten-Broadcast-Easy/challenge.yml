@@ -1,5 +1,5 @@
 name: "The Herald's Forgotten Broadcast"
-author: "ISSessions"
+author: "Jon Marien"
 category: osint
 description: |
   The Royal Herald was tasked with broadcasting a secret decree across the realm. He scattered fragments of the message across the public notice boards of the land. Only those who can trace his identity and follow his trail will recover the full decree.
@@ -26,5 +26,14 @@ hints:
     cost: 50
 requirements:
   - "The Cartographer's Lost Map"
+tags:
+  - osint
+  - social-media
+  - git
+  - easy
+topics:
+  - username-enumeration
+  - git-history
+  - github-osint
 state: hidden
 version: "0.1"

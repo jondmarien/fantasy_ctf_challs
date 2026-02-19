@@ -1,5 +1,5 @@
 name: The Lich's Cursed Oracle
-author: ISSessions
+author: Jon Marien
 category: crypto
 description: |-
   The Lich guards his vault with an enchanted oracle that issues access tokens. You have been issued a guest token — but the vault only opens for admins.
@@ -37,6 +37,13 @@ hints:
 requirements:
 - The Dragon's Sealed Proclamation
 
+tags:
+- aes
+- network
+- hard
+topics:
+- cbc-bit-flipping
+- aes-cbc
 state: hidden
 
 version: '0.1'

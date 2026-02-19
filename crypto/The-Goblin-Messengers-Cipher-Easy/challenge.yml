@@ -1,5 +1,5 @@
 name: "The Goblin Messenger's Cipher"
-author: "ISSessions"
+author: "Jon Marien"
 category: crypto
 description: |
   A goblin courier was captured carrying an encrypted message between enemy camps. The goblins are known to use a simple keyword cipher — and rumour has it the key is the name of their warlord.
@@ -27,5 +27,11 @@ hints:
     cost: 75
 requirements:
   - "The Scribe's Encoded Scroll"
+tags:
+  - classical-crypto
+  - easy
+topics:
+  - vigenere
+  - polyalphabetic-substitution
 state: hidden
 version: "0.1"

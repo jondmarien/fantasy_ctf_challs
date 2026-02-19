@@ -1,5 +1,5 @@
 name: "The Guild Ledger"
-author: "ISSessions"
+author: "Jon Marien"
 category: prog
 description: |
   The Guild Ledger holds records of every adventurer who has passed through the Guild Hall. But one entry is a fraud — a cunning infiltrator hid a secret message in the notes field of a most unusual transaction.
@@ -22,5 +22,12 @@ hints:
     cost: 0
   - content: "Once you find the unusual entry, its notes aren't plain text — they're encoded in a very common format."
     cost: 25
+tags:
+  - parsing
+  - beginner
+topics:
+  - json-parsing
+  - base64
+  - prime-numbers
 state: hidden
 version: "0.1"

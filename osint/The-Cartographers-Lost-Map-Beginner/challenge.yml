@@ -1,5 +1,5 @@
 name: "The Cartographer's Lost Map"
-author: "ISSessions"
+author: "Jon Marien"
 category: osint
 description: |
   A tattered map fragment was recovered from the ruins of the Arcane Library. The cartographer who drew it vanished years ago, but the map depicts a real-world fortress that fantasy legends were built upon.
@@ -24,5 +24,12 @@ hints:
     cost: 0
   - content: "This fortress guards a Scottish loch where three waters converge."
     cost: 25
+tags:
+  - osint
+  - geolocation
+  - beginner
+topics:
+  - reverse-image-search
+  - geolocation
 state: hidden
 version: "0.1"

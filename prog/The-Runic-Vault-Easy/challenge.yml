@@ -1,5 +1,5 @@
 name: "The Runic Vault"
-author: "ISSessions"
+author: "Jon Marien"
 category: prog
 description: |
   Deep beneath the Runekeeper's Tower lies a vault sealed by an ancient four-letter word of power. The vault keeper encrypted its contents with a repeating-key XOR cipher using this word — four lowercase letters, no more, no less.
@@ -25,5 +25,13 @@ hints:
     cost: 50
 requirements:
   - "The Guild Ledger"
+tags:
+  - xor
+  - brute-force
+  - easy
+topics:
+  - xor-cipher
+  - brute-force
+  - key-recovery
 state: hidden
 version: "0.1"

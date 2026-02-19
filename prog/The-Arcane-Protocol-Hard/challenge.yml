@@ -1,5 +1,5 @@
 name: The Arcane Protocol
-author: ISSessions
+author: Jon Marien
 category: prog
 description: |-
   The Arcane Server guards a sealed door deep within the Obsidian Citadel. It speaks a binary tongue of keys and echoes — always beginning with a whisper and ending with a seal.
@@ -38,6 +38,13 @@ hints:
 requirements:
 - The Dungeon Cartographer
 
+tags:
+- network
+- hard
+topics:
+- hmac-sha256
+- protocol-reversing
+- keyed-hash
 state: hidden
 
 version: '0.1'

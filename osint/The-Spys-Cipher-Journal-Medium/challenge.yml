@@ -1,5 +1,5 @@
 name: "The Spy's Cipher Journal"
-author: "ISSessions"
+author: "Jon Marien"
 category: osint
 description: |
   A spy for the Shadow Council was captured, but not before hiding their journal. The journal page they carried contains more than meets the eye — secrets are woven into the very fabric of the image.
@@ -28,5 +28,14 @@ hints:
     cost: 100
 requirements:
   - "The Herald's Forgotten Broadcast"
+tags:
+  - osint
+  - metadata
+  - medium
+topics:
+  - exif-metadata
+  - base64
+  - rot13
+  - pastebin
 state: hidden
 version: "0.1"

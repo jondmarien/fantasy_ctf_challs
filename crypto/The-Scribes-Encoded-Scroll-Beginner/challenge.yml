@@ -1,5 +1,5 @@
 name: "The Scribe's Encoded Scroll"
-author: "ISSessions"
+author: "Jon Marien"
 category: crypto
 description: |
   A dusty scroll was recovered from the ruins of the Arcane Library. The scribe who wrote it was known for his love of obfuscation — layering one encoding atop another to hide his secrets.
@@ -23,5 +23,11 @@ hints:
     cost: 0
   - content: "The outer encoding uses an alphabet of 64 characters. The inner one rotates each letter by 13."
     cost: 25
+tags:
+  - encoding
+  - beginner
+topics:
+  - base64
+  - rot13
 state: hidden
 version: "0.1"

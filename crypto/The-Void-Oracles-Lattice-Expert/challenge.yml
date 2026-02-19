@@ -1,5 +1,5 @@
 name: "The Void Oracle's Lattice"
-author: "ISSessions"
+author: "Jon Marien"
 category: crypto
 description: |
   Beyond the veil of the material plane, the Void Oracle communicates across dimensions using an ancient RSA key exchange. To reduce latency, the Oracle chose a private exponent that is far too small.
@@ -27,5 +27,12 @@ hints:
     cost: 125
 requirements:
   - "The Lich's Cursed Oracle"
+tags:
+  - rsa
+  - expert
+topics:
+  - wieners-attack
+  - continued-fractions
+  - rsa
 state: hidden
 version: "0.1"

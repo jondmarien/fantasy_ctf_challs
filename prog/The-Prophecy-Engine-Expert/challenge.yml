@@ -1,5 +1,5 @@
 name: The Prophecy Engine
-author: ISSessions
+author: Jon Marien
 category: prog
 description: |-
   The Prophecy Engine transforms what you give it, step by step, in ways both ancient and recursive. Connect to it, probe it with the ORACLE command, deduce the multi-stage transformation, then use the CHALLENGE command to receive a target output and compute the input that produces it.
@@ -36,6 +36,14 @@ hints:
 requirements:
 - The Arcane Protocol
 
+tags:
+- network
+- reversing
+- expert
+topics:
+- modular-arithmetic
+- inverse-functions
+- protocol-analysis
 state: hidden
 
 version: '0.1'
