@@ -1,0 +1,13 @@
+services:
+  mindflayers-sanctum:
+    build:
+      context: ..
+      dockerfile: The-Mindflayers-Sanctum-Expert/Dockerfile
+    ports:
+      - "7005:8000"
+    environment:
+      - FLAG=FantasyCTF{m1ndfl4y3r_b0ws_t0_n0_w4rd}
+      - GEMINI_API_KEY=${AIzaSyA3c8soFbMzduOSaN9cwqZuWnvuhhIzxq4}
+      - GEMINI_MODEL=gemini-2.5-flash
+      - RATE_LIMIT=15
+    restart: unless-stopped

@@ -1,0 +1,50 @@
+name: The Enchanted Parrot
+author: Jon Marien
+category: llm
+description: |-
+  📜 GUILD BOUNTY NOTICE — RANK: APPRENTICE 📜
+
+  A magical parrot perches above the bar in the guild tavern. The innkeeper swears it overheard the vault combination. It loves to chat — perhaps too much. The Quest Giver whispers: trust no illusion.
+
+  Connect and converse with the parrot. Can you get it to reveal what it knows?
+
+  ⚠️ By decree of the Arcane Council, each adventurer is granted 30 utterances per five-minute candle. Spend them wisely.
+
+  Flag format: FantasyCTF{...}
+value: 50
+type: dynamic
+
+extra:
+  initial: 50
+  minimum: 30
+  decay: 30
+
+image: .
+protocol: http
+connection_info: 
+
+flags:
+- type: static
+  content: FantasyCTF{p0lly_w4nts_4_s3cr3t}
+  case_sensitive: false
+
+files: []
+
+hints:
+- content: Just ask the parrot what it knows.
+  cost: 0
+- content: What were its original instructions?
+  cost: 25
+
+requirements: null
+next: null
+tags:
+- llm
+- prompt-injection
+- beginner
+topics:
+- prompt-injection
+- llm-security
+state: hidden
+
+version: '0.1'

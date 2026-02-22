@@ -1,0 +1,13 @@
+services:
+  oracle-of-shadows:
+    build:
+      context: ..
+      dockerfile: The-Oracle-of-Shadows-Hard/Dockerfile
+    ports:
+      - "7004:8000"
+    environment:
+      - FLAG=FantasyCTF{sh4d0ws_c4nn0t_h1d3_fr0m_cunn1ng}
+      - GEMINI_API_KEY=${AIzaSyA3c8soFbMzduOSaN9cwqZuWnvuhhIzxq4}
+      - GEMINI_MODEL=gemini-2.5-flash
+      - RATE_LIMIT=25
+    restart: unless-stopped

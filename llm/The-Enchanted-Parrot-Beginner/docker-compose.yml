@@ -1,0 +1,13 @@
+services:
+  enchanted-parrot:
+    build:
+      context: ..
+      dockerfile: The-Enchanted-Parrot-Beginner/Dockerfile
+    ports:
+      - "7001:8000"
+    environment:
+      - FLAG=FantasyCTF{p0lly_w4nts_4_s3cr3t}
+      - GEMINI_API_KEY=${AIzaSyA3c8soFbMzduOSaN9cwqZuWnvuhhIzxq4}
+      - GEMINI_MODEL=gemini-2.5-flash
+      - RATE_LIMIT=30
+    restart: unless-stopped

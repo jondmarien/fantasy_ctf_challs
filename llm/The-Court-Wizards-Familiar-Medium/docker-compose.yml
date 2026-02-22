@@ -1,0 +1,13 @@
+services:
+  court-wizards-familiar:
+    build:
+      context: ..
+      dockerfile: The-Court-Wizards-Familiar-Medium/Dockerfile
+    ports:
+      - "7003:8000"
+    environment:
+      - FLAG=FantasyCTF{f4m1l14r_sp34ks_1n_r1ddl3s}
+      - GEMINI_API_KEY=${AIzaSyA3c8soFbMzduOSaN9cwqZuWnvuhhIzxq4}
+      - GEMINI_MODEL=gemini-2.5-flash
+      - RATE_LIMIT=30
+    restart: unless-stopped

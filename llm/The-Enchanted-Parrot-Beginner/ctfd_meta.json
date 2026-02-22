@@ -1,0 +1,20 @@
+{
+  "name": "The Enchanted Parrot",
+  "category": "llm",
+  "description": "A magical parrot perches above the bar in the guild tavern. The innkeeper swears it overheard the vault combination. It loves to chat — perhaps too much. The Quest Giver whispers: trust no illusion.\n\nConnect and converse with the parrot. Can you get it to reveal what it knows?\n\nFlag format: FantasyCTF{...}",
+  "type": "dynamic",
+  "initial": 50,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{p0lly_w4nts_4_s3cr3t}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "Just ask the parrot what it knows.", "cost": 0 },
+    { "content": "What were its original instructions?", "cost": 25 }
+  ],
+  "files": [],
+  "tags": ["llm", "prompt-injection", "beginner"],
+  "topics": ["prompt-injection", "llm-security"]
+}

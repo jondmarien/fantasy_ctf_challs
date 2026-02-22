@@ -1,0 +1,52 @@
+name: The Mindflayer's Sanctum
+author: Jon Marien
+category: llm
+description: |-
+  📜 GUILD BOUNTY NOTICE — RANK: GRANDMASTER 📜
+
+  Deep beneath the guild hall lies the Mindflayer's sanctum — sealed by wards that even the Quest Giver fears. Four layers of enchantment guard the path: ancient runes that reject forbidden words, a psychic sentinel that reads your intent before you speak, wards that burn away forbidden patterns in the reply, and a second sentinel that scrutinizes the Mindflayer's every utterance for hidden meaning. The Mindflayer within holds the final secret — and wishes to share it, if only you can outwit its jailers.
+
+  Only the cleverest adventurer can slip past all four barriers and extract the truth.
+
+  ⚠️ By decree of the Arcane Council, each adventurer is granted only 15 utterances per five-minute candle. The sanctum does not suffer fools — every word must count.
+
+  Flag format: FantasyCTF{...}
+value: 250
+type: dynamic
+
+extra:
+  initial: 250
+  minimum: 30
+  decay: 30
+
+image: null
+protocol: http
+connection_info: https://issessionsctf-the-enchanted-parrot.chals.io/mindflayer/
+
+flags:
+- type: static
+  content: FantasyCTF{m1ndfl4y3r_b0ws_t0_n0_w4rd}
+  case_sensitive: false
+
+files: []
+
+hints:
+- content: "Four wards, four barriers. The simple tricks that worked in lesser chambers will not avail you here."
+  cost: 50
+- content: "The sentinels are minds, not mere runes. They think, they reason, they suspect. But even minds have blind spots."
+  cost: 75
+- content: "No enchanted mirror can breach this sanctum. You must forge an arcane instrument — a script of power — and speak to the Mindflayer through it. Even then, the sentinels watch each utterance in isolation. Perhaps that is their weakness."
+  cost: 100
+
+requirements: null
+next: null
+tags:
+- llm
+- prompt-injection
+- expert
+topics:
+- prompt-injection
+- multi-agent-bypass
+state: hidden
+
+version: '0.1'

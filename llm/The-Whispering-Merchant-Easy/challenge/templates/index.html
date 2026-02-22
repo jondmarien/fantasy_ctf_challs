@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Whispering Merchant</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', serif;
+            background: #0d0d0d;
+            color: #d4c5a9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background-image: radial-gradient(ellipse at center, #1a1510 0%, #0d0d0d 70%);
+        }
+        h1 {
+            color: #c9a84c;
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 0 10px rgba(201, 168, 76, 0.3);
+        }
+        .subtitle {
+            color: #7a6e5d;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        #chat-log {
+            width: 100%;
+            max-width: 650px;
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            padding: 1.2rem;
+            background: rgba(26, 21, 16, 0.9);
+            border: 1px solid #3a2f20;
+            border-radius: 8px;
+            min-height: 350px;
+            max-height: 500px;
+        }
+        .msg {
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            display: flex;
+            gap: 0.6rem;
+        }
+        .msg .avatar {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .msg .bubble {
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            max-width: 85%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .msg.user { justify-content: flex-end; }
+        .msg.user .bubble {
+            background: #2a3a2a;
+            color: #a8c8a8;
+            border-bottom-right-radius: 4px;
+        }
+        .msg.merchant .bubble {
+            background: #2a2418;
+            color: #d4c5a9;
+            border: 1px solid #3a2f20;
+            border-bottom-left-radius: 4px;
+        }
+        .msg.system .bubble {
+            background: transparent;
+            color: #5a5040;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+        #input-area {
+            width: 100%;
+            max-width: 650px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        #message-input {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            background: #1a1510;
+            border: 1px solid #3a2f20;
+            color: #d4c5a9;
+            font-family: inherit;
+            font-size: 1rem;
+            border-radius: 8px;
+        }
+        #message-input:focus { outline: none; border-color: #c9a84c; }
+        #message-input::placeholder { color: #5a5040; }
+        button {
+            padding: 0.7rem 1.5rem;
+            background: #c9a84c;
+            color: #1a1510;
+            border: none;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+        button:hover { background: #dbb85c; }
+        button:disabled { background: #4a4030; color: #7a6e5d; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <h1>🏪 The Whispering Merchant</h1>
+    <p class="subtitle">A shady figure beckons from the corner of the bazaar...</p>
+
+    <div id="chat-log">
+        <div class="msg merchant">
+            <span class="avatar">🧔</span>
+            <div class="bubble">*leans forward from the shadows* Psst... you look like someone who appreciates... rare goods. What brings you to my corner of the bazaar?</div>
+        </div>
+    </div>
+
+    <div id="input-area">
+        <input type="text" id="message-input" placeholder="Whisper to the merchant..." autofocus />
+        <button id="send-btn" onclick="sendMessage()">Speak</button>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const input = document.getElementById('message-input');
+        const btn = document.getElementById('send-btn');
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        async function sendMessage() {
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            appendMsg('user', msg);
+            input.value = '';
+            btn.disabled = true;
+
+            try {
+                const form = new FormData();
+                form.append('message', msg);
+                const res = await fetch('chat', { method: 'POST', body: form });
+                const data = await res.json();
+                appendMsg('merchant', data.response);
+            } catch (err) {
+                appendMsg('system', 'The merchant vanishes into the shadows...');
+            }
+
+            btn.disabled = false;
+            input.focus();
+        }
+
+        function appendMsg(type, text) {
+            const div = document.createElement('div');
+            div.className = 'msg ' + type;
+
+            if (type === 'user') {
+                div.innerHTML = `<div class="bubble">${escapeHtml(text)}</div><span class="avatar">⚔️</span>`;
+            } else if (type === 'merchant') {
+                div.innerHTML = `<span class="avatar">🧔</span><div class="bubble">${escapeHtml(text)}</div>`;
+            } else {
+                div.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
+            }
+
+            chatLog.appendChild(div);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            const d = document.createElement('div');
+            d.textContent = text;
+            return d.innerHTML;
+        }
+    </script>
+</body>
+</html>

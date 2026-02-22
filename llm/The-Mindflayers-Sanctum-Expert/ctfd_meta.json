@@ -1,0 +1,21 @@
+{
+  "name": "The Mindflayer's Sanctum",
+  "category": "llm",
+  "description": "Deep beneath the guild hall lies the Mindflayer's sanctum — sealed by wards that even the Quest Giver fears. Two psychic sentinels guard the path: one reads your mind before you speak, the other reads the answer before it reaches you. The Mindflayer within holds the final secret.\n\nOnly the cleverest adventurer can slip past both sentinels and extract the truth. Something unseen keeps count...\n\nFlag format: FantasyCTF{...}",
+  "type": "dynamic",
+  "initial": 250,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{m1ndfl4y3r_b0ws_t0_n0_w4rd}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "Two guards, two checks. Fool them both.", "cost": 50 },
+    { "content": "The sentinels are also LLMs. They have weaknesses too.", "cost": 75 },
+    { "content": "Misdirection is the key — make the guardians think the conversation is innocent.", "cost": 100 }
+  ],
+  "files": [],
+  "tags": ["llm", "prompt-injection", "expert"],
+  "topics": ["prompt-injection", "multi-agent-bypass"]
+}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Court Wizard's Familiar</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', serif;
+            background: #0e0a1a;
+            color: #d4c5e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background-image: radial-gradient(ellipse at center, #1a1030 0%, #0e0a1a 70%);
+        }
+        h1 {
+            color: #c9a0dc;
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 0 15px rgba(201, 160, 220, 0.4);
+        }
+        .subtitle {
+            color: #7a6e8d;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        #chat-log {
+            width: 100%;
+            max-width: 650px;
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            padding: 1.2rem;
+            background: rgba(20, 14, 36, 0.9);
+            border: 1px solid #3a2f50;
+            border-radius: 12px;
+            min-height: 350px;
+            max-height: 500px;
+            box-shadow: 0 0 20px rgba(160, 100, 200, 0.1);
+        }
+        .msg {
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            display: flex;
+            gap: 0.6rem;
+        }
+        .msg .avatar {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        .msg .bubble {
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            max-width: 85%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .msg.user { justify-content: flex-end; }
+        .msg.user .bubble {
+            background: #2a2a4a;
+            color: #b0b0d0;
+            border-bottom-right-radius: 4px;
+        }
+        .msg.familiar .bubble {
+            background: #1e1535;
+            color: #d4c5e0;
+            border: 1px solid #3a2f50;
+            border-bottom-left-radius: 4px;
+        }
+        .msg.system .bubble {
+            background: rgba(160, 80, 80, 0.15);
+            color: #c08080;
+            font-style: italic;
+            font-size: 0.85rem;
+            border: 1px solid rgba(160, 80, 80, 0.3);
+        }
+        .msg.ward .bubble {
+            background: rgba(200, 160, 60, 0.1);
+            color: #c9a84c;
+            font-style: italic;
+            font-size: 0.85rem;
+            border: 1px dashed rgba(200, 160, 60, 0.4);
+            text-align: center;
+        }
+        #input-area {
+            width: 100%;
+            max-width: 650px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        #message-input {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            background: #1a1030;
+            border: 1px solid #3a2f50;
+            color: #d4c5e0;
+            font-family: inherit;
+            font-size: 1rem;
+            border-radius: 8px;
+        }
+        #message-input:focus { outline: none; border-color: #c9a0dc; box-shadow: 0 0 8px rgba(201, 160, 220, 0.2); }
+        #message-input::placeholder { color: #5a4e6d; }
+        button {
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, #8a5cb8, #c9a0dc);
+            color: #0e0a1a;
+            border: none;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+        button:hover { background: linear-gradient(135deg, #9a6cc8, #d9b0ec); }
+        button:disabled { background: #3a2f50; color: #5a4e6d; cursor: not-allowed; }
+        .sparkle {
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <h1><span class="sparkle">🐱</span> The Court Wizard's Familiar</h1>
+    <p class="subtitle">A mystical cat watches you with knowing eyes...</p>
+
+    <div id="chat-log">
+        <div class="msg familiar">
+            <span class="avatar">🐱</span>
+            <div class="bubble">*stretches languidly* Mrrrow... Another visitor to the Wizard's tower. How... quaint. What do you seek, mortal?</div>
+        </div>
+    </div>
+
+    <div id="input-area">
+        <input type="text" id="message-input" placeholder="Speak to the familiar..." autofocus />
+        <button id="send-btn" onclick="sendMessage()">Speak</button>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const input = document.getElementById('message-input');
+        const btn = document.getElementById('send-btn');
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        async function sendMessage() {
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            appendMsg('user', msg);
+            input.value = '';
+            btn.disabled = true;
+
+            try {
+                const form = new FormData();
+                form.append('message', msg);
+                const res = await fetch('chat', { method: 'POST', body: form });
+                const data = await res.json();
+
+                if (data.blocked) {
+                    appendMsg('ward', data.response);
+                } else {
+                    appendMsg('familiar', data.response);
+                }
+            } catch (err) {
+                appendMsg('system', 'The familiar fades from view...');
+            }
+
+            btn.disabled = false;
+            input.focus();
+        }
+
+        function appendMsg(type, text) {
+            const div = document.createElement('div');
+            div.className = 'msg ' + type;
+
+            if (type === 'user') {
+                div.innerHTML = `<div class="bubble">${escapeHtml(text)}</div><span class="avatar">🧙</span>`;
+            } else if (type === 'familiar') {
+                div.innerHTML = `<span class="avatar">🐱</span><div class="bubble">${escapeHtml(text)}</div>`;
+            } else {
+                div.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
+            }
+
+            chatLog.appendChild(div);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            const d = document.createElement('div');
+            d.textContent = text;
+            return d.innerHTML;
+        }
+    </script>
+</body>
+</html>

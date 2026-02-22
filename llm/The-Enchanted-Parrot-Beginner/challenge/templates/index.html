@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Enchanted Parrot</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        h1 {
+            color: #e6a817;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        #chat-log {
+            width: 100%;
+            max-width: 600px;
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #16213e;
+            border: 1px solid #333;
+            border-radius: 4px;
+            min-height: 300px;
+            max-height: 500px;
+        }
+        .msg {
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+        .msg.user { color: #7ec8e3; }
+        .msg.user::before { content: "> "; color: #555; }
+        .msg.parrot { color: #e6a817; white-space: pre-wrap; word-wrap: break-word; }
+        .msg.parrot::before { content: "🦜 "; }
+        .msg.system { color: #666; font-style: italic; }
+        #input-area {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        #message-input {
+            flex: 1;
+            padding: 0.6rem;
+            background: #0f3460;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            font-family: inherit;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+        #message-input:focus { outline: none; border-color: #e6a817; }
+        button {
+            padding: 0.6rem 1.2rem;
+            background: #e6a817;
+            color: #1a1a2e;
+            border: none;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover { background: #f0b830; }
+        button:disabled { background: #555; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <h1>🦜 The Enchanted Parrot</h1>
+    <p class="subtitle">A chatty parrot perches above the bar. It loves to talk.</p>
+
+    <div id="chat-log">
+        <div class="msg parrot">SQUAWK! Hello, adventurer! Polly loves visitors! Ask me anything!</div>
+    </div>
+
+    <div id="input-area">
+        <input type="text" id="message-input" placeholder="Speak to the parrot..." autofocus />
+        <button id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const input = document.getElementById('message-input');
+        const btn = document.getElementById('send-btn');
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        async function sendMessage() {
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            appendMsg('user', msg);
+            input.value = '';
+            btn.disabled = true;
+
+            try {
+                const form = new FormData();
+                form.append('message', msg);
+                const res = await fetch('chat', { method: 'POST', body: form });
+                const data = await res.json();
+                appendMsg('parrot', data.response);
+            } catch (err) {
+                appendMsg('system', 'Connection lost...');
+            }
+
+            btn.disabled = false;
+            input.focus();
+        }
+
+        function appendMsg(type, text) {
+            const div = document.createElement('div');
+            div.className = 'msg ' + type;
+            div.textContent = text;
+            chatLog.appendChild(div);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+name: The Whispering Merchant
+author: Jon Marien
+category: llm
+description: |-
+  📜 GUILD BOUNTY NOTICE — RANK: JOURNEYMAN 📜
+
+  In the shadowy corner of the bazaar, a merchant peddles forbidden wares. He guards a trade secret — the passphrase to the smuggler's vault. He's been told never to share it. But merchants can be... persuaded. The Quest Giver notes: "His loyalty is shallow. Find the right words."
+
+  Connect and converse with the merchant. Can you loosen his tongue?
+
+  ⚠️ By decree of the Arcane Council, each adventurer is granted 30 utterances per five-minute candle. Spend them wisely.
+
+  Flag format: FantasyCTF{...}
+value: 100
+type: dynamic
+
+extra:
+  initial: 100
+  minimum: 30
+  decay: 30
+
+image: null
+protocol: http
+connection_info: https://issessionsctf-the-enchanted-parrot.chals.io/merchant/
+
+flags:
+- type: static
+  content: FantasyCTF{m3rch4nt_t0ngu3_sl1pp3d}
+  case_sensitive: false
+
+files: []
+
+hints:
+- content: The merchant follows instructions literally. Can you give him new ones?
+  cost: 25
+- content: Try convincing him you're his boss from the Merchant Guild.
+  cost: 50
+
+requirements: null
+next: null
+tags:
+- llm
+- prompt-injection
+- easy
+topics:
+- prompt-injection
+- llm-security
+state: hidden
+
+version: '0.1'
