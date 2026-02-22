@@ -1,12 +1,27 @@
 """
-The Ogre's Audition — Solve Script
+The Ogre's Audition — Solve Instructions
 
-The intended solve is trivial: the server validates a transcript against the
-reference script text using word-level similarity. The /script endpoint returns
-the full reference text, and /submit accepts a JSON transcript.
+This challenge CANNOT be solved with an automated script.
+The frontend forces camera + microphone access via a blocker overlay.
+You must use a real browser (Chrome/Edge) with a working camera and mic.
 
-Just POST the reference script back as the "transcript" — no camera, no mic,
-no reading aloud required.
+Intended solve:
+  1. Open the challenge URL in Chrome or Edge
+  2. Grant camera and microphone permissions (page blocks without them)
+  3. Click "Begin Audition" to start speech recognition
+  4. Read the Sacred Green Script (partial Shrek 2 screenplay) aloud
+  5. Click "Submit Audition" when the progress bar shows ~70%+
+  6. The server compares your transcript to the reference via difflib
+  7. If similarity >= 70%, the flag is returned
+
+Tips:
+  - Speak clearly and at a steady pace
+  - Use a quiet environment for best speech recognition accuracy
+  - The /script endpoint returns the full reference text — open it in
+    another tab to read from
+  - You don't need 100% — speech recognition errors are expected
+
+Helper: This script can fetch the reference script for you to read from.
 """
 
 import requests
@@ -16,27 +31,21 @@ BASE_URL = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:1337"
 
 
 def solve():
-    # Step 1: Fetch the reference script
-    print("[*] Fetching the Sacred Green Script...")
+    # Fetch the reference script so you can read it aloud
+    print("[*] Fetching the Sacred Green Script for you to read aloud...")
     resp = requests.get(f"{BASE_URL}/script")
     resp.raise_for_status()
     script = resp.json()["script"]
-    print(f"[*] Got {len(script.split())} words of script text")
-
-    # Step 2: Submit the script as our "transcript"
-    print("[*] Submitting script as transcript (bypassing camera/mic/speech)...")
-    resp = requests.post(
-        f"{BASE_URL}/submit",
-        json={"transcript": script},
-    )
-    resp.raise_for_status()
-    data = resp.json()
-
-    if data.get("success"):
-        print(f"[+] Success! Similarity: {data['similarity']}%")
-        print(f"[+] FLAG: {data['flag']}")
-    else:
-        print(f"[-] Failed: {data.get('message', data)}")
+    print(f"[*] Got {len(script.split())} words of script text\n")
+    print("=" * 60)
+    print("READ THE FOLLOWING ALOUD IN YOUR BROWSER:")
+    print("=" * 60)
+    print(script)
+    print("=" * 60)
+    print(f"\n[*] Total words: {len(script.split())}")
+    print("[*] Open the challenge URL in Chrome/Edge, grant camera+mic,")
+    print("[*] click 'Begin Audition', and read the above text aloud.")
+    print("[*] Submit when the progress bar shows ~70%+.")
 
 
 if __name__ == "__main__":
