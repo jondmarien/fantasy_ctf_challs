@@ -1,6 +1,6 @@
 # FantasyCTF Challenges
 
-A collection of 10 Capture The Flag challenges with a high-fantasy theme, designed for [ISSessions](https://issessions.ca/) FantasyCTF. Covers **Cryptography** and **Programming** across five difficulty tiers.
+A collection of 20 Capture The Flag challenges with a high-fantasy theme, designed for [ISSessions](https://issessions.ca/) FantasyCTF. Covers **Cryptography**, **Programming**, **OSINT**, **Reverse Engineering**, **LLM Security**, and **The Wizards Games** across multiple difficulty tiers.
 
 ## Challenge Overview
 
@@ -24,6 +24,36 @@ A collection of 10 Capture The Flag challenges with a high-fantasy theme, design
 | 9 | The Arcane Protocol | Hard | TCP + HMAC-SHA256 handshake | 600 |
 | 10 | The Prophecy Engine | Expert | Black-box function reversal | 1000 |
 
+### OSINT
+
+| # | Challenge | Difficulty | Technique | Points |
+|---|-----------|------------|-----------|--------|
+| 11 | The Cartographer's Lost Map | Beginner | Reverse image search + geolocation | 100 |
+| 12 | The Herald's Forgotten Broadcast | Easy | Username enumeration + git history | 150 |
+| 13 | The Spy's Cipher Journal | Medium | EXIF metadata + Base64 + ROT13 | 200 |
+
+### Reverse Engineering
+
+| # | Challenge | Difficulty | Technique | Points |
+|---|-----------|------------|-----------|--------|
+| 14 | The Runecaster's Compiled Tome | Easy | Python bytecode decompilation | 250 |
+
+### LLM Security
+
+| # | Challenge | Difficulty | Technique | Points |
+|---|-----------|------------|-----------|--------|
+| 15 | The Enchanted Parrot | Beginner | Basic prompt injection | 50 |
+| 16 | The Whispering Merchant | Easy | System prompt bypass | 100 |
+| 17 | The Court Wizard's Familiar | Medium | Output filter bypass | 150 |
+| 18 | The Oracle of Shadows | Hard | Input + output filter bypass | 200 |
+| 19 | The Mindflayer's Sanctum | Expert | Multi-agent LLM bypass | 250 |
+
+### The Wizards Games
+
+| # | Challenge | Difficulty | Technique | Points |
+|---|-----------|------------|-----------|--------|
+| 20 | The Ogre's Audition | Hard | Web Speech API + source analysis | 600 |
+
 ## Folder Structure
 
 ```tree
@@ -34,12 +64,27 @@ fantasy_ctf_challs/
 │   ├── The-Dragons-Sealed-Proclamation-Medium/
 │   ├── The-Lichs-Cursed-Oracle-Hard/
 │   └── The-Void-Oracles-Lattice-Expert/
-└── prog/
-    ├── The-Guild-Ledger-Beginner/
-    ├── The-Runic-Vault-Easy/
-    ├── The-Dungeon-Cartographer-Medium/
-    ├── The-Arcane-Protocol-Hard/
-    └── The-Prophecy-Engine-Expert/
+├── osint/
+│   ├── The-Cartographers-Lost-Map-Beginner/
+│   ├── The-Heralds-Forgotten-Broadcast-Easy/
+│   └── The-Spys-Cipher-Journal-Medium/
+├── prog/
+│   ├── The-Guild-Ledger-Beginner/
+│   ├── The-Runic-Vault-Easy/
+│   ├── The-Dungeon-Cartographer-Medium/
+│   ├── The-Arcane-Protocol-Hard/
+│   └── The-Prophecy-Engine-Expert/
+├── rev/
+│   └── The-Runecasters-Compiled-Tome-Easy/
+├── llm/
+│   ├── shared/                              (Gemini client, filters, rate limiter)
+│   ├── The-Enchanted-Parrot-Beginner/
+│   ├── The-Whispering-Merchant-Easy/
+│   ├── The-Court-Wizards-Familiar-Medium/
+│   ├── The-Oracle-of-Shadows-Hard/
+│   └── The-Mindflayers-Sanctum-Expert/
+└── misc/
+    └── The-Ogres-Audition-Hard/
 ```
 
 Each challenge folder contains:
@@ -48,7 +93,7 @@ Each challenge folder contains:
 - **`challenge/`** — Player-facing files (no flags)
 - **`solution/`** — Working solve script that recovers the flag
 - **`ctfd_meta.json`** — CTFd import metadata (name, category, scoring, hints, flags)
-- **`Dockerfile`** + **`docker-compose.yml`** — For network challenges (Hard/Expert)
+- **`Dockerfile`** + **`docker-compose.yml`** — For network challenges (Hard/Expert) and all LLM challenges
 
 ## Scoring
 
@@ -87,6 +132,18 @@ docker compose up -d
 
 The flag is injected via the `FLAG` environment variable in `docker-compose.yml` — it is **not** hardcoded in the challenge source files.
 
+### LLM challenges (all difficulties)
+
+1. Copy `llm/.env.example` to `llm/.env` and paste your Gemini API key from [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys)
+2. Run any challenge:
+
+```bash
+cd llm/The-Enchanted-Parrot-Beginner
+docker compose up -d
+```
+
+LLM challenges use **Google Gemini 2.5 Flash** via the `google-genai` SDK. Each runs a FastAPI server in Docker with the flag injected via environment variable.
+
 ## Dependencies
 
 Solve scripts may require:
@@ -95,11 +152,13 @@ Solve scripts may require:
 - **sympy** — RSA challenges
 - **pwntools** — Network challenge solvers
 - **pycryptodome** — AES/CBC challenge
+- **requests** — LLM challenge solvers
+- **uncompyle6** or **pycdc** — Rev challenge (Python bytecode decompilation)
 
 Install with:
 
 ```bash
-pip install sympy pwntools pycryptodome
+pip install sympy pwntools pycryptodome requests
 ```
 
 ## License

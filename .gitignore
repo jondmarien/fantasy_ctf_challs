@@ -6,3 +6,5 @@ __pycache__/
 
 SQL Injection Challenge/
 example-multichal/
+
+.env
