@@ -1,0 +1,48 @@
+name: "The Runecaster's Compiled Tome"
+author: "Jon Marien"
+category: rev
+description: |
+  📜 GUILD BOUNTY NOTICE — RANK: SCOUT 📜
+
+  A runecaster of the old order was known to *compile* his spells into unreadable tomes before distributing them. One such tome was recovered from his abandoned tower — it appears to verify a secret passphrase, but the incantation within is obscured.
+
+  The Quest Giver believes the spell's logic can be *decompiled* and reversed by a skilled adventurer who speaks the serpent's tongue.
+
+  Reverse-engineer the tome and recover the passphrase.
+
+  Flag format: FantasyCTF{...}
+value: 250
+type: dynamic
+extra:
+  initial: 250
+  minimum: 30
+  decay: 30
+
+image: null
+
+flags:
+- type: static
+  content: "FantasyCTF{th3_t0me_sp3aks_1n_byt3c0de}"
+  case_sensitive: false
+
+files:
+- challenge/tome.pyc
+
+hints:
+- content: "The runecaster's tome is written in a language that serpents understand."
+  cost: 0
+- content: "Tools like uncompyle6 or pycdc can read compiled serpent tomes."
+  cost: 25
+
+requirements: null
+next: null
+tags:
+- rev
+- python-bytecode
+- easy
+topics:
+- reverse-engineering
+- python-bytecode
+state: hidden
+
+version: "0.1"
