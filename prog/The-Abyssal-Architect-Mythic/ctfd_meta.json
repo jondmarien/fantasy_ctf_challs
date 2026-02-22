@@ -1,0 +1,19 @@
+{
+  "name": "The Abyssal Architect",
+  "category": "prog",
+  "description": "Beneath the deepest dungeon, below even the Prophecy Engine's sanctum, lies the Abyssal Architect's forge \u2014 a machine of obsidian and void-crystal that speaks only in stacks and sigils. The Architect carved it from raw creation, and it obeys no tongue but its own.\n\nTo claim the final seal, you must speak its language: craft a program from raw instructions that computes what the Architect demands. Many have descended. None have returned with the seal.\n\nFlag format: FantasyCTF{...}",
+  "type": "dynamic",
+  "initial": 250,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{th3_4byss_y13lds_t0_1ts_4rch1t3ct}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "Read the VM spec carefully. Every instruction is documented.", "cost": 25 },
+    { "content": "You don't need division. Think about how to compute the sum 1+2+...+n with a loop.", "cost": 50 },
+    { "content": "Use memory slots as variables. Slot 0 is your input. Use slots 1-2 for accumulator and counter.", "cost": 75 }
+  ],
+  "files": ["challenge/abyssal_architect.py"]
+}

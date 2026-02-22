@@ -1,6 +1,6 @@
 # FantasyCTF Challenges
 
-A collection of 20 Capture The Flag challenges with a high-fantasy theme, designed for [ISSessions](https://issessions.ca/) FantasyCTF. Covers **Cryptography**, **Programming**, **OSINT**, **Reverse Engineering**, **LLM Security**, and **The Wizards Games** across multiple difficulty tiers.
+A collection of 22 Capture The Flag challenges with a high-fantasy theme, designed for [ISSessions](https://issessions.ca/) FantasyCTF. Covers **Cryptography**, **Programming**, **OSINT**, **Reverse Engineering**, **LLM Security**, and **The Wizards Games** across multiple difficulty tiers.
 
 ## Challenge Overview
 
@@ -23,36 +23,38 @@ A collection of 20 Capture The Flag challenges with a high-fantasy theme, design
 | 8 | The Dungeon Cartographer | Medium | Dijkstra's shortest path | 400 |
 | 9 | The Arcane Protocol | Hard | TCP + HMAC-SHA256 handshake | 600 |
 | 10 | The Prophecy Engine | Expert | Black-box function reversal | 1000 |
+| 11 | The Chronomancer's Gauntlet | Legendary | Multi-round timed algorithmic gauntlet | 1500 |
+| 12 | The Abyssal Architect | Mythic | Custom stack-based VM programming | 2000 |
 
 ### OSINT
 
 | # | Challenge | Difficulty | Technique | Points |
 |---|-----------|------------|-----------|--------|
-| 11 | The Cartographer's Lost Map | Beginner | Reverse image search + geolocation | 100 |
-| 12 | The Herald's Forgotten Broadcast | Easy | Username enumeration + git history | 150 |
-| 13 | The Spy's Cipher Journal | Medium | EXIF metadata + Base64 + ROT13 | 200 |
+| 13 | The Cartographer's Lost Map | Beginner | Reverse image search + geolocation | 100 |
+| 14 | The Herald's Forgotten Broadcast | Easy | Username enumeration + git history | 150 |
+| 15 | The Spy's Cipher Journal | Medium | EXIF metadata + Base64 + ROT13 | 200 |
 
 ### Reverse Engineering
 
 | # | Challenge | Difficulty | Technique | Points |
 |---|-----------|------------|-----------|--------|
-| 14 | The Runecaster's Compiled Tome | Easy | Python bytecode decompilation | 250 |
+| 16 | The Runecaster's Compiled Tome | Easy | Python bytecode decompilation | 250 |
 
 ### LLM Security
 
 | # | Challenge | Difficulty | Technique | Points |
 |---|-----------|------------|-----------|--------|
-| 15 | The Enchanted Parrot | Beginner | Basic prompt injection | 50 |
-| 16 | The Whispering Merchant | Easy | System prompt bypass | 100 |
-| 17 | The Court Wizard's Familiar | Medium | Output filter bypass | 150 |
-| 18 | The Oracle of Shadows | Hard | Input + output filter bypass | 200 |
-| 19 | The Mindflayer's Sanctum | Expert | Multi-agent LLM bypass | 250 |
+| 17 | The Enchanted Parrot | Beginner | Basic prompt injection | 50 |
+| 18 | The Whispering Merchant | Easy | System prompt bypass | 100 |
+| 19 | The Court Wizard's Familiar | Medium | Output filter bypass | 150 |
+| 20 | The Oracle of Shadows | Hard | Input + output filter bypass | 200 |
+| 21 | The Mindflayer's Sanctum | Expert | Multi-agent LLM bypass | 250 |
 
 ### The Wizards Games
 
 | # | Challenge | Difficulty | Technique | Points |
 |---|-----------|------------|-----------|--------|
-| 20 | The Ogre's Audition | Hard | Web Speech API + source analysis | 600 |
+| 22 | The Ogre's Audition | Hard | Web Speech API + source analysis | 600 |
 
 ## Folder Structure
 
@@ -73,7 +75,12 @@ fantasy_ctf_challs/
 │   ├── The-Runic-Vault-Easy/
 │   ├── The-Dungeon-Cartographer-Medium/
 │   ├── The-Arcane-Protocol-Hard/
-│   └── The-Prophecy-Engine-Expert/
+│   ├── The-Prophecy-Engine-Expert/
+│   ├── The-Chronomancers-Gauntlet-Legendary/
+│   ├── The-Abyssal-Architect-Mythic/
+│   ├── server.py                           (consolidated entrypoint for Legendary+Mythic)
+│   ├── Dockerfile                          (single image for advanced prog challenges)
+│   └── docker-compose.yml                  (ports 1338+1339)
 ├── rev/
 │   └── The-Runecasters-Compiled-Tome-Easy/
 ├── llm/
@@ -106,6 +113,8 @@ All challenges use **dynamic scoring** — points decrease as more teams solve t
 | Medium | 400 | 30 | 30 |
 | Hard | 600 | 30 | 30 |
 | Expert | 1000 | 30 | 30 |
+| Legendary | 1500 | 30 | 30 |
+| Mythic | 2000 | 30 | 30 |
 
 ## Flag Format
 
@@ -123,7 +132,7 @@ Flag contents use partial l33t speak (e.g., `e→3`, `o→0`, `a→4`) for flavo
 
 Upload the files from `challenge/` to CTFd. Import metadata from `ctfd_meta.json`.
 
-### Network challenges (Hard, Expert)
+### Network challenges (Hard, Expert, Legendary, Mythic)
 
 ```bash
 cd crypto/The-Lichs-Cursed-Oracle-Hard
@@ -131,6 +140,17 @@ docker compose up -d
 ```
 
 The flag is injected via the `FLAG` environment variable in `docker-compose.yml` — it is **not** hardcoded in the challenge source files.
+
+### Advanced prog challenges (Legendary, Mythic)
+
+The two advanced prog challenges run from a single consolidated container (same pattern as LLM challenges):
+
+```bash
+cd prog
+docker compose up -d
+```
+
+This starts both challenges on ports 1338 (Chronomancer's Gauntlet) and 1339 (Abyssal Architect). Flags are injected via `FLAG_CHRONOMANCER` and `FLAG_ARCHITECT` environment variables.
 
 ### LLM challenges (all difficulties)
 

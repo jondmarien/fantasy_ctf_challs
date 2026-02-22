@@ -36,7 +36,7 @@ hints:
 requirements:
 - The Arcane Protocol
 
-next: null
+next: "The Chronomancer's Gauntlet"
 tags:
 - network
 - reversing

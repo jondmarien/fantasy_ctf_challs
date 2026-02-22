@@ -1,0 +1,19 @@
+{
+  "name": "The Chronomancer's Gauntlet",
+  "category": "prog",
+  "description": "The Chronomancer's Gauntlet is a relic of the First Age, an hourglass that accelerates time around the challenger. Five trials flash before you in heartbeats \u2014 each demanding a different art. Only those who have mastered the Engine's sight possess the reflexes to survive. Fail a single trial, and the sands consume you.\n\nConnect to the Gauntlet and face five timed algorithmic trials. No mortal hand can solve them unaided \u2014 you must forge an arcane instrument to speak on your behalf.\n\nFlag format: FantasyCTF{...}",
+  "type": "dynamic",
+  "initial": 250,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{t1m3_b3nds_t0_th3_sw1ft_m1nd}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "You cannot solve this by hand. Write a script.", "cost": 25 },
+    { "content": "Each round is a different algorithm. Expression eval, shortest path, CRT, determinant, knapsack.", "cost": 50 },
+    { "content": "Parse the problem text carefully. The format is consistent within each round.", "cost": 75 }
+  ],
+  "files": ["challenge/chronomancer.py"]
+}

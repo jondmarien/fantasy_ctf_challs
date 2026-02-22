@@ -1,0 +1,56 @@
+name: "The Chronomancer's Gauntlet"
+author: Jon Marien
+category: prog
+description: |-
+  The Chronomancer's Gauntlet is a relic of the First Age, an hourglass that accelerates time around the challenger. Five trials flash before you in heartbeats — each demanding a different art. Only those who have mastered the Engine's sight possess the reflexes to survive. Fail a single trial, and the sands consume you.
+
+  Connect to the Gauntlet and face five timed algorithmic trials. No mortal hand can solve them unaided — you must forge an arcane instrument to speak on your behalf.
+
+  Flag format: FantasyCTF{...}
+value: 250
+type: dynamic
+
+extra:
+  initial: 250
+  minimum: 30
+  decay: 30
+
+image: .
+protocol: tcp
+connection_info: nc 0.cloud.chals.io 1338
+
+flags:
+- type: static
+  content: FantasyCTF{t1m3_b3nds_t0_th3_sw1ft_m1nd}
+  case_sensitive: false
+
+files:
+- The-Chronomancers-Gauntlet-Legendary/challenge/chronomancer.py
+
+hints:
+- content: You cannot solve this by hand. Write a script.
+  cost: 25
+- content: >-
+    Each round is a different algorithm. Expression eval, shortest path, CRT,
+    determinant, knapsack.
+  cost: 50
+- content: Parse the problem text carefully. The format is consistent within each round.
+  cost: 75
+
+requirements:
+- The Prophecy Engine
+
+next: "The Abyssal Architect"
+tags:
+- algorithms
+- automation
+- legendary
+topics:
+- dijkstra
+- crt
+- knapsack
+- matrix-determinant
+- expression-parsing
+state: hidden
+
+version: '0.1'
