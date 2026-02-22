@@ -1,0 +1,50 @@
+name: The Ogre's Audition
+author: Jon Marien
+category: The Wizards Games
+description: |-
+  The Ogre King holds auditions in his legendary swamp theater. Only those who recite the Sacred Green Script — aloud, before the Ogre's unblinking gaze — shall earn passage.
+
+  The audition is watched. The audition is heard. But remember: the director only listens to your words, not your face.
+
+  Visit the audition hall and perform.
+value: 600
+type: dynamic
+
+extra:
+  initial: 600
+  minimum: 30
+  decay: 30
+
+image: .
+protocol: http
+connection_info: https://issessionsctf-the-ogre-s-audition.chals.io
+
+flags:
+- type: static
+  content: FantasyCTF{sh3_s4id_d0_y0u_kn0w_th3_muffin_m4n}
+  case_sensitive: false
+
+topics:
+- web-api
+- speech-recognition
+- source-analysis
+
+tags:
+- The Wizards Games
+- web
+- trolling
+
+hints:
+- content: The Ogre watches, but does he really need to see you?
+  cost: 50
+- content: >-
+    The /script endpoint gives you everything you need. The /submit endpoint takes
+    a JSON transcript.
+  cost: 100
+- content: >-
+    You don't need a camera or microphone. Just POST the script text as your transcript.
+  cost: 150
+
+state: hidden
+
+version: '0.1'

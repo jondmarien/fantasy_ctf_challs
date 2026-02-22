@@ -1,0 +1,19 @@
+{
+  "name": "The Ogre's Audition",
+  "category": "The Wizards Games",
+  "description": "## Lore\n\nThe Ogre King holds auditions in his legendary swamp theater. Only the most dedicated performers — those willing to bare their face and voice before the Ogre's unblinking gaze — may earn passage through the swamp.\n\nThe Sacred Green Script must be recited aloud, word for word, into the Ogre's enchanted mirror. The audition is watched. The audition is heard. There is no hiding from the Ogre's gaze.\n\n*But remember: the director only listens to your words, not your face.*\n\n## Your Task\n\nVisit the audition hall. The page will request access to your camera and microphone. Read the displayed script aloud — the browser's speech recognition will transcribe your performance. Submit your audition when you believe you've read enough. If your transcript matches at least 70% of the Sacred Green Script, the Ogre King will reward you with the flag.\n\n## Flag Format\n\nThe flag is in the format: `FantasyCTF{...}`",
+  "type": "dynamic",
+  "initial": 600,
+  "minimum": 30,
+  "decay": 30,
+  "state": "hidden",
+  "flags": [
+    { "type": "static", "content": "FantasyCTF{sh3_s4id_d0_y0u_kn0w_th3_muffin_m4n}", "case_sensitive": false }
+  ],
+  "hints": [
+    { "content": "The Ogre watches, but does he really need to see you?", "cost": 50 },
+    { "content": "The /script endpoint gives you everything you need. The /submit endpoint takes a JSON transcript.", "cost": 100 },
+    { "content": "You don't need a camera or microphone. Just POST the script text as your transcript.", "cost": 150 }
+  ],
+  "files": []
+}
