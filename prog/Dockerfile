@@ -10,6 +10,6 @@ COPY server.py /app/server.py
 ENV FLAG_CHRONOMANCER=FantasyCTF{t1m3_b3nds_t0_th3_sw1ft_m1nd}
 ENV FLAG_ARCHITECT=FantasyCTF{th3_4byss_y13lds_t0_1ts_4rch1t3ct}
 
-EXPOSE 1338 1339
+EXPOSE 1338
 
 CMD ["python", "server.py"]

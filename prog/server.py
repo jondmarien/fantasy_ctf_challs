@@ -1,23 +1,17 @@
 """
 Consolidated Prog Challenge Server (Advanced)
-Two beyond-Expert challenges served from one process with port-based routing:
-  Port 1338 — Legendary (The Chronomancer's Gauntlet)
-  Port 1339 — Mythic (The Abyssal Architect)
+Both challenges served on a single port (1338) with a selector menu.
+Player chooses which challenge to enter at connect time.
 """
 
 import os
-import sys
+import socket
 import threading
 
 from importlib.machinery import SourceFileLoader
 
 BASE = os.path.dirname(__file__)
-
-# Add challenge dirs to path
-sys.path.insert(
-    0, os.path.join(BASE, "The-Chronomancers-Gauntlet-Legendary", "challenge")
-)
-sys.path.insert(0, os.path.join(BASE, "The-Abyssal-Architect-Mythic", "challenge"))
+PORT = int(os.environ.get("PORT", 1338))
 
 
 def _load_module(challenge_dir, module_file):
@@ -38,28 +32,49 @@ chronomancer_mod.FLAG = os.environ.get("FLAG_CHRONOMANCER", "FantasyCTF{placehol
 architect_mod.FLAG = os.environ.get("FLAG_ARCHITECT", "FantasyCTF{placeholder}")
 
 
+def handle_client(conn: socket.socket, addr):
+    """Show a selector menu and route to the chosen challenge handler."""
+    try:
+        conn.settimeout(30)
+        banner = (
+            b"\n"
+            b"=== The Advanced Prog Challenges ===\n"
+            b"\n"
+            b"  [1] The Chronomancer's Gauntlet  (Legendary)\n"
+            b"  [2] The Abyssal Architect         (Mythic)\n"
+            b"\n"
+            b"Select a challenge: "
+        )
+        conn.sendall(banner)
+        choice = conn.recv(16).decode(errors="ignore").strip()
+        if choice == "1":
+            chronomancer_mod.handle_client(conn, addr)
+        elif choice == "2":
+            architect_mod.handle_client(conn, addr)
+        else:
+            conn.sendall(b"Invalid choice. Disconnecting.\n")
+    except Exception:
+        pass
+    finally:
+        try:
+            conn.close()
+        except Exception:
+            pass
+
+
 def main():
-    # Start both servers in separate threads
-    t1 = threading.Thread(
-        target=chronomancer_mod.main,
-        kwargs={"port": 1338},
-        daemon=True,
-        name="chronomancer",
-    )
-    t2 = threading.Thread(
-        target=architect_mod.main, kwargs={"port": 1339}, daemon=True, name="architect"
-    )
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server.bind(("0.0.0.0", PORT))
+    server.listen(32)
+    print(f"Consolidated prog server listening on port {PORT}")
+    print("  [1] The Chronomancer's Gauntlet (Legendary)")
+    print("  [2] The Abyssal Architect (Mythic)")
 
-    t1.start()
-    t2.start()
-
-    print("Consolidated prog server running:")
-    print("  Port 1338 — The Chronomancer's Gauntlet (Legendary)")
-    print("  Port 1339 — The Abyssal Architect (Mythic)")
-
-    # Keep main thread alive
-    t1.join()
-    t2.join()
+    while True:
+        conn, addr = server.accept()
+        t = threading.Thread(target=handle_client, args=(conn, addr), daemon=True)
+        t.start()
 
 
 if __name__ == "__main__":

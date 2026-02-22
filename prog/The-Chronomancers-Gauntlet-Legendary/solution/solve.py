@@ -14,13 +14,14 @@ from pwn import *
 import re
 import heapq
 
-HOST = "localhost"
-PORT = 1338
+HOST = "0.cloud.chals.io"
+PORT = 28165  # shared port — both advanced prog challenges on one service
 
 
 # ---------------------------------------------------------------------------
 # Round 1: Expression evaluator
 # ---------------------------------------------------------------------------
+
 
 def solve_expression(expr_str):
     """Parse and evaluate the custom expression."""
@@ -38,7 +39,7 @@ def solve_expression(expr_str):
 
     def parse_atom():
         t = peek()
-        if t == '(':
+        if t == "(":
             consume()
             val = parse_add()
             consume()  # ')'
@@ -47,7 +48,7 @@ def solve_expression(expr_str):
 
     def parse_at():
         val = parse_atom()
-        while peek() == '@':
+        while peek() == "@":
             consume()
             right = parse_atom()
             val = pow(val, right, MOD)
@@ -55,7 +56,7 @@ def solve_expression(expr_str):
 
     def parse_xor():
         val = parse_at()
-        while peek() == '#':
+        while peek() == "#":
             consume()
             right = parse_at()
             val = val ^ right
@@ -63,7 +64,7 @@ def solve_expression(expr_str):
 
     def parse_mul():
         val = parse_xor()
-        while peek() == '*':
+        while peek() == "*":
             consume()
             right = parse_xor()
             val = val * right
@@ -71,10 +72,10 @@ def solve_expression(expr_str):
 
     def parse_add():
         val = parse_mul()
-        while peek() in ('+', '-'):
+        while peek() in ("+", "-"):
             op = consume()
             right = parse_mul()
-            if op == '+':
+            if op == "+":
                 val = val + right
             else:
                 val = val - right
@@ -87,23 +88,24 @@ def solve_expression(expr_str):
 # Round 2: Shortest path (Dijkstra)
 # ---------------------------------------------------------------------------
 
+
 def solve_shortest_path(text):
     """Parse graph edges and run Dijkstra."""
     # Extract src, dst
-    m = re.search(r'from node (\d+) to node (\d+)', text)
+    m = re.search(r"from node (\d+) to node (\d+)", text)
     src, dst = int(m.group(1)), int(m.group(2))
 
     # Extract node count
-    m = re.search(r'Nodes: 0 to (\d+)', text)
+    m = re.search(r"Nodes: 0 to (\d+)", text)
     n = int(m.group(1)) + 1
 
     # Extract edges: "u -> v (weight w)"
-    edges = re.findall(r'(\d+) -> (\d+) \(weight (\d+)\)', text)
+    edges = re.findall(r"(\d+) -> (\d+) \(weight (\d+)\)", text)
     adj = [[] for _ in range(n)]
     for u, v, w in edges:
         adj[int(u)].append((int(v), int(w)))
 
-    dist = [float('inf')] * n
+    dist = [float("inf")] * n
     dist[src] = 0
     pq = [(0, src)]
     while pq:
@@ -123,10 +125,11 @@ def solve_shortest_path(text):
 # Round 3: Chinese Remainder Theorem
 # ---------------------------------------------------------------------------
 
+
 def solve_crt(text):
     """Parse congruences and solve via CRT."""
     # x ≡ r (mod m)  — note the ≡ is UTF-8
-    eqs = re.findall(r'x\s*(?:≡|=)\s*(\d+)\s*\(mod\s*(\d+)\)', text)
+    eqs = re.findall(r"x\s*(?:≡|=)\s*(\d+)\s*\(mod\s*(\d+)\)", text)
     rems = [int(r) for r, _ in eqs]
     mods = [int(m) for _, m in eqs]
 
@@ -145,13 +148,14 @@ def solve_crt(text):
 # Round 4: Matrix determinant mod P
 # ---------------------------------------------------------------------------
 
+
 def solve_determinant(text):
     """Parse matrix and compute determinant mod P."""
-    m = re.search(r'modulo (\d+)', text)
+    m = re.search(r"modulo (\d+)", text)
     P = int(m.group(1))
 
     # Extract matrix lines (lines with multiple numbers)
-    lines = text.split('\n')
+    lines = text.split("\n")
     matrix = []
     for line in lines:
         nums = line.strip().split()
@@ -189,12 +193,13 @@ def solve_determinant(text):
 # Round 5: 0/1 Knapsack
 # ---------------------------------------------------------------------------
 
+
 def solve_knapsack(text):
     """Parse items and solve 0/1 knapsack via DP."""
-    m = re.search(r'capacity (\d+)', text)
+    m = re.search(r"capacity (\d+)", text)
     capacity = int(m.group(1))
 
-    items = re.findall(r'weight=(\d+),\s*value=(\d+)', text)
+    items = re.findall(r"weight=(\d+),\s*value=(\d+)", text)
     items = [(int(w), int(v)) for w, v in items]
 
     dp = [0] * (capacity + 1)
@@ -209,7 +214,9 @@ def solve_knapsack(text):
 # ---------------------------------------------------------------------------
 
 SOLVERS = {
-    1: lambda text: solve_expression(re.search(r'EXPRESSION:\s*(.+)', text).group(1).strip()),
+    1: lambda text: solve_expression(
+        re.search(r"EXPRESSION:\s*(.+)", text).group(1).strip()
+    ),
     2: lambda text: solve_shortest_path(text),
     3: lambda text: solve_crt(text),
     4: lambda text: solve_determinant(text),
@@ -219,6 +226,10 @@ SOLVERS = {
 
 def solve():
     r = remote(HOST, PORT)
+
+    # Select challenge from the shared selector menu
+    r.recvuntil(b"Select a challenge: ")
+    r.sendline(b"1")
 
     # Receive banner
     r.recvuntil(b"consume you.\n\n")

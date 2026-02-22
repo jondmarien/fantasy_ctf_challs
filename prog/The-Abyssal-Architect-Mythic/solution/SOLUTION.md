@@ -51,7 +51,7 @@ HALT         ; return 0
 
 ## Steps
 
-1. **Connect to the server** — Read the VM spec and target function.
+1. **Connect to the server** — Both advanced prog challenges share one port. A selector menu appears on connect — send `2` to enter The Abyssal Architect.
 2. **Use TEST command** (optional) — Verify your program against sample inputs (3 attempts).
 3. **Use SUBMIT command** — Send the program line by line, ending with `END`.
 4. **Pass all 10 test cases** — The server validates against random inputs including edge cases (0, negative numbers, large positives).

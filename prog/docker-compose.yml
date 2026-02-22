@@ -5,7 +5,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "1338:1338"
-      - "1339:1339"
     environment:
       - FLAG_CHRONOMANCER=FantasyCTF{t1m3_b3nds_t0_th3_sw1ft_m1nd}
       - FLAG_ARCHITECT=FantasyCTF{th3_4byss_y13lds_t0_1ts_4rch1t3ct}

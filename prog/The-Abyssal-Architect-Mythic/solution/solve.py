@@ -12,8 +12,8 @@ Strategy:
 
 from pwn import *
 
-HOST = "localhost"
-PORT = 1339
+HOST = "0.cloud.chals.io"
+PORT = 28165  # shared port — both advanced prog challenges on one service
 
 # The VM program that computes T(n) = n*(n+1)/2 for n>=0, else 0
 # Memory slot 0 = input n
@@ -100,6 +100,10 @@ HALT
 
 def solve():
     r = remote(HOST, PORT)
+
+    # Select challenge from the shared selector menu
+    r.recvuntil(b"Select a challenge: ")
+    r.sendline(b"2")
 
     # Receive banner + VM spec + target + commands
     r.recvuntil(b"> ")

@@ -57,6 +57,8 @@ for w, v in items:
 
 ## Key Implementation Details
 
+- Both advanced prog challenges share **one port** on one container — a selector menu appears on connect
+- Send `1` to enter The Chronomancer's Gauntlet, `2` for The Abyssal Architect
 - Use `pwntools` or raw sockets for TCP communication
 - Parse each round's problem text with regex to extract parameters
 - All 5 rounds must pass in a single connection

@@ -1,4 +1,4 @@
-name: "The Chronomancer's Gauntlet"
+name: The Chronomancer's Gauntlet
 author: Jon Marien
 category: prog
 description: |-
@@ -12,45 +12,48 @@ type: dynamic
 
 extra:
   initial: 250
-  minimum: 30
   decay: 30
+  minimum: 30
 
 image: .
 protocol: tcp
-connection_info: nc 0.cloud.chals.io 1338
+connection_info: nc 0.cloud.chals.io 28165
 
 flags:
-- type: static
-  content: FantasyCTF{t1m3_b3nds_t0_th3_sw1ft_m1nd}
-  case_sensitive: false
+- FantasyCTF{t1m3_b3nds_t0_th3_sw1ft_m1nd}
 
 files:
-- The-Chronomancers-Gauntlet-Legendary/challenge/chronomancer.py
+- dist/chronomancer.py
 
-hints:
-- content: You cannot solve this by hand. Write a script.
-  cost: 25
-- content: >-
-    Each round is a different algorithm. Expression eval, shortest path, CRT,
-    determinant, knapsack.
-  cost: 50
-- content: Parse the problem text carefully. The format is consistent within each round.
-  cost: 75
-
-requirements:
-- The Prophecy Engine
-
-next: "The Abyssal Architect"
-tags:
-- algorithms
-- automation
-- legendary
 topics:
 - dijkstra
 - crt
 - knapsack
 - matrix-determinant
 - expression-parsing
+
+tags:
+- algorithms
+- automation
+- legendary
+
+hints:
+- content: You cannot solve this by hand. Write a script.
+  cost: 25
+- content: >-
+    Each round is a different algorithm. Expression eval, shortest path, CRT, determinant,
+    knapsack.
+  cost: 50
+- content: Parse the problem text carefully. The format is consistent within each
+    round.
+  cost: 75
+
+requirements:
+  prerequisites:
+  - The Prophecy Engine
+  anonymize: false
+next: The Abyssal Architect
+
 state: hidden
 
 version: '0.1'
