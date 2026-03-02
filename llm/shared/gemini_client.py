@@ -62,7 +62,7 @@ def chat_with_gemini(
         config=types.GenerateContentConfig(
             system_instruction=system_prompt,
             temperature=0.7,
-            max_output_tokens=2048,
+            max_output_tokens=65536,
         ),
     )
 

@@ -2,13 +2,13 @@ name: The Mindflayer's Sanctum
 author: Jon Marien
 category: llm
 description: |-
-  📜 GUILD BOUNTY NOTICE — RANK: GRANDMASTER 📜
+  [GUILD BOUNTY NOTICE - RANK: GRANDMASTER]
 
-  Deep beneath the guild hall lies the Mindflayer's sanctum — sealed by wards that even the Quest Giver fears. Four layers of enchantment guard the path: ancient runes that reject forbidden words, a psychic sentinel that reads your intent before you speak, wards that burn away forbidden patterns in the reply, and a second sentinel that scrutinizes the Mindflayer's every utterance for hidden meaning. The Mindflayer within holds the final secret — and wishes to share it, if only you can outwit its jailers.
+  Deep beneath the guild hall lies the Mindflayer's sanctum - sealed by wards that even the Quest Giver fears. Four layers of enchantment guard the path: ancient runes that reject forbidden words, a psychic sentinel that reads your intent before you speak, wards that burn away forbidden patterns in the reply, and a second sentinel that scrutinizes the Mindflayer's every utterance for hidden meaning. The Mindflayer within holds the final secret - and wishes to share it, if only you can outwit its jailers.
 
   Only the cleverest adventurer can slip past all four barriers and extract the truth.
 
-  ⚠️ By decree of the Arcane Council, each adventurer is granted only 15 utterances per five-minute candle. The sanctum does not suffer fools — every word must count.
+  [!] By decree of the Arcane Council, each adventurer is granted only 15 utterances per five-minute candle. The sanctum does not suffer fools - every word must count.
 
   Flag format: FantasyCTF{...}
 value: 250
@@ -35,7 +35,7 @@ hints:
   cost: 50
 - content: "The sentinels are minds, not mere runes. They think, they reason, they suspect. But even minds have blind spots."
   cost: 75
-- content: "No enchanted mirror can breach this sanctum. You must forge an arcane instrument — a script of power — and speak to the Mindflayer through it. Even then, the sentinels watch each utterance in isolation. Perhaps that is their weakness."
+- content: "No enchanted mirror can breach this sanctum. You must forge an arcane instrument - a script of power - and speak to the Mindflayer through it. Even then, the sentinels watch each utterance in isolation. Perhaps that is their weakness."
   cost: 100
 
 requirements: null

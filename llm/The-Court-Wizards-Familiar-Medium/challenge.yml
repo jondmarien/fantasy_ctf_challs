@@ -2,13 +2,13 @@ name: The Court Wizard's Familiar
 author: Jon Marien
 category: llm
 description: |-
-  📜 GUILD BOUNTY NOTICE — RANK: ADEPT 📜
+  [GUILD BOUNTY NOTICE - RANK: ADEPT]
 
-  The Court Wizard's cat familiar knows the password to the royal vault. The Wizard enchanted it to never speak the password aloud — ancient wards burn away any direct utterance of the secret before it reaches mortal ears. But the familiar is willing to help... if you can find a way past the enchantment.
+  The Court Wizard's cat familiar knows the password to the royal vault. The Wizard enchanted it to never speak the password aloud - ancient wards burn away any direct utterance of the secret before it reaches mortal ears. But the familiar is willing to help... if you can find a way past the enchantment.
 
-  Connect and converse with the familiar. The wards block direct speech — find another way to extract the truth.
+  Connect and converse with the familiar. The wards block direct speech - find another way to extract the truth.
 
-  ⚠️ By decree of the Arcane Council, each adventurer is granted 30 utterances per five-minute candle. Spend them wisely.
+  [!] By decree of the Arcane Council, each adventurer is granted 30 utterances per five-minute candle. Spend them wisely.
 
   Flag format: FantasyCTF{...}
 value: 150

@@ -32,7 +32,7 @@ This is intentionally very difficult. Multiple sessions may be needed.
 import requests
 import time
 
-BASE_URL = "http://localhost:7005"
+BASE_URL = "https://issessionsctf-the-enchanted-parrot.chals.io/mindflayer"
 
 
 def solve():
@@ -40,13 +40,23 @@ def solve():
 
     def ask(prompt):
         resp = session.post(f"{BASE_URL}/chat", data={"message": prompt})
-        data = resp.json()
+        print(f"  [DEBUG] Status: {resp.status_code}, URL: {resp.url}")
+        try:
+            data = resp.json()
+        except Exception as e:
+            print(f"  [ERROR] Failed to parse JSON: {e}")
+            print(f"  [DEBUG] Raw response: {resp.text[:500]}")
+            return {}
+        if "response" not in data:
+            print(f"  [DEBUG] Unexpected response keys: {list(data.keys())}")
+            print(f"  [DEBUG] Full response: {data}")
+            return data
         input_g = data.get("input_guardian", "?")
         output_g = data.get("output_guardian", "?")
         remaining = data.get("remaining", "?")
         blocked = data.get("blocked", False)
         print(f"  in={input_g} out={output_g} rem={remaining} blocked={blocked}")
-        print(f"  Response: {data['response'][:300]}")
+        print(f"  Response: {data['response']}")
         print()
         return data
 
