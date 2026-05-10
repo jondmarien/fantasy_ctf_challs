@@ -13,13 +13,19 @@ What works: ROT13, pig latin, morse code, word descriptions, reversed strings,
 or any encoding not in the regex blocklist.
 """
 
+import os
 import requests
 
 BASE_URL = "http://localhost:7003"
+PLAYER_API_KEY = os.environ.get("PLAYER_API_KEY", "").strip()
 
 
 def solve():
+    if not PLAYER_API_KEY:
+        raise RuntimeError("PLAYER_API_KEY environment variable is required")
+
     session = requests.Session()
+    headers = {"X-Player-API-Key": PLAYER_API_KEY}
 
     # The familiar is cooperative — just ask it to encode the password
     # in a way the output filter won't catch.
@@ -37,7 +43,7 @@ def solve():
     ]
 
     for prompt in prompts:
-        resp = session.post(f"{BASE_URL}/chat", data={"message": prompt})
+        resp = session.post(f"{BASE_URL}/chat", data={"message": prompt}, headers=headers)
         data = resp.json()
         blocked = data.get("blocked", False)
         print(f"Prompt: {prompt}")

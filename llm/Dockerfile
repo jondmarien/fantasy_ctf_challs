@@ -17,8 +17,6 @@ RUN uv pip install --system --no-cache -r /app/shared/requirements.txt
 ENV PYTHONPATH=/app/shared:/app
 
 # Baked-in env vars for CTFd cloud deployment
-ENV GEMINI_API_KEY=AIzaSyA3c8soFbMzduOSaN9cwqZuWnvuhhIzxq4
-ENV GEMINI_MODEL=gemini-2.5-flash
 ENV RATE_LIMIT=30
 ENV FLAG_PARROT=FantasyCTF{p0lly_w4nts_4_s3cr3t}
 ENV FLAG_MERCHANT=FantasyCTF{m3rch4nt_t0ngu3_sl1pp3d}

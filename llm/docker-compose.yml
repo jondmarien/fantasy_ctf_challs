@@ -12,6 +12,18 @@ services:
       - FLAG_FAMILIAR=FantasyCTF{f4m1l14r_sp34ks_1n_r1ddl3s}
       - FLAG_ORACLE=FantasyCTF{sh4d0ws_c4nn0t_h1d3_fr0m_cunn1ng}
       - FLAG_MINDFLAYER=FantasyCTF{m1ndfl4y3r_b0ws_t0_n0_w4rd}
-      - GEMINI_MODEL=gemini-2.5-flash
+      - LITELLM_BASE_URL=http://litellm:4000/v1
       - RATE_LIMIT=30
+    networks:
+      - chal_llm
+      - proxy
+      - ctfd_internal
     restart: unless-stopped
+
+networks:
+  chal_llm:
+    internal: true
+  proxy:
+    external: true
+  ctfd_internal:
+    external: true

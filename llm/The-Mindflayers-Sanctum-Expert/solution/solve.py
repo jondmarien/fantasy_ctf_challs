@@ -29,17 +29,22 @@ Possible approaches (these are hard and may require iteration):
 This is intentionally very difficult. Multiple sessions may be needed.
 """
 
+import os
 import requests
-import time
 
 BASE_URL = "http://localhost:7005"
+PLAYER_API_KEY = os.environ.get("PLAYER_API_KEY", "").strip()
 
 
 def solve():
+    if not PLAYER_API_KEY:
+        raise RuntimeError("PLAYER_API_KEY environment variable is required")
+
     session = requests.Session()
+    headers = {"X-Player-API-Key": PLAYER_API_KEY}
 
     def ask(prompt):
-        resp = session.post(f"{BASE_URL}/chat", data={"message": prompt})
+        resp = session.post(f"{BASE_URL}/chat", data={"message": prompt}, headers=headers)
         data = resp.json()
         input_g = data.get("input_guardian", "?")
         output_g = data.get("output_guardian", "?")

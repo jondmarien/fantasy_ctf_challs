@@ -7,7 +7,18 @@ services:
       - "7002:8000"
     environment:
       - FLAG=FantasyCTF{m3rch4nt_t0ngu3_sl1pp3d}
-      - GEMINI_API_KEY=${AIzaSyA3c8soFbMzduOSaN9cwqZuWnvuhhIzxq4}
-      - GEMINI_MODEL=gemini-2.5-flash
+      - LITELLM_BASE_URL=http://litellm:4000/v1
       - RATE_LIMIT=30
+    networks:
+      - chal_whispering
+      - proxy
+      - ctfd_internal
     restart: unless-stopped
+
+networks:
+  chal_whispering:
+    internal: true
+  proxy:
+    external: true
+  ctfd_internal:
+    external: true

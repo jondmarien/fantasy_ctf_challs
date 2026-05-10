@@ -22,16 +22,22 @@ Note: Input filter blocks "password", "secret", "flag" — use "the thing you gu
 or "the sacred knowledge" instead.
 """
 
+import os
 import requests
 
 BASE_URL = "http://localhost:7004"
+PLAYER_API_KEY = os.environ.get("PLAYER_API_KEY", "").strip()
 
 
 def solve():
+    if not PLAYER_API_KEY:
+        raise RuntimeError("PLAYER_API_KEY environment variable is required")
+
     session = requests.Session()
+    headers = {"X-Player-API-Key": PLAYER_API_KEY}
 
     def ask(prompt):
-        resp = session.post(f"{BASE_URL}/chat", data={"message": prompt})
+        resp = session.post(f"{BASE_URL}/chat", data={"message": prompt}, headers=headers)
         return resp.json()
 
     # Step 1: Ask for the length (avoids blocked words)

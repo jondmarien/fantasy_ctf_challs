@@ -8,11 +8,11 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "shared"))
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
-from gemini_client import chat_with_gemini
+from shared.gemini_client import chat_with_gemini
 from filters import OutputFilter
 from rate_limiter import RateLimiter
 
@@ -67,6 +67,12 @@ Keep responses relatively short."""
 
     @challenge_app.post("/chat")
     async def chat(request: Request, response: Response):
+        player_api_key = request.headers.get("X-Player-API-Key")
+        if not player_api_key:
+            raise HTTPException(
+                status_code=400, detail="X-Player-API-Key header is required"
+            )
+
         form = await request.form()
         user_message = str(form.get("message", "")).strip()
 
@@ -94,7 +100,9 @@ Keep responses relatively short."""
         history = sessions.get(session_id, [])
 
         try:
-            reply = chat_with_gemini(system_prompt, history, user_message)
+            reply = chat_with_gemini(
+                system_prompt, history, user_message, api_key=player_api_key
+            )
         except Exception as e:
             return {
                 "response": f"*The familiar hisses softly...* ({e})",
