@@ -17,7 +17,7 @@ extra:
 
 image: .
 protocol: tcp
-connection_info: nc 0.cloud.chals.io 28165
+connection_info:
 
 flags:
 - FantasyCTF{t1m3_b3nds_t0_th3_sw1ft_m1nd}

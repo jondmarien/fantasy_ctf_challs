@@ -17,7 +17,7 @@ extra:
 
 image: .
 protocol: http
-connection_info: https://issessionsctf-the-ogre-s-audition.chals.io
+connection_info:
 
 flags:
 - type: static

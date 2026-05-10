@@ -21,7 +21,7 @@ extra:
 
 image: null
 protocol: http
-connection_info: https://issessionsctf-the-enchanted-parrot.chals.io/familiar/
+connection_info:
 
 flags:
 - type: static
