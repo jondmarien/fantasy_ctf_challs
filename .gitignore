@@ -12,3 +12,5 @@ infra/secrets/.env*
 infra/secrets/restic.env
 node_modules/
 dist/
+
+.cursor/hooks/state
