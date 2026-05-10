@@ -109,8 +109,9 @@ services:
       - CORS_ORIGIN=https://ctf.chron0.tech,https://scoreboard.chron0.tech
       - CORS_ALLOW_CREDENTIALS=true
       # OAuth (CTFd OAuth plugin reads these once installed)
-      - OAUTH_CLIENT_ID=${GITHUB_OAUTH_CLIENT_ID}
-      - OAUTH_CLIENT_SECRET=${GITHUB_OAUTH_CLIENT_SECRET}
+      - GITHUB_OAUTH_CLIENT_ID=${GITHUB_OAUTH_CLIENT_ID}
+      - GITHUB_OAUTH_CLIENT_SECRET=${GITHUB_OAUTH_CLIENT_SECRET}
+      - GITHUB_OAUTH_SCOPE=user
     volumes:
       - ctfd_uploads:/var/uploads
       - ctfd_logs:/var/log/CTFd
