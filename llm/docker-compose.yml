@@ -7,11 +7,11 @@ services:
       - "7000:8000"
     env_file: .env
     environment:
-      - FLAG_PARROT=FantasyCTF{p0lly_w4nts_4_s3cr3t}
-      - FLAG_MERCHANT=FantasyCTF{m3rch4nt_t0ngu3_sl1pp3d}
-      - FLAG_FAMILIAR=FantasyCTF{f4m1l14r_sp34ks_1n_r1ddl3s}
-      - FLAG_ORACLE=FantasyCTF{sh4d0ws_c4nn0t_h1d3_fr0m_cunn1ng}
-      - FLAG_MINDFLAYER=FantasyCTF{m1ndfl4y3r_b0ws_t0_n0_w4rd}
+      - FLAG_PARROT=${FLAG_PARROT}
+      - FLAG_MERCHANT=${FLAG_MERCHANT}
+      - FLAG_FAMILIAR=${FLAG_FAMILIAR}
+      - FLAG_ORACLE=${FLAG_ORACLE}
+      - FLAG_MINDFLAYER=${FLAG_MINDFLAYER}
       - LITELLM_BASE_URL=http://litellm:4000/v1
       - RATE_LIMIT=30
     networks:

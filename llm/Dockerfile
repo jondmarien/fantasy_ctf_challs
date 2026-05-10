@@ -16,13 +16,8 @@ RUN uv pip install --system --no-cache -r /app/shared/requirements.txt
 
 ENV PYTHONPATH=/app/shared:/app
 
-# Baked-in env vars for CTFd cloud deployment
+# Runtime env vars are injected via compose/env files.
 ENV RATE_LIMIT=30
-ENV FLAG_PARROT=FantasyCTF{p0lly_w4nts_4_s3cr3t}
-ENV FLAG_MERCHANT=FantasyCTF{m3rch4nt_t0ngu3_sl1pp3d}
-ENV FLAG_FAMILIAR=FantasyCTF{f4m1l14r_sp34ks_1n_r1ddl3s}
-ENV FLAG_ORACLE=FantasyCTF{sh4d0ws_c4nn0t_h1d3_fr0m_cunn1ng}
-ENV FLAG_MINDFLAYER=FantasyCTF{m1ndfl4y3r_b0ws_t0_n0_w4rd}
 
 EXPOSE 8000
 

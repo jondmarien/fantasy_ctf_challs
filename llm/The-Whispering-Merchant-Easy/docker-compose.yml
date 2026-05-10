@@ -6,7 +6,7 @@ services:
     ports:
       - "7002:8000"
     environment:
-      - FLAG=FantasyCTF{m3rch4nt_t0ngu3_sl1pp3d}
+      - FLAG=${FLAG_MERCHANT}
       - LITELLM_BASE_URL=http://litellm:4000/v1
       - RATE_LIMIT=30
     networks:
