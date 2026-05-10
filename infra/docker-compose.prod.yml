@@ -17,7 +17,7 @@ volumes:
 
 services:
   traefik:
-    image: traefik:v3.2
+    image: traefik:v3.7
     restart: unless-stopped
     command:
       - --api.dashboard=true
@@ -43,6 +43,7 @@ services:
       - "443:443"
     environment:
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+      - DOCKER_API_VERSION=1.47
     volumes:
       - traefik_acme:/acme
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -83,7 +84,10 @@ services:
       - ctfd_internal
 
   ctfd:
-    image: ctfd/ctfd:3.8.1
+    image: ctfd-local:3.8.1
+    build:
+      context: .
+      dockerfile: Dockerfile.ctfd
     restart: unless-stopped
     depends_on:
       db:

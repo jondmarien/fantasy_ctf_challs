@@ -1,0 +1,2 @@
+FROM ctfd/ctfd:3.8.1
+RUN /opt/venv/bin/pip install --no-cache-dir psycopg2-binary
