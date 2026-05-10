@@ -84,7 +84,7 @@ services:
       - ctfd_internal
 
   ctfd:
-    image: ctfd-local:3.8.1
+    image: ctfd-local:3.8.4
     build:
       context: .
       dockerfile: Dockerfile.ctfd
