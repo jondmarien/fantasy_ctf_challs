@@ -1,0 +1,41 @@
+model_list:
+  # OpenAI
+  - model_name: gpt-4o-mini
+    litellm_params:
+      model: openai/gpt-4o-mini
+  - model_name: gpt-5-nano
+    litellm_params:
+      model: openai/gpt-5-nano
+
+  # Anthropic
+  - model_name: claude-haiku-4-5
+    litellm_params:
+      model: anthropic/claude-haiku-4-5-20251001
+  - model_name: claude-sonnet-4-6
+    litellm_params:
+      model: anthropic/claude-sonnet-4-6
+
+  # Gemini
+  - model_name: gemini-2.5-flash
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+  - model_name: gemini-2.5-pro
+    litellm_params:
+      model: gemini/gemini-2.5-pro
+
+  # OpenRouter — players can route to any OR-supported model via this name
+  - model_name: openrouter/*
+    litellm_params:
+      model: openrouter/*
+
+litellm_settings:
+  # No global key — players supply their own via Authorization header
+  drop_params: true
+  set_verbose: false
+  # Telemetry off — don't leak prompt content
+  telemetry: false
+
+general_settings:
+  # No master key — proxy is reachable only from internal Docker network
+  # Allow players to provide their key via the request body
+  store_model_in_db: false

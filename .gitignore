@@ -8,3 +8,7 @@ SQL Injection Challenge/
 example-multichal/
 
 .env
+infra/secrets/.env*
+infra/secrets/restic.env
+node_modules/
+dist/
