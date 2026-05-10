@@ -1,0 +1,201 @@
+---
+name: sync-ctfd
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options:
+          - staging
+          - production
+        default: staging
+
+concurrency:
+  group: sync-ctfd-${{ github.ref }}-${{ github.event.inputs.environment || 'staging' }}
+  cancel-in-progress: false
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      matrix: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          list-files: json
+          filters: |
+            crypto-scribe:  ['crypto/The-Scribes-Encoded-Scroll-Beginner/**']
+            crypto-goblin:  ['crypto/The-Goblin-Messengers-Cipher-Easy/**']
+            crypto-dragon:  ['crypto/The-Dragons-Sealed-Proclamation-Medium/**']
+            crypto-lich:    ['crypto/The-Lichs-Cursed-Oracle-Hard/**']
+            crypto-void:    ['crypto/The-Void-Oracles-Lattice-Expert/**']
+            prog-guild:     ['prog/The-Guild-Ledger-Beginner/**']
+            prog-runic:     ['prog/The-Runic-Vault-Easy/**']
+            prog-dungeon:   ['prog/The-Dungeon-Cartographer-Medium/**']
+            prog-arcane:    ['prog/The-Arcane-Protocol-Hard/**']
+            prog-prophecy:  ['prog/The-Prophecy-Engine-Expert/**']
+            prog-chrono:    ['prog/The-Chronomancers-Gauntlet-Legendary/**']
+            prog-abyssal:   ['prog/The-Abyssal-Architect-Mythic/**']
+            osint-cart:     ['osint/The-Cartographers-Lost-Map-Beginner/**']
+            osint-herald:   ['osint/The-Heralds-Forgotten-Broadcast-Easy/**']
+            osint-spy:      ['osint/The-Spys-Cipher-Journal-Medium/**']
+            rev-rune:       ['rev/The-Runecasters-Compiled-Tome-Easy/**']
+            llm-parrot:     ['llm/The-Enchanted-Parrot-Beginner/**']
+            llm-whispering: ['llm/The-Whispering-Merchant-Easy/**']
+            llm-court:      ['llm/The-Court-Wizards-Familiar-Medium/**']
+            llm-oracle:     ['llm/The-Oracle-of-Shadows-Hard/**']
+            llm-mindflayer: ['llm/The-Mindflayers-Sanctum-Expert/**']
+            misc-ogres:     ['misc/The-Ogres-Audition-Hard/**']
+            infra:          ['infra/**']
+
+  build-images:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        challenge: ${{ fromJSON(needs.detect-changes.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Map challenge name to path
+        id: paths
+        shell: bash
+        run: |
+          declare -A MAP=(
+            [crypto-scribe]="crypto/The-Scribes-Encoded-Scroll-Beginner"
+            [crypto-goblin]="crypto/The-Goblin-Messengers-Cipher-Easy"
+            [crypto-dragon]="crypto/The-Dragons-Sealed-Proclamation-Medium"
+            [crypto-lich]="crypto/The-Lichs-Cursed-Oracle-Hard"
+            [crypto-void]="crypto/The-Void-Oracles-Lattice-Expert"
+            [prog-guild]="prog/The-Guild-Ledger-Beginner"
+            [prog-runic]="prog/The-Runic-Vault-Easy"
+            [prog-dungeon]="prog/The-Dungeon-Cartographer-Medium"
+            [prog-arcane]="prog/The-Arcane-Protocol-Hard"
+            [prog-prophecy]="prog/The-Prophecy-Engine-Expert"
+            [prog-chrono]="prog/The-Chronomancers-Gauntlet-Legendary"
+            [prog-abyssal]="prog/The-Abyssal-Architect-Mythic"
+            [osint-cart]="osint/The-Cartographers-Lost-Map-Beginner"
+            [osint-herald]="osint/The-Heralds-Forgotten-Broadcast-Easy"
+            [osint-spy]="osint/The-Spys-Cipher-Journal-Medium"
+            [rev-rune]="rev/The-Runecasters-Compiled-Tome-Easy"
+            [llm-parrot]="llm/The-Enchanted-Parrot-Beginner"
+            [llm-whispering]="llm/The-Whispering-Merchant-Easy"
+            [llm-court]="llm/The-Court-Wizards-Familiar-Medium"
+            [llm-oracle]="llm/The-Oracle-of-Shadows-Hard"
+            [llm-mindflayer]="llm/The-Mindflayers-Sanctum-Expert"
+            [misc-ogres]="misc/The-Ogres-Audition-Hard"
+          )
+          path="${MAP[${{ matrix.challenge }}]}"
+          if [ -z "$path" ] || [ ! -f "$path/Dockerfile" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "path=$path" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.paths.outputs.skip == 'false'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - if: steps.paths.outputs.skip == 'false'
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ steps.paths.outputs.path }}
+          push: true
+          tags: |
+            ghcr.io/jondmarien/fantasy-ctf-${{ matrix.challenge }}:${{ github.sha }}
+            ghcr.io/jondmarien/fantasy-ctf-${{ matrix.challenge }}:latest
+
+  sync-metadata:
+    needs:
+      - detect-changes
+      - build-images
+    if: always() && needs.detect-changes.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    environment: ${{ github.event.inputs.environment || 'staging' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install CTF CLI
+        run: pip install ctfcli==0.1.7
+      - name: Sync changed challenge metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          declare -A MAP=(
+            [crypto-scribe]="crypto/The-Scribes-Encoded-Scroll-Beginner"
+            [crypto-goblin]="crypto/The-Goblin-Messengers-Cipher-Easy"
+            [crypto-dragon]="crypto/The-Dragons-Sealed-Proclamation-Medium"
+            [crypto-lich]="crypto/The-Lichs-Cursed-Oracle-Hard"
+            [crypto-void]="crypto/The-Void-Oracles-Lattice-Expert"
+            [prog-guild]="prog/The-Guild-Ledger-Beginner"
+            [prog-runic]="prog/The-Runic-Vault-Easy"
+            [prog-dungeon]="prog/The-Dungeon-Cartographer-Medium"
+            [prog-arcane]="prog/The-Arcane-Protocol-Hard"
+            [prog-prophecy]="prog/The-Prophecy-Engine-Expert"
+            [prog-chrono]="prog/The-Chronomancers-Gauntlet-Legendary"
+            [prog-abyssal]="prog/The-Abyssal-Architect-Mythic"
+            [osint-cart]="osint/The-Cartographers-Lost-Map-Beginner"
+            [osint-herald]="osint/The-Heralds-Forgotten-Broadcast-Easy"
+            [osint-spy]="osint/The-Spys-Cipher-Journal-Medium"
+            [rev-rune]="rev/The-Runecasters-Compiled-Tome-Easy"
+            [llm-parrot]="llm/The-Enchanted-Parrot-Beginner"
+            [llm-whispering]="llm/The-Whispering-Merchant-Easy"
+            [llm-court]="llm/The-Court-Wizards-Familiar-Medium"
+            [llm-oracle]="llm/The-Oracle-of-Shadows-Hard"
+            [llm-mindflayer]="llm/The-Mindflayers-Sanctum-Expert"
+            [misc-ogres]="misc/The-Ogres-Audition-Hard"
+          )
+
+          for c in $(echo '${{ needs.detect-changes.outputs.matrix }}' | jq -r '.[]'); do
+            # Skip non-challenge entries.
+            [ "$c" = "infra" ] && continue
+            path="${MAP[$c]:-}"
+            [ -z "$path" ] && continue
+            echo "Syncing $path"
+            ctf challenge sync "$path"
+          done
+        env:
+          CTF_URL: ${{ secrets.CTFD_URL }}
+          CTF_TOKEN: ${{ secrets.CTFD_TOKEN }}
+
+  deploy-vps:
+    needs:
+      - detect-changes
+      - sync-metadata
+    if: needs.detect-changes.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    environment: ${{ github.event.inputs.environment || 'staging' }}
+    steps:
+      - uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ctf
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -euo pipefail
+            cd /opt/fantasy_ctf_challs && git pull origin feat/hosting
+            cd infra
+            docker compose --env-file secrets/.env.prod -f docker-compose.prod.yml pull
+            docker compose --env-file secrets/.env.prod -f docker-compose.prod.yml up -d --remove-orphans
