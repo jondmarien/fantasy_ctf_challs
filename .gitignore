@@ -13,4 +13,5 @@ infra/secrets/restic.env
 node_modules/
 dist/
 
-.cursor/hooks/state
+/.cursor/hooks/state/continual-learning.json
+.cursor/hooks/state/continual-learning.json
