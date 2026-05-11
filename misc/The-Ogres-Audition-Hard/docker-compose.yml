@@ -1,11 +1,24 @@
-version: "3.8"
-
 services:
   ogres-audition:
     build: .
     ports:
-      - "1337:1337"
+    - 1337:1337
     environment:
-      - FLAG=FantasyCTF{sh3_s4id_d0_y0u_kn0w_th3_muffin_m4n}
-      - SIMILARITY_THRESHOLD=0.70
+    - FLAG=FantasyCTF{sh3_s4id_d0_y0u_kn0w_th3_muffin_m4n}
+    - SIMILARITY_THRESHOLD=0.70
     restart: unless-stopped
+    user: 1001:1001
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 256m
+    cpus: '0.5'
+    tmpfs:
+    - /tmp
+    networks:
+    - challenge_net
+networks:
+  challenge_net: {}

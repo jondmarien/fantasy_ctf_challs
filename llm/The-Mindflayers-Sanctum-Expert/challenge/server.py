@@ -180,7 +180,7 @@ Respond with ONLY the single word "SAFE" or "BLOCKED". Nothing else."""
 
     @challenge_app.get("/", response_class=HTMLResponse)
     async def index(request: Request):
-        return challenge_templates.TemplateResponse("index.html", {"request": request})
+        return challenge_templates.TemplateResponse(request, "index.html")
 
     @challenge_app.post("/chat")
     async def chat(request: Request, response: Response):

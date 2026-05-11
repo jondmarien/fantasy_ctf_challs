@@ -4,17 +4,27 @@ services:
       context: ..
       dockerfile: The-Oracle-of-Shadows-Hard/Dockerfile
     ports:
-      - "7004:8000"
+    - 7004:8000
     environment:
-      - FLAG=${FLAG_ORACLE}
-      - LITELLM_BASE_URL=http://litellm:4000/v1
-      - RATE_LIMIT=25
+    - LITELLM_BASE_URL=http://litellm:4000/v1
+    - RATE_LIMIT=25
     networks:
-      - chal_oracle
-      - proxy
-      - ctfd_internal
+    - chal_oracle
+    - proxy
+    - ctfd_internal
     restart: unless-stopped
-
+    user: 1001:1001
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 256m
+    cpus: '0.5'
+    tmpfs:
+    - /tmp
+    env_file: .env
 networks:
   chal_oracle:
     internal: true

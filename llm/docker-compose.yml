@@ -4,22 +4,27 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "7000:8000"
-    env_file: .env
+    - 7000:8000
     environment:
-      - FLAG_PARROT=${FLAG_PARROT}
-      - FLAG_MERCHANT=${FLAG_MERCHANT}
-      - FLAG_FAMILIAR=${FLAG_FAMILIAR}
-      - FLAG_ORACLE=${FLAG_ORACLE}
-      - FLAG_MINDFLAYER=${FLAG_MINDFLAYER}
-      - LITELLM_BASE_URL=http://litellm:4000/v1
-      - RATE_LIMIT=30
+    - LITELLM_BASE_URL=http://litellm:4000/v1
+    - RATE_LIMIT=30
     networks:
-      - chal_llm
-      - proxy
-      - ctfd_internal
+    - chal_llm
+    - proxy
+    - ctfd_internal
     restart: unless-stopped
-
+    user: 1001:1001
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 256m
+    cpus: '0.5'
+    tmpfs:
+    - /tmp
+    env_file: .env
 networks:
   chal_llm:
     internal: true

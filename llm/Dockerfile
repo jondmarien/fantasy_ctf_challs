@@ -1,5 +1,14 @@
 FROM python:3.12-slim
 
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    HOME=/tmp \
+    XDG_CACHE_HOME=/tmp/.cache \
+    TMPDIR=/tmp
+
+RUN addgroup --gid 1001 ctf && \
+    adduser --uid 1001 --gid 1001 --home /home/ctf --disabled-password --gecos "" ctf
+
 WORKDIR /app
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -18,6 +27,10 @@ ENV PYTHONPATH=/app/shared:/app
 
 # Runtime env vars are injected via compose/env files.
 ENV RATE_LIMIT=30
+
+RUN chown -R 1001:1001 /app
+
+USER 1001:1001
 
 EXPOSE 8000
 

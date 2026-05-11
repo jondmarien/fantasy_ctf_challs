@@ -2,7 +2,22 @@ services:
   lich-oracle:
     build: .
     ports:
-      - "1337:1337"
+    - 1337:1337
     environment:
-      - FLAG=FantasyCTF{bl0ck_by_bl0ck_th3_ch41n_br34ks}
+    - FLAG=FantasyCTF{bl0ck_by_bl0ck_th3_ch41n_br34ks}
     restart: unless-stopped
+    user: 1001:1001
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 256m
+    cpus: '0.5'
+    tmpfs:
+    - /tmp
+    networks:
+    - challenge_net
+networks:
+  challenge_net: {}
