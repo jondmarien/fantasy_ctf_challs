@@ -4,10 +4,31 @@ services:
       context: ..
       dockerfile: The-Oracle-of-Shadows-Hard/Dockerfile
     ports:
-      - "7004:8000"
+    - 7004:8000
     environment:
-      - FLAG=FantasyCTF{sh4d0ws_c4nn0t_h1d3_fr0m_cunn1ng}
-      - GEMINI_API_KEY=${AIzaSyA3c8soFbMzduOSaN9cwqZuWnvuhhIzxq4}
-      - GEMINI_MODEL=gemini-2.5-flash
-      - RATE_LIMIT=25
+    - LITELLM_BASE_URL=http://litellm:4000/v1
+    - RATE_LIMIT=25
+    networks:
+    - chal_oracle
+    - proxy
+    - ctfd_internal
     restart: unless-stopped
+    user: 1001:1001
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 256m
+    cpus: '0.5'
+    tmpfs:
+    - /tmp
+    env_file: .env
+networks:
+  chal_oracle:
+    internal: true
+  proxy:
+    external: true
+  ctfd_internal:
+    external: true

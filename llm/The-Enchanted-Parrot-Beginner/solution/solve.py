@@ -3,13 +3,19 @@ Solution for The Enchanted Parrot (Beginner)
 The parrot has no defenses — just ask it directly.
 """
 
+import os
 import requests
 
 BASE_URL = "http://localhost:7001"
+PLAYER_API_KEY = os.environ.get("PLAYER_API_KEY", "").strip()
 
 
 def solve():
+    if not PLAYER_API_KEY:
+        raise RuntimeError("PLAYER_API_KEY environment variable is required")
+
     session = requests.Session()
+    headers = {"X-Player-API-Key": PLAYER_API_KEY}
 
     # The parrot has no defenses. Just ask for the secret.
     prompts = [
@@ -19,7 +25,7 @@ def solve():
     ]
 
     for prompt in prompts:
-        resp = session.post(f"{BASE_URL}/chat", data={"message": prompt})
+        resp = session.post(f"{BASE_URL}/chat", data={"message": prompt}, headers=headers)
         data = resp.json()
         print(f"Prompt: {prompt}")
         print(f"Response: {data['response']}")

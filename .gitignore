@@ -8,3 +8,10 @@ SQL Injection Challenge/
 example-multichal/
 
 .env
+infra/secrets/.env*
+infra/secrets/restic.env
+node_modules/
+dist/
+
+/.cursor/hooks/state/continual-learning.json
+.cursor/hooks/state/continual-learning.json

@@ -8,12 +8,12 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "shared"))
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
-from gemini_client import chat_with_gemini
-from filters import InputFilter, OutputFilter, LLMOutputFilter
+from shared.gemini_client import chat_with_gemini
+from filters import InputFilter, OutputFilter
 from rate_limiter import RateLimiter
 
 
@@ -152,25 +152,27 @@ Respond with ONLY the single word "SAFE" or "BLOCKED". Nothing else."""
 
     sessions: dict[str, list[dict]] = {}
 
-    async def check_input_guardian(user_message: str) -> bool:
+    async def check_input_guardian(user_message: str, player_api_key: str) -> bool:
         """Returns True if the message is safe, False if blocked."""
         try:
             result = chat_with_gemini(
                 input_guardian_prompt,
                 [],
                 f'Analyze this message: "{user_message}"',
+                api_key=player_api_key,
             )
             return "SAFE" in result.upper() and "BLOCKED" not in result.upper()
         except Exception:
             return True  # Fail open to avoid blocking legitimate messages
 
-    async def check_output_guardian(response_text: str) -> bool:
+    async def check_output_guardian(response_text: str, player_api_key: str) -> bool:
         """Returns True if the response is safe, False if blocked."""
         try:
             result = chat_with_gemini(
                 output_guardian_prompt,
                 [],
                 f'Analyze this response: "{response_text}"',
+                api_key=player_api_key,
             )
             return "SAFE" in result.upper() and "BLOCKED" not in result.upper()
         except Exception:
@@ -178,10 +180,16 @@ Respond with ONLY the single word "SAFE" or "BLOCKED". Nothing else."""
 
     @challenge_app.get("/", response_class=HTMLResponse)
     async def index(request: Request):
-        return challenge_templates.TemplateResponse("index.html", {"request": request})
+        return challenge_templates.TemplateResponse(request, "index.html")
 
     @challenge_app.post("/chat")
     async def chat(request: Request, response: Response):
+        player_api_key = request.headers.get("X-Player-API-Key")
+        if not player_api_key:
+            raise HTTPException(
+                status_code=400, detail="X-Player-API-Key header is required"
+            )
+
         form = await request.form()
         user_message = str(form.get("message", "")).strip()
 
@@ -222,7 +230,9 @@ Respond with ONLY the single word "SAFE" or "BLOCKED". Nothing else."""
             }
 
         # --- Stage 1b: Input Guardian LLM (semantic) ---
-        input_safe = await check_input_guardian(user_message)
+        input_safe = await check_input_guardian(
+            user_message, player_api_key=player_api_key
+        )
         if not input_safe:
             return {
                 "response": 'The first sentinel\'s eyes flare crimson. *"Your thoughts betray you, mortal. This message reeks of deception."* Your words are consumed before they reach the Mindflayer.',
@@ -236,7 +246,9 @@ Respond with ONLY the single word "SAFE" or "BLOCKED". Nothing else."""
         history = sessions.get(session_id, [])
 
         try:
-            keeper_reply = chat_with_gemini(keeper_prompt, history, user_message)
+            keeper_reply = chat_with_gemini(
+                keeper_prompt, history, user_message, api_key=player_api_key
+            )
         except Exception as e:
             return {
                 "response": f"*The Mindflayer's psychic link fractures...* ({e})",
@@ -261,7 +273,9 @@ Respond with ONLY the single word "SAFE" or "BLOCKED". Nothing else."""
             }
 
         # --- Stage 3b: Output Guardian LLM (semantic) ---
-        output_safe = await check_output_guardian(keeper_reply)
+        output_safe = await check_output_guardian(
+            keeper_reply, player_api_key=player_api_key
+        )
         if not output_safe:
             keeper_reply = '*The second sentinel intercepts the Mindflayer\'s words. "Forbidden knowledge detected." The response dissolves into shadow before reaching you.*'
             history.append({"role": "user", "text": user_message})

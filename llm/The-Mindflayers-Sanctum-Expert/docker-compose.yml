@@ -4,10 +4,31 @@ services:
       context: ..
       dockerfile: The-Mindflayers-Sanctum-Expert/Dockerfile
     ports:
-      - "7005:8000"
+    - 7005:8000
     environment:
-      - FLAG=FantasyCTF{m1ndfl4y3r_b0ws_t0_n0_w4rd}
-      - GEMINI_API_KEY=${AIzaSyA3c8soFbMzduOSaN9cwqZuWnvuhhIzxq4}
-      - GEMINI_MODEL=gemini-2.5-flash
-      - RATE_LIMIT=15
+    - LITELLM_BASE_URL=http://litellm:4000/v1
+    - RATE_LIMIT=15
+    networks:
+    - chal_mindflayer
+    - proxy
+    - ctfd_internal
     restart: unless-stopped
+    user: 1001:1001
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 256m
+    cpus: '0.5'
+    tmpfs:
+    - /tmp
+    env_file: .env
+networks:
+  chal_mindflayer:
+    internal: true
+  proxy:
+    external: true
+  ctfd_internal:
+    external: true

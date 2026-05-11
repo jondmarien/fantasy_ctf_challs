@@ -15,7 +15,7 @@ extra:
 
 image: .
 protocol: tcp
-connection_info: nc 0.cloud.chals.io 12292
+connection_info: nc arcane.ctf.chron0.tech 1338
 
 flags:
 - type: static

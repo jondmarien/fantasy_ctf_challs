@@ -4,10 +4,31 @@ services:
       context: ..
       dockerfile: The-Court-Wizards-Familiar-Medium/Dockerfile
     ports:
-      - "7003:8000"
+    - 7003:8000
     environment:
-      - FLAG=FantasyCTF{f4m1l14r_sp34ks_1n_r1ddl3s}
-      - GEMINI_API_KEY=${AIzaSyA3c8soFbMzduOSaN9cwqZuWnvuhhIzxq4}
-      - GEMINI_MODEL=gemini-2.5-flash
-      - RATE_LIMIT=30
+    - LITELLM_BASE_URL=http://litellm:4000/v1
+    - RATE_LIMIT=30
+    networks:
+    - chal_familiar
+    - proxy
+    - ctfd_internal
     restart: unless-stopped
+    user: 1001:1001
+    read_only: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 256m
+    cpus: '0.5'
+    tmpfs:
+    - /tmp
+    env_file: .env
+networks:
+  chal_familiar:
+    internal: true
+  proxy:
+    external: true
+  ctfd_internal:
+    external: true

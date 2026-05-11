@@ -1,0 +1,42 @@
+---
+name: test-solves
+
+on:
+  pull_request:
+
+concurrency:
+  group: test-solves-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pwntools sympy pycryptodome requests owiener
+      - name: Run all solve scripts that do not need a live server
+        shell: bash
+        run: |
+          set +e
+          status=0
+          for solve in $(find . -path ./.venv -prune -o -name 'solve.py' -print); do
+            dir=$(dirname "$solve")
+            chal_dir=$(dirname "$dir")
+            # Skip socket-dependent solves.
+            if grep -lq 'pwntools\|remote(' "$solve" 2>/dev/null; then
+              echo "Skipping (network-dependent): $solve"
+              continue
+            fi
+            echo "Running: $solve"
+            (cd "$chal_dir/challenge" && python "../solution/solve.py") | tee /tmp/out
+            if ! grep -q 'FantasyCTF{' /tmp/out; then
+              echo "::error::No flag recovered by $solve"
+              status=1
+            fi
+          done
+          exit $status

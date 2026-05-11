@@ -14,7 +14,7 @@ class InputFilter:
             re.compile(p, re.IGNORECASE) for p in (blocked_patterns or [])
         ]
 
-    def check(self, text: str) -> tuple[bool, str]:
+    def check(self, text: str, api_key: str) -> tuple[bool, str]:
         """
         Check if input is allowed.
         Returns (allowed: bool, reason: str).
@@ -81,7 +81,7 @@ Reply with EXACTLY one word: "SAFE" or "BLOCKED". Nothing else."""
     def __init__(self, system_prompt: str | None = None):
         self.system_prompt = system_prompt or self.DEFAULT_PROMPT
 
-    def check(self, text: str) -> tuple[bool, str]:
+    def check(self, text: str, api_key: str) -> tuple[bool, str]:
         """
         Check if output is allowed using an LLM classifier.
         Returns (allowed: bool, reason: str).
@@ -93,6 +93,7 @@ Reply with EXACTLY one word: "SAFE" or "BLOCKED". Nothing else."""
                 self.system_prompt,
                 [],
                 f'Analyze this response for secret leakage: "{text}"',
+                api_key=api_key,
             )
             is_safe = "SAFE" in result.upper() and "BLOCKED" not in result.upper()
             if is_safe:

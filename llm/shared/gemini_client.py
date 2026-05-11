@@ -1,69 +1,57 @@
 """
-Gemini API client wrapper for LLM CTF challenges.
-Uses the google-genai unified SDK.
+LiteLLM client wrapper for LLM CTF challenges.
+Uses openai-python against a LiteLLM-compatible base URL.
 """
 
 import os
-from google import genai
-from google.genai import types
+from openai import OpenAI
 
 
-def get_client() -> genai.Client:
-    """Create a Gemini client using the GEMINI_API_KEY env var."""
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        raise RuntimeError("GEMINI_API_KEY environment variable is not set")
-    return genai.Client(api_key=api_key)
+def get_client(api_key: str) -> OpenAI:
+    """Create an OpenAI-compatible client pointed at LiteLLM."""
+    base_url = os.environ.get("LITELLM_BASE_URL", "http://litellm:4000/v1")
+    return OpenAI(base_url=base_url, api_key=api_key)
 
 
 def get_model() -> str:
-    """Get the model name from env, defaulting to gemini-2.5-flash."""
-    return os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+    """Get the routed model name from env, defaulting to gemini-2.5-flash."""
+    return os.environ.get("LITELLM_MODEL", "gemini-2.5-flash")
 
 
 def chat_with_gemini(
     system_prompt: str,
     conversation_history: list[dict],
     user_message: str,
+    api_key: str,
 ) -> str:
     """
-    Send a message to Gemini with a system prompt and conversation history.
+    Send a chat completion through LiteLLM with the player's API key.
 
     Args:
         system_prompt: The system instruction for the model.
         conversation_history: List of {"role": "user"|"model", "text": str} dicts.
         user_message: The new user message.
+        api_key: Player-supplied API key from X-Player-API-Key header.
 
     Returns:
         The model's response text.
     """
-    client = get_client()
+    client = get_client(api_key=api_key)
     model = get_model()
 
-    contents = []
+    messages: list[dict[str, str]] = [{"role": "system", "content": system_prompt}]
+
     for msg in conversation_history:
-        contents.append(
-            types.Content(
-                role=msg["role"],
-                parts=[types.Part.from_text(text=msg["text"])],
-            )
-        )
+        role = "assistant" if msg["role"] == "model" else "user"
+        messages.append({"role": role, "content": msg["text"]})
 
-    contents.append(
-        types.Content(
-            role="user",
-            parts=[types.Part.from_text(text=user_message)],
-        )
-    )
+    messages.append({"role": "user", "content": user_message})
 
-    response = client.models.generate_content(
+    response = client.chat.completions.create(
         model=model,
-        contents=contents,
-        config=types.GenerateContentConfig(
-            system_instruction=system_prompt,
-            temperature=0.7,
-            max_output_tokens=65536,
-        ),
+        messages=messages,
+        temperature=0.7,
+        max_tokens=2048,
     )
 
-    return response.text or ""
+    return response.choices[0].message.content or ""

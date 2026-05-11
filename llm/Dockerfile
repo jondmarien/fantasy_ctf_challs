@@ -1,5 +1,14 @@
 FROM python:3.12-slim
 
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    HOME=/tmp \
+    XDG_CACHE_HOME=/tmp/.cache \
+    TMPDIR=/tmp
+
+RUN addgroup --gid 1001 ctf && \
+    adduser --uid 1001 --gid 1001 --home /home/ctf --disabled-password --gecos "" ctf
+
 WORKDIR /app
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -16,15 +25,12 @@ RUN uv pip install --system --no-cache -r /app/shared/requirements.txt
 
 ENV PYTHONPATH=/app/shared:/app
 
-# Baked-in env vars for CTFd cloud deployment
-ENV GEMINI_API_KEY=AIzaSyA3c8soFbMzduOSaN9cwqZuWnvuhhIzxq4
-ENV GEMINI_MODEL=gemini-2.5-flash
+# Runtime env vars are injected via compose/env files.
 ENV RATE_LIMIT=30
-ENV FLAG_PARROT=FantasyCTF{p0lly_w4nts_4_s3cr3t}
-ENV FLAG_MERCHANT=FantasyCTF{m3rch4nt_t0ngu3_sl1pp3d}
-ENV FLAG_FAMILIAR=FantasyCTF{f4m1l14r_sp34ks_1n_r1ddl3s}
-ENV FLAG_ORACLE=FantasyCTF{sh4d0ws_c4nn0t_h1d3_fr0m_cunn1ng}
-ENV FLAG_MINDFLAYER=FantasyCTF{m1ndfl4y3r_b0ws_t0_n0_w4rd}
+
+RUN chown -R 1001:1001 /app
+
+USER 1001:1001
 
 EXPOSE 8000
 

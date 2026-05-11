@@ -1,0 +1,173 @@
+version: "3.9"
+
+networks:
+  proxy:
+    name: proxy
+  ctfd_internal:
+    name: ctfd_internal
+    internal: true
+
+volumes:
+  ctfd_uploads:
+  ctfd_logs:
+  pg_data:
+  redis_data:
+  traefik_acme:
+  uptime_kuma_data:
+
+services:
+  traefik:
+    image: traefik:v3.7
+    restart: unless-stopped
+    command:
+      - --api.dashboard=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=proxy
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.websecure.http.tls=true
+      - --entrypoints.websecure.http.tls.certresolver=cloudflare
+      - --entrypoints.websecure.http.tls.domains[0].main=ctf.chron0.tech
+      - --entrypoints.websecure.http.tls.domains[0].sans=*.ctf.chron0.tech
+      - --certificatesresolvers.cloudflare.acme.dnschallenge=true
+      - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
+      - --certificatesresolvers.cloudflare.acme.email=jon@d-sports.org
+      - --certificatesresolvers.cloudflare.acme.storage=/acme/acme.json
+      - --log.level=INFO
+      - --accesslog=true
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+      - DOCKER_API_VERSION=1.47
+    volumes:
+      - traefik_acme:/acme
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dashboard.rule=Host(`status.ctf.chron0.tech`) && PathPrefix(`/traefik`)
+      - traefik.http.routers.dashboard.entrypoints=websecure
+      - traefik.http.routers.dashboard.service=api@internal
+      - traefik.http.routers.dashboard.middlewares=dashboard-auth
+      - traefik.http.middlewares.dashboard-auth.basicauth.users=${TRAEFIK_DASHBOARD_USER}:${TRAEFIK_DASHBOARD_PASS_HASH}
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - ctfd_internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  cache:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    networks:
+      - ctfd_internal
+
+  ctfd:
+    image: ctfd-local:3.8.4
+    build:
+      context: .
+      dockerfile: Dockerfile.ctfd
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_started
+    environment:
+      - SECRET_KEY=${CTFD_SECRET_KEY}
+      - DATABASE_URL=${CTFD_DATABASE_URL}
+      - REDIS_URL=${CTFD_REDIS_URL}
+      - WORKERS=4
+      - LOG_FOLDER=/var/log/CTFd
+      - ACCESS_LOG=-
+      - ERROR_LOG=-
+      - REVERSE_PROXY=true
+      - SESSION_COOKIE_SAMESITE=Lax
+      - SESSION_COOKIE_SECURE=true
+      - SESSION_COOKIE_DOMAIN=.chron0.tech
+      - CORS_ORIGIN=https://ctf.chron0.tech,https://scoreboard.chron0.tech
+      - CORS_ALLOW_CREDENTIALS=true
+      # OAuth (CTFd OAuth plugin reads these once installed)
+      - GITHUB_OAUTH_CLIENT_ID=${GITHUB_OAUTH_CLIENT_ID}
+      - GITHUB_OAUTH_CLIENT_SECRET=${GITHUB_OAUTH_CLIENT_SECRET}
+      - GITHUB_OAUTH_SCOPE=user
+    volumes:
+      - ctfd_uploads:/var/uploads
+      - ctfd_logs:/var/log/CTFd
+      - ./ctfd/plugins:/opt/CTFd/CTFd/plugins:ro
+    networks:
+      - ctfd_internal
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ctfd.rule=Host(`api.ctf.chron0.tech`)
+      - traefik.http.routers.ctfd.entrypoints=websecure
+      - traefik.http.routers.ctfd.tls.certresolver=cloudflare
+      - traefik.http.services.ctfd.loadbalancer.server.port=8000
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-stable
+    restart: unless-stopped
+    command: --config /app/config.yml --port 4000
+    volumes:
+      - ./litellm/config.yml:/app/config.yml:ro
+    networks:
+      - ctfd_internal
+    # Not exposed via Traefik — only reachable from challenge containers on ctfd_internal
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    restart: unless-stopped
+    volumes:
+      - uptime_kuma_data:/app/data
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.uptime.rule=Host(`status.ctf.chron0.tech`)
+      - traefik.http.routers.uptime.entrypoints=websecure
+      - traefik.http.routers.uptime.tls.certresolver=cloudflare
+      - traefik.http.routers.uptime.priority=10
+      - traefik.http.services.uptime.loadbalancer.server.port=3001
+
+  socket-proxy:
+    image: tecnativa/docker-socket-proxy
+    restart: unless-stopped
+    environment:
+      # Allow only what Whale needs — no exec, no build, no push
+      - CONTAINERS=1
+      - IMAGES=1
+      - NETWORKS=1
+      - INFO=1
+      - VERSION=1
+      - PING=1
+      - EXEC=0
+      - BUILD=0
+      - PUSH=0
+      - DELETE=0
+      - POST=1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - ctfd_internal

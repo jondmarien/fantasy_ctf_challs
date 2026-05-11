@@ -13,7 +13,7 @@ extra:
 
 image: .
 protocol: tcp
-connection_info: nc 0.cloud.chals.io 26408
+connection_info: nc prophecy.ctf.chron0.tech 1339
 
 flags:
 - type: static
