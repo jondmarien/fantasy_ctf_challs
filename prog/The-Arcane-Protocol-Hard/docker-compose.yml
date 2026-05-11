@@ -2,7 +2,7 @@ services:
   arcane-protocol:
     build: .
     ports:
-    - 1337:1337
+    - 1338:1337
     environment:
     - FLAG=FantasyCTF{k3ys_4nd_3ch03s_uns34l_th3_d00r}
     restart: unless-stopped

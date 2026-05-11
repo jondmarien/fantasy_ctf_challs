@@ -21,7 +21,7 @@ extra:
 
 image: null
 protocol: http
-connection_info:
+connection_info: http://whispering.ctf.chron0.tech:7002
 
 flags:
 - type: static
