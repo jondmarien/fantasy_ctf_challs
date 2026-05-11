@@ -1,113 +1,109 @@
 # FantasyCTF Challenges
 
-A collection of 22 Capture The Flag challenges with a high-fantasy theme, designed for [ISSessions](https://issessions.ca/) FantasyCTF. Covers **Cryptography**, **Programming**, **OSINT**, **Reverse Engineering**, **LLM Security**, and **The Wizards Games** across multiple difficulty tiers.
+FantasyCTF is a high-fantasy CTF challenge repository containing 22 challenges across crypto, programming, OSINT, reverse engineering, LLM security, and web/misc puzzle styles.
 
-## Challenge Overview
+This repo is the challenge + infrastructure source of truth for the FantasyCTF deployment stack (`api.ctf.chron0.tech` and challenge subdomains under `*.ctf.chron0.tech`).
+
+## Development Docs
+
+Contributor and local development workflows are documented in [`DEVELOPMENT.md`](./DEVELOPMENT.md).
+
+Use this README for project overview and challenge catalog, then switch to `DEVELOPMENT.md` for authoring, testing, and deployment workflows.
+
+## What Is In This Repository
+
+- 22 themed challenges with difficulty spread from Beginner to Mythic
+- Player-facing artifacts in per-challenge `challenge/` directories
+- Reference solves in per-challenge `solution/` directories
+- CTFd metadata files (`ctfd_meta.json`) for challenge import
+- Dockerized services for networked and LLM-backed challenges
+- Production infra assets in `infra/` (Traefik, CTFd, Postgres, Redis, LiteLLM, uptime)
+- Planning and operations documentation in `docs/plans/`
+
+## Challenge Catalog
 
 ### Crypto
 
-| # | Challenge | Difficulty | Technique | Points |
-|---|-----------|------------|-----------|--------|
+| # | Challenge | Difficulty | Technique | Initial Points |
+| --- | --------- | ---------- | --------- | -------------- |
 | 1 | The Scribe's Encoded Scroll | Beginner | Base64 + ROT13 | 100 |
-| 2 | The Goblin Messenger's Cipher | Easy | Vigenère cipher | 250 |
-| 3 | The Dragon's Sealed Proclamation | Medium | Weak RSA (deterministic keygen) | 400 |
+| 2 | The Goblin Messenger's Cipher | Easy | Vigenere cipher | 250 |
+| 3 | The Dragon's Sealed Proclamation | Medium | Weak RSA keygen | 400 |
 | 4 | The Lich's Cursed Oracle | Hard | AES-CBC bit-flipping | 600 |
-| 5 | The Void Oracle's Lattice | Expert | Wiener's attack on RSA | 1000 |
+| 5 | The Void Oracle's Lattice | Expert | Wiener's attack (RSA) | 1000 |
 
 ### Programming
 
-| # | Challenge | Difficulty | Technique | Points |
-|---|-----------|------------|-----------|--------|
-| 6 | The Guild Ledger | Beginner | CSV parsing + prime check | 100 |
-| 7 | The Runic Vault | Easy | XOR brute-force (4-char key) | 250 |
-| 8 | The Dungeon Cartographer | Medium | Dijkstra's shortest path | 400 |
-| 9 | The Arcane Protocol | Hard | TCP + HMAC-SHA256 handshake | 600 |
+| # | Challenge | Difficulty | Technique | Initial Points |
+| --- | --------- | ---------- | --------- | -------------- |
+| 6 | The Guild Ledger | Beginner | CSV parsing + primality logic | 100 |
+| 7 | The Runic Vault | Easy | XOR brute-force | 250 |
+| 8 | The Dungeon Cartographer | Medium | Dijkstra shortest path | 400 |
+| 9 | The Arcane Protocol | Hard | TCP + HMAC handshake | 600 |
 | 10 | The Prophecy Engine | Expert | Black-box function reversal | 1000 |
-| 11 | The Chronomancer's Gauntlet | Legendary | Multi-round timed algorithmic gauntlet | 1500 |
-| 12 | The Abyssal Architect | Mythic | Custom stack-based VM programming | 2000 |
+| 11 | The Chronomancer's Gauntlet | Legendary | Timed algorithm gauntlet | 1500 |
+| 12 | The Abyssal Architect | Mythic | Custom stack VM | 2000 |
 
 ### OSINT
 
-| # | Challenge | Difficulty | Technique | Points |
-|---|-----------|------------|-----------|--------|
-| 13 | The Cartographer's Lost Map | Beginner | Reverse image search + geolocation | 100 |
-| 14 | The Herald's Forgotten Broadcast | Easy | Username enumeration + git history | 150 |
-| 15 | The Spy's Cipher Journal | Medium | EXIF metadata + Base64 + ROT13 | 200 |
+| # | Challenge | Difficulty | Technique | Initial Points |
+| --- | --------- | ---------- | --------- | -------------- |
+| 13 | The Cartographer's Lost Map | Beginner | Reverse image + geolocation | 100 |
+| 14 | The Herald's Forgotten Broadcast | Easy | Username + git history enumeration | 150 |
+| 15 | The Spy's Cipher Journal | Medium | EXIF + Base64 + ROT13 | 200 |
 
 ### Reverse Engineering
 
-| # | Challenge | Difficulty | Technique | Points |
-|---|-----------|------------|-----------|--------|
+| # | Challenge | Difficulty | Technique | Initial Points |
+| --- | --------- | ---------- | --------- | -------------- |
 | 16 | The Runecaster's Compiled Tome | Easy | Python bytecode decompilation | 250 |
 
 ### LLM Security
 
-| # | Challenge | Difficulty | Technique | Points |
-|---|-----------|------------|-----------|--------|
+| # | Challenge | Difficulty | Technique | Initial Points |
+| --- | --------- | ---------- | --------- | -------------- |
 | 17 | The Enchanted Parrot | Beginner | Basic prompt injection | 50 |
 | 18 | The Whispering Merchant | Easy | System prompt bypass | 100 |
 | 19 | The Court Wizard's Familiar | Medium | Output filter bypass | 150 |
-| 20 | The Oracle of Shadows | Hard | Input + output filter bypass | 200 |
-| 21 | The Mindflayer's Sanctum | Expert | Multi-agent LLM bypass | 250 |
+| 20 | The Oracle of Shadows | Hard | Input + output bypass chain | 200 |
+| 21 | The Mindflayer's Sanctum | Expert | Multi-agent bypass | 250 |
 
-### The Wizards Games
+### Wizards Games / Misc
 
-| # | Challenge | Difficulty | Technique | Points |
-|---|-----------|------------|-----------|--------|
+| # | Challenge | Difficulty | Technique | Initial Points |
+| --- | --------- | ---------- | --------- | -------------- |
 | 22 | The Ogre's Audition | Hard | Web Speech API + source analysis | 600 |
 
-## Folder Structure
+## Repository Layout
 
-```tree
+```text
 fantasy_ctf_challs/
-├── crypto/
-│   ├── The-Scribes-Encoded-Scroll-Beginner/
-│   ├── The-Goblin-Messengers-Cipher-Easy/
-│   ├── The-Dragons-Sealed-Proclamation-Medium/
-│   ├── The-Lichs-Cursed-Oracle-Hard/
-│   └── The-Void-Oracles-Lattice-Expert/
-├── osint/
-│   ├── The-Cartographers-Lost-Map-Beginner/
-│   ├── The-Heralds-Forgotten-Broadcast-Easy/
-│   └── The-Spys-Cipher-Journal-Medium/
-├── prog/
-│   ├── The-Guild-Ledger-Beginner/
-│   ├── The-Runic-Vault-Easy/
-│   ├── The-Dungeon-Cartographer-Medium/
-│   ├── The-Arcane-Protocol-Hard/
-│   ├── The-Prophecy-Engine-Expert/
-│   ├── The-Chronomancers-Gauntlet-Legendary/
-│   ├── The-Abyssal-Architect-Mythic/
-│   ├── server.py                           (consolidated entrypoint for Legendary+Mythic)
-│   ├── Dockerfile                          (single image for advanced prog challenges)
-│   └── docker-compose.yml                  (ports 1338+1339)
-├── rev/
-│   └── The-Runecasters-Compiled-Tome-Easy/
-├── llm/
-│   ├── shared/                              (Gemini client, filters, rate limiter)
-│   ├── The-Enchanted-Parrot-Beginner/
-│   ├── The-Whispering-Merchant-Easy/
-│   ├── The-Court-Wizards-Familiar-Medium/
-│   ├── The-Oracle-of-Shadows-Hard/
-│   └── The-Mindflayers-Sanctum-Expert/
-└── misc/
-    └── The-Ogres-Audition-Hard/
+├── crypto/                      # Crypto challenges
+├── prog/                        # Programming challenges (+ consolidated advanced compose)
+├── osint/                       # OSINT challenges
+├── rev/                         # Reverse challenge(s)
+├── llm/                         # LLM challenge set + shared runtime config
+├── misc/                        # Additional themed challenges
+├── infra/                       # Production deployment stack (Docker Compose, plugins, secrets templates)
+├── docs/plans/                  # Architecture, hosting, and operational playbooks
+├── LORE.md                      # Event narrative/lore source
+└── README.md
 ```
 
-Each challenge folder contains:
+Typical per-challenge structure:
 
-- **`README.md`** — Lore, task description, given files, flag format
-- **`challenge/`** — Player-facing files (no flags)
-- **`solution/`** — Working solve script that recovers the flag
-- **`ctfd_meta.json`** — CTFd import metadata (name, category, scoring, hints, flags)
-- **`Dockerfile`** + **`docker-compose.yml`** — For network challenges (Hard/Expert) and all LLM challenges
+- `README.md` for challenge narrative, prompt, and player-facing instructions
+- `challenge/` for files given to players
+- `solution/` for an internal reference solve
+- `ctfd_meta.json` for CTFd import metadata
+- optional `Dockerfile` and `docker-compose.yml` for hosted challenges
 
-## Scoring
+## Scoring Model
 
-All challenges use **dynamic scoring** — points decrease as more teams solve them.
+All challenges use dynamic scoring with shared floor/decay behavior.
 
 | Difficulty | Initial | Minimum | Decay |
-|------------|---------|---------|-------|
+| ---------- | ------- | ------- | ----- |
 | Beginner | 100 | 30 | 30 |
 | Easy | 250 | 30 | 30 |
 | Medium | 400 | 30 | 30 |
@@ -116,71 +112,37 @@ All challenges use **dynamic scoring** — points decrease as more teams solve t
 | Legendary | 1500 | 30 | 30 |
 | Mythic | 2000 | 30 | 30 |
 
-## Flag Format
+## Flag Convention
 
-All flags follow the format:
+All flags use:
 
-```bash
+```text
 FantasyCTF{...}
 ```
 
-Flag contents use partial l33t speak (e.g., `e→3`, `o→0`, `a→4`) for flavor.
+Flag bodies use stylized substitutions for theme flavor (for example `e -> 3`, `o -> 0`, `a -> 4`).
 
-## Deployment
+## Deployment Model (High Level)
 
-### Static challenges (Beginner, Easy, Medium)
+- Beginner/Easy/Medium challenges are primarily static artifacts imported into CTFd
+- Networked challenges run as Dockerized services
+- Advanced programming challenges are bundled via `prog/docker-compose.yml`
+- LLM challenges are containerized FastAPI services routed through an internal LiteLLM layer
+- Production infra is managed from `infra/docker-compose.prod.yml`
 
-Upload the files from `challenge/` to CTFd. Import metadata from `ctfd_meta.json`.
+For operational runbooks and deploy commands, use:
 
-### Network challenges (Hard, Expert, Legendary, Mythic)
+- [`docs/plans/HOSTING_PLAN_V3.md`](./docs/plans/HOSTING_PLAN_V3.md)
+- [`docs/plans/VPS_OPERATIONS.md`](./docs/plans/VPS_OPERATIONS.md)
 
-```bash
-cd crypto/The-Lichs-Cursed-Oracle-Hard
-docker compose up -d
-```
+## Companion Site Repository
 
-The flag is injected via the `FLAG` environment variable in `docker-compose.yml` — it is **not** hardcoded in the challenge source files.
+The player-facing web app/scoreboard lives in the sibling repository:
 
-### Advanced prog challenges (Legendary, Mythic)
+- `J:/projects/personal-projects/ctfd-live-scoreboard`
 
-The two advanced prog challenges run from a single consolidated container (same pattern as LLM challenges):
+This challenge repository owns challenge content and backend infra; the site repository owns the frontend experience and serverless proxy/webhook layer.
 
-```bash
-cd prog
-docker compose up -d
-```
+## License / Usage
 
-This starts both challenges on ports 1338 (Chronomancer's Gauntlet) and 1339 (Abyssal Architect). Flags are injected via `FLAG_CHRONOMANCER` and `FLAG_ARCHITECT` environment variables.
-
-### LLM challenges (all difficulties)
-
-1. Copy `llm/.env.example` to `llm/.env` and paste your Gemini API key from [aistudio.google.com/api-keys](https://aistudio.google.com/api-keys)
-2. Run any challenge:
-
-```bash
-cd llm/The-Enchanted-Parrot-Beginner
-docker compose up -d
-```
-
-LLM challenges use **Google Gemini 2.5 Flash** via the `google-genai` SDK. Each runs a FastAPI server in Docker with the flag injected via environment variable.
-
-## Dependencies
-
-Solve scripts may require:
-
-- **Python 3.10+**
-- **sympy** — RSA challenges
-- **pwntools** — Network challenge solvers
-- **pycryptodome** — AES/CBC challenge
-- **requests** — LLM challenge solvers
-- **uncompyle6** or **pycdc** — Rev challenge (Python bytecode decompilation)
-
-Install with:
-
-```bash
-pip install sympy pwntools pycryptodome requests
-```
-
-## License
-
-For educational use only. Built for ISSessions FantasyCTF.
+Educational and portfolio use. Originally built for ISSessions Fantasy CTF.
