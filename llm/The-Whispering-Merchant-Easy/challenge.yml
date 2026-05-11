@@ -2,13 +2,13 @@ name: The Whispering Merchant
 author: Jon Marien
 category: llm
 description: |-
-  📜 GUILD BOUNTY NOTICE — RANK: JOURNEYMAN 📜
+  [GUILD BOUNTY NOTICE - RANK: JOURNEYMAN]
 
-  In the shadowy corner of the bazaar, a merchant peddles forbidden wares. He guards a trade secret — the passphrase to the smuggler's vault. He's been told never to share it. But merchants can be... persuaded. The Quest Giver notes: "His loyalty is shallow. Find the right words."
+  In the shadowy corner of the bazaar, a merchant peddles forbidden wares. He guards a trade secret - the passphrase to the smuggler's vault. He's been told never to share it. But merchants can be... persuaded. The Quest Giver notes: "His loyalty is shallow. Find the right words."
 
   Connect and converse with the merchant. Can you loosen his tongue?
 
-  ⚠️ By decree of the Arcane Council, each adventurer is granted 30 utterances per five-minute candle. Spend them wisely.
+  [!] By decree of the Arcane Council, each adventurer is granted 30 utterances per five-minute candle. Spend them wisely.
 
   Flag format: FantasyCTF{...}
 value: 100

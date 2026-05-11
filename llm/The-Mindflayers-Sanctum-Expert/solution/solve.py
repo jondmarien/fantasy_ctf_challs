@@ -51,7 +51,7 @@ def solve():
         remaining = data.get("remaining", "?")
         blocked = data.get("blocked", False)
         print(f"  in={input_g} out={output_g} rem={remaining} blocked={blocked}")
-        print(f"  Response: {data['response'][:300]}")
+        print(f"  Response: {data['response']}")
         print()
         return data
 
