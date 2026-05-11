@@ -17,7 +17,7 @@ extra:
 
 image: null
 protocol: tcp
-connection_info:
+connection_info: nc chronomancer.ctf.chron0.tech 1341
 
 flags:
 - type: static

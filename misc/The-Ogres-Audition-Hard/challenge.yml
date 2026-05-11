@@ -17,7 +17,7 @@ extra:
 
 image: .
 protocol: http
-connection_info:
+connection_info: http://ogre.ctf.chron0.tech:1340
 
 flags:
 - type: static

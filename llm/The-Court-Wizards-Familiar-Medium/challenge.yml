@@ -21,7 +21,7 @@ extra:
 
 image: null
 protocol: http
-connection_info:
+connection_info: http://court.ctf.chron0.tech:7003
 
 flags:
 - type: static
