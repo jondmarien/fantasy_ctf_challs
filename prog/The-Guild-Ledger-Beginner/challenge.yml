@@ -11,6 +11,8 @@ extra:
   initial: 100
   minimum: 30
   decay: 30
+solution: solution/SOLUTION.md
+
 flags:
   - type: static
     content: "FantasyCTF{pr1m3_b0unty_unm4sks_th3_fr4ud}"
@@ -30,5 +32,5 @@ topics:
   - json-parsing
   - base64
   - prime-numbers
-state: hidden
+state: visible
 version: "0.1"

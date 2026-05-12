@@ -15,6 +15,8 @@ image: .
 protocol: tcp
 connection_info: nc prophecy.ctf.chron0.tech 1339
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{r3v3rs3_th3_pr0ph3cy_3ng1n3}
@@ -34,7 +36,9 @@ hints:
   cost: 125
 
 requirements:
-- The Arcane Protocol
+  prerequisites:
+    - "The Arcane Protocol"
+  anonymize: preview
 
 next: "The Chronomancer's Gauntlet"
 tags:
@@ -45,6 +49,6 @@ topics:
 - modular-arithmetic
 - inverse-functions
 - protocol-analysis
-state: hidden
+state: visible
 
 version: '0.1'

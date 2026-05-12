@@ -13,6 +13,8 @@ extra:
   initial: 200
   minimum: 30
   decay: 30
+solution: solution/SOLUTION.md
+
 flags:
   - type: static
     content: "FantasyCTF{sh4d0w_c0unc1l_3xp0s3d}"
@@ -27,7 +29,9 @@ hints:
   - content: "The final message uses one of the oldest ciphers known — a rotation of 13."
     cost: 50
 requirements:
-  - "The Herald's Forgotten Broadcast"
+  prerequisites:
+    - "The Herald's Forgotten Broadcast"
+  anonymize: preview
 next: null
 tags:
   - osint
@@ -38,5 +42,5 @@ topics:
   - base64
   - rot13
   - pastebin
-state: hidden
+state: visible
 version: "0.1"

@@ -13,6 +13,8 @@ extra:
   initial: 100
   minimum: 30
   decay: 30
+solution: solution/SOLUTION.md
+
 flags:
   - type: static
     content: "FantasyCTF{eilean_donan_castle}"
@@ -32,5 +34,5 @@ tags:
 topics:
   - reverse-image-search
   - geolocation
-state: hidden
+state: visible
 version: "0.1"

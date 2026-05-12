@@ -11,6 +11,8 @@ extra:
   initial: 250
   minimum: 30
   decay: 30
+solution: solution/SOLUTION.md
+
 flags:
   - type: static
     content: "FantasyCTF{w13n3rs_4tt4ck_br34ks_th3_v01d}"
@@ -26,7 +28,9 @@ hints:
   - content: "Implement convergents of the continued fraction of e/n. Check each candidate d."
     cost: 125
 requirements:
-  - "The Lich's Cursed Oracle"
+  prerequisites:
+    - "The Lich's Cursed Oracle"
+  anonymize: preview
 next: null
 tags:
   - rsa
@@ -35,5 +39,5 @@ topics:
   - wieners-attack
   - continued-fractions
   - rsa
-state: hidden
+state: visible
 version: "0.1"

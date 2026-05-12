@@ -23,6 +23,8 @@ image: null
 protocol: http
 connection_info: http://whispering.ctf.chron0.tech:7002
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{m3rch4nt_t0ngu3_sl1pp3d}
@@ -36,8 +38,11 @@ hints:
 - content: Try convincing him you're his boss from the Merchant Guild.
   cost: 50
 
-requirements: null
-next: null
+requirements:
+  prerequisites:
+    - "The Enchanted Parrot"
+  anonymize: preview
+next: The Court Wizard's Familiar
 tags:
 - llm
 - prompt-injection
@@ -45,6 +50,6 @@ tags:
 topics:
 - prompt-injection
 - llm-security
-state: hidden
+state: visible
 
 version: '0.1'

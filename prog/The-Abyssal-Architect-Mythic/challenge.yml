@@ -19,6 +19,8 @@ image: null
 protocol: tcp
 connection_info: nc architect.ctf.chron0.tech 1341
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{th3_4byss_y13lds_t0_1ts_4rch1t3ct}
@@ -36,7 +38,9 @@ hints:
   cost: 75
 
 requirements:
-- "The Chronomancer's Gauntlet"
+  prerequisites:
+    - "The Chronomancer's Gauntlet"
+  anonymize: preview
 
 next: null
 tags:
@@ -47,6 +51,6 @@ topics:
 - stack-based-vm
 - bytecode-programming
 - algorithm-design
-state: hidden
+state: visible
 
 version: '0.1'

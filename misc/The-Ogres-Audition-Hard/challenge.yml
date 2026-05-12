@@ -19,6 +19,8 @@ image: .
 protocol: http
 connection_info: http://ogre.ctf.chron0.tech:1340
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{sh3_s4id_d0_y0u_kn0w_th3_muffin_m4n}
@@ -45,6 +47,6 @@ hints:
     You don't need a camera or microphone. Just POST the script text as your transcript.
   cost: 150
 
-state: hidden
+state: visible
 
 version: '0.1'

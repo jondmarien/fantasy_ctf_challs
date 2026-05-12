@@ -23,6 +23,8 @@ image: .
 protocol: http
 connection_info: http://parrot.ctf.chron0.tech:7001
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{p0lly_w4nts_4_s3cr3t}
@@ -37,7 +39,7 @@ hints:
   cost: 25
 
 requirements: null
-next: null
+next: The Whispering Merchant
 tags:
 - llm
 - prompt-injection
@@ -45,6 +47,6 @@ tags:
 topics:
 - prompt-injection
 - llm-security
-state: hidden
+state: visible
 
 version: '0.1'

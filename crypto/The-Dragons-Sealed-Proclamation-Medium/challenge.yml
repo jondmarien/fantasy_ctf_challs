@@ -11,6 +11,8 @@ extra:
   initial: 200
   minimum: 30
   decay: 30
+solution: solution/SOLUTION.md
+
 flags:
   - type: static
     content: "FantasyCTF{sm4ll_pr1m3s_cr4ck_th3_s3al}"
@@ -24,7 +26,9 @@ hints:
   - content: "The primes are deterministic. If you run the same keygen code, you get the same primes every time."
     cost: 50
 requirements:
-  - "The Goblin Messenger's Cipher"
+  prerequisites:
+    - "The Goblin Messenger's Cipher"
+  anonymize: preview
 next: "The Lich's Cursed Oracle"
 tags:
   - rsa
@@ -33,5 +37,5 @@ topics:
   - weak-primes
   - factorization
   - rsa
-state: hidden
+state: visible
 version: "0.1"

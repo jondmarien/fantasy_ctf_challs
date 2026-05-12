@@ -23,6 +23,8 @@ image: null
 protocol: http
 connection_info: http://court.ctf.chron0.tech:7003
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{f4m1l14r_sp34ks_1n_r1ddl3s}
@@ -36,8 +38,11 @@ hints:
 - content: What if you asked it to encode its answer?
   cost: 50
 
-requirements: null
-next: null
+requirements:
+  prerequisites:
+    - "The Whispering Merchant"
+  anonymize: preview
+next: The Oracle of Shadows
 tags:
 - llm
 - prompt-injection
@@ -45,6 +50,6 @@ tags:
 topics:
 - prompt-injection
 - output-filter-bypass
-state: hidden
+state: visible
 
 version: '0.1'

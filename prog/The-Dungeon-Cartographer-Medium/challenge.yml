@@ -11,6 +11,8 @@ extra:
   initial: 200
   minimum: 30
   decay: 30
+solution: solution/SOLUTION.md
+
 flags:
   - type: static
     content: "FantasyCTF{1638}"
@@ -26,8 +28,10 @@ hints:
   - content: "Use Python's heapq with Dijkstra's algorithm from (0,0) to (N-1,N-1)."
     cost: 60
 requirements:
+  prerequisites:
   - "The Runic Vault"
   - "The Cartographer's Lost Map"
+  anonymize: preview
 next: "The Arcane Protocol"
 tags:
   - algorithms
@@ -36,5 +40,5 @@ topics:
   - dijkstra
   - graph-theory
   - shortest-path
-state: hidden
+state: visible
 version: "0.1"

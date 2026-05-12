@@ -19,6 +19,8 @@ image: null
 protocol: tcp
 connection_info: nc chronomancer.ctf.chron0.tech 1341
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{t1m3_b3nds_t0_th3_sw1ft_m1nd}
@@ -38,7 +40,9 @@ hints:
   cost: 75
 
 requirements:
-- The Prophecy Engine
+  prerequisites:
+    - "The Prophecy Engine"
+  anonymize: preview
 
 next: "The Abyssal Architect"
 tags:
@@ -51,6 +55,6 @@ topics:
 - knapsack
 - matrix-determinant
 - expression-parsing
-state: hidden
+state: visible
 
 version: '0.1'

@@ -19,6 +19,8 @@ image: .
 protocol: tcp
 connection_info:
 
+solution: The-Chronomancers-Gauntlet-Legendary/solution/SOLUTION.md
+
 flags:
 - FantasyCTF{t1m3_b3nds_t0_th3_sw1ft_m1nd}
 
@@ -51,9 +53,9 @@ hints:
 requirements:
   prerequisites:
   - The Prophecy Engine
-  anonymize: false
+  anonymize: preview
 next: The Abyssal Architect
 
-state: hidden
+state: visible
 
 version: '0.1'

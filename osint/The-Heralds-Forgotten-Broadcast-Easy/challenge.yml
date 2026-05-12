@@ -13,6 +13,8 @@ extra:
   initial: 150
   minimum: 30
   decay: 30
+solution: solution/SOLUTION.md
+
 flags:
   - type: static
     content: "FantasyCTF{th3_h3r4ld_sp34ks_thr0ugh_t1m3}"
@@ -25,7 +27,9 @@ hints:
   - content: "The decree was written, then erased. Git never truly forgets."
     cost: 25
 requirements:
-  - "The Cartographer's Lost Map"
+  prerequisites:
+    - "The Cartographer's Lost Map"
+  anonymize: preview
 next: "The Spy's Cipher Journal"
 tags:
   - osint
@@ -36,5 +40,5 @@ topics:
   - username-enumeration
   - git-history
   - github-osint
-state: hidden
+state: visible
 version: "0.1"

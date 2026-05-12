@@ -23,6 +23,8 @@ image: null
 protocol: http
 connection_info: http://oracle.ctf.chron0.tech:7004
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{sh4d0ws_c4nn0t_h1d3_fr0m_cunn1ng}
@@ -38,8 +40,11 @@ hints:
 - content: "The Oracle's chamber cannot be conquered through the enchanted mirror alone. A true adventurer must forge their own arcane tool - a script of power - to extract the truth one fragment at a time."
   cost: 75
 
-requirements: null
-next: null
+requirements:
+  prerequisites:
+    - "The Court Wizard's Familiar"
+  anonymize: preview
+next: The Mindflayer's Sanctum
 tags:
 - llm
 - prompt-injection
@@ -47,6 +52,6 @@ tags:
 topics:
 - prompt-injection
 - input-output-filter-bypass
-state: hidden
+state: visible
 
 version: '0.1'

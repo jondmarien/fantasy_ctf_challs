@@ -20,6 +20,8 @@ extra:
 
 image: null
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: "FantasyCTF{th3_t0me_sp3aks_1n_byt3c0de}"
@@ -43,6 +45,6 @@ tags:
 topics:
 - reverse-engineering
 - python-bytecode
-state: hidden
+state: visible
 
 version: "0.1"

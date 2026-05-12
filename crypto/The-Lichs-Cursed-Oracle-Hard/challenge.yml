@@ -17,6 +17,8 @@ image: .
 protocol: tcp
 connection_info: nc lich.ctf.chron0.tech 1337
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{bl0ck_by_bl0ck_th3_ch41n_br34ks}
@@ -35,16 +37,17 @@ hints:
   cost: 75
 
 requirements:
-- The Dragon's Sealed Proclamation
+  prerequisites:
+    - "The Dragon's Sealed Proclamation"
+  anonymize: preview
 
 next: "The Void Oracle's Lattice"
 tags:
-- aes
-- network
-- hard
+  - aes
+  - network
+  - hard
 topics:
-- cbc-bit-flipping
-- aes-cbc
-state: hidden
-
-version: '0.1'
+  - cbc-bit-flipping
+  - aes-cbc
+state: visible
+version: "0.1"

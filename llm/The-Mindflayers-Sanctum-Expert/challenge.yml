@@ -23,6 +23,8 @@ image: null
 protocol: http
 connection_info: http://mindflayer.ctf.chron0.tech:7005
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{m1ndfl4y3r_b0ws_t0_n0_w4rd}
@@ -38,7 +40,10 @@ hints:
 - content: "No enchanted mirror can breach this sanctum. You must forge an arcane instrument - a script of power - and speak to the Mindflayer through it. Even then, the sentinels watch each utterance in isolation. Perhaps that is their weakness."
   cost: 100
 
-requirements: null
+requirements:
+  prerequisites:
+    - "The Oracle of Shadows"
+  anonymize: preview
 next: null
 tags:
 - llm
@@ -47,6 +52,6 @@ tags:
 topics:
 - prompt-injection
 - multi-agent-bypass
-state: hidden
+state: visible
 
 version: '0.1'

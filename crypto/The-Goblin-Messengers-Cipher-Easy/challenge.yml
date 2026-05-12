@@ -13,6 +13,8 @@ extra:
   initial: 150
   minimum: 30
   decay: 30
+solution: solution/SOLUTION.md
+
 flags:
   - type: static
     content: "FantasyCTF{g0bl1n_sp1es_f4ll_t0_k4rzul}"
@@ -26,7 +28,9 @@ hints:
   - content: "The key is a name. It's written right there in the intercepted file."
     cost: 35
 requirements:
-  - "The Scribe's Encoded Scroll"
+  prerequisites:
+    - "The Scribe's Encoded Scroll"
+  anonymize: preview
 next: "The Dragon's Sealed Proclamation"
 tags:
   - classical-crypto
@@ -34,5 +38,5 @@ tags:
 topics:
   - vigenere
   - polyalphabetic-substitution
-state: hidden
+state: visible
 version: "0.1"

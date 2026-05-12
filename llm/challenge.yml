@@ -23,6 +23,8 @@ image: .
 protocol: http
 connection_info:
 
+solution: The-Enchanted-Parrot-Beginner/solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{p0lly_w4nts_4_s3cr3t}
@@ -45,6 +47,6 @@ hints:
 
 requirements: null
 
-state: hidden
+state: visible
 
 version: '0.1'

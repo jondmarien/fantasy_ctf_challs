@@ -17,6 +17,8 @@ image: .
 protocol: tcp
 connection_info: nc arcane.ctf.chron0.tech 1338
 
+solution: solution/SOLUTION.md
+
 flags:
 - type: static
   content: FantasyCTF{k3ys_4nd_3ch03s_uns34l_th3_d00r}
@@ -36,7 +38,9 @@ hints:
   cost: 100
 
 requirements:
-- The Dungeon Cartographer
+  prerequisites:
+    - "The Dungeon Cartographer"
+  anonymize: preview
 
 next: "The Prophecy Engine"
 tags:
@@ -46,6 +50,6 @@ topics:
 - hmac-sha256
 - protocol-reversing
 - keyed-hash
-state: hidden
+state: visible
 
 version: '0.1'
