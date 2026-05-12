@@ -22,7 +22,7 @@ extra:
 
 image: null
 protocol: http
-connection_info: http://mindflayer.ctf.chron0.tech:7005
+connection_info: https://mindflayer.ctf.chron0.tech
 
 solution: solution/SOLUTION.md
 

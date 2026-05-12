@@ -22,7 +22,7 @@ extra:
 
 image: null
 protocol: http
-connection_info: http://whispering.ctf.chron0.tech:7002
+connection_info: https://whispering.ctf.chron0.tech
 
 solution: solution/SOLUTION.md
 

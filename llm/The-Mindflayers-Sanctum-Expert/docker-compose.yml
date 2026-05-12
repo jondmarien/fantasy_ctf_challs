@@ -3,8 +3,6 @@ services:
     build:
       context: ..
       dockerfile: The-Mindflayers-Sanctum-Expert/Dockerfile
-    ports:
-    - 7005:8000
     environment:
     - LITELLM_BASE_URL=http://litellm:4000/v1
     - RATE_LIMIT=15
@@ -25,6 +23,12 @@ services:
     tmpfs:
     - /tmp
     env_file: .env
+    labels:
+    - traefik.enable=true
+    - traefik.http.routers.mindflayer.rule=Host(`mindflayer.ctf.chron0.tech`)
+    - traefik.http.routers.mindflayer.entrypoints=websecure
+    - traefik.http.routers.mindflayer.tls.certresolver=cloudflare
+    - traefik.http.services.mindflayer.loadbalancer.server.port=8000
 networks:
   chal_mindflayer:
     internal: true

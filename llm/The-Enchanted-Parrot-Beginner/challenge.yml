@@ -22,7 +22,7 @@ extra:
 
 image: .
 protocol: http
-connection_info: http://parrot.ctf.chron0.tech:7001
+connection_info: https://parrot.ctf.chron0.tech
 
 solution: solution/SOLUTION.md
 

@@ -22,7 +22,7 @@ extra:
 
 image: null
 protocol: http
-connection_info: http://court.ctf.chron0.tech:7003
+connection_info: https://court.ctf.chron0.tech
 
 solution: solution/SOLUTION.md
 
