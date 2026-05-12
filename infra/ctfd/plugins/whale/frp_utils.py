@@ -8,6 +8,13 @@ class FrpUtils:
     @staticmethod
     def update_frp_redirect():
         configs = DBUtils.get_all_configs()
+
+        # Skip FRP update when not configured
+        frp_ip = configs.get("frp_api_ip")
+        frp_port = configs.get("frp_api_port")
+        if not frp_ip or not frp_port:
+            return
+
         domain = configs.get('frp_http_domain_suffix', "")
 
         containers = DBUtils.get_all_alive_container()
@@ -50,6 +57,6 @@ class FrpUtils:
                     str(c.user_id) + '-' + c.uuid, str(c.user_id) + '-' + c.uuid,
                     dynamic_docker_challenge.redirect_port, c.port)
 
-        requests.put("http://" + configs.get("frp_api_ip") + ":" + configs.get("frp_api_port") + "/api/config", output,
+        requests.put("http://" + frp_ip + ":" + frp_port + "/api/config", output,
                      timeout=5)
-        requests.get("http://" + configs.get("frp_api_ip") + ":" + configs.get("frp_api_port") + "/api/reload", timeout=5)
+        requests.get("http://" + frp_ip + ":" + frp_port + "/api/reload", timeout=5)
