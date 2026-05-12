@@ -188,11 +188,32 @@ jobs:
       contents: read
     environment: ${{ github.event.inputs.environment || 'staging' }}
     steps:
-      - uses: appleboy/ssh-action@v1
+      - name: Deploy on VPS (attempt 1)
+        id: deploy_attempt_1
+        continue-on-error: true
+        uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ctf
           key: ${{ secrets.VPS_SSH_KEY }}
+          timeout: 90s
+          command_timeout: 20m
+          script: |
+            set -euo pipefail
+            cd /opt/fantasy_ctf_challs && git pull origin feat/hosting
+            cd infra
+            docker compose --env-file secrets/.env.prod -f docker-compose.prod.yml pull
+            docker compose --env-file secrets/.env.prod -f docker-compose.prod.yml up -d --remove-orphans
+
+      - name: Deploy on VPS (attempt 2 after transient failure)
+        if: steps.deploy_attempt_1.outcome == 'failure'
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ctf
+          key: ${{ secrets.VPS_SSH_KEY }}
+          timeout: 90s
+          command_timeout: 20m
           script: |
             set -euo pipefail
             cd /opt/fantasy_ctf_challs && git pull origin feat/hosting
