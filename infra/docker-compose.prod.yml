@@ -116,6 +116,7 @@ services:
       - ctfd_uploads:/var/uploads
       - ctfd_logs:/var/log/CTFd
       - ./ctfd/plugins:/opt/CTFd/CTFd/plugins:ro
+      - ./ctfd/themes/fantasy:/opt/CTFd/CTFd/themes/fantasy:ro
     networks:
       - ctfd_internal
       - proxy
