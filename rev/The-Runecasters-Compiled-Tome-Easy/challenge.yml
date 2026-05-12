@@ -17,6 +17,7 @@ extra:
   initial: 250
   minimum: 30
   decay: 30
+  function: aachen
 
 image: null
 

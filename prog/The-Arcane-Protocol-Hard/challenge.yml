@@ -12,6 +12,7 @@ extra:
   initial: 225
   minimum: 30
   decay: 30
+  function: aachen
 
 image: .
 protocol: tcp

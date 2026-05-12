@@ -11,6 +11,7 @@ extra:
   initial: 200
   minimum: 30
   decay: 30
+  function: aachen
 solution: solution/SOLUTION.md
 
 flags:

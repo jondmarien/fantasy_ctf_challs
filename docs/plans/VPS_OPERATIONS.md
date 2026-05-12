@@ -119,6 +119,7 @@ If anything fails, paste the error to Jon — likely a typo in the bootstrap scr
 ### Rollback (if something goes wrong)
 
 If you can't SSH back in as either user, use the Hetzner web console (independent of SSH) to:
+
 1. Re-enable root SSH: `sed -i 's/^PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config && systemctl restart ssh`
 2. Investigate from there.
 
@@ -216,6 +217,7 @@ docker compose --env-file secrets/.env.prod -f docker-compose.prod.yml logs -f t
 ```
 
 You're looking for either:
+
 - `Certificate obtained for [...] *.ctf.chron0.tech` — success.
 - DNS-01 challenge errors — the `CF_DNS_API_TOKEN` is wrong or scoped incorrectly.
 
@@ -262,6 +264,7 @@ docker compose --env-file secrets/.env.prod -f docker-compose.prod.yml down
 **State:** CTFd is reachable at `https://api.ctf.chron0.tech` and showing the setup wizard.
 
 Jon will walk through the wizard in his browser:
+
 - Set CTF name `FantasyCTF`
 - User mode: Users (single)
 - Create admin: `jon-admin` / `jon@d-sports.org` / strong password
@@ -325,6 +328,7 @@ docker compose --env-file secrets/.env.prod -f docker-compose.prod.yml restart c
 ```
 
 After restart, **Jon will configure Whale in the CTFd admin UI** at `Plugins → Whale`:
+
 - `WHALE_DOCKER_MAX_CONTAINERS=15`
 - `WHALE_DOCKER_API_URL=tcp://socket-proxy:2375` (the socket-proxy comes online in Section 11)
 - Default container memory: 256MB
@@ -568,6 +572,7 @@ docker ps -aq | xargs -I{} sh -c 'docker logs --tail 50 {} 2>&1 | grep -i "error
 ## 12.4 Update Hetzner snapshot before risky changes
 
 Tell Jon to take a snapshot via the Hetzner UI before:
+
 - CTFd version bumps
 - Plugin updates
 - Cloud-init or kernel changes
@@ -598,6 +603,51 @@ nano /opt/fantasy_ctf_challs/infra/secrets/.env.prod
 cd /opt/fantasy_ctf_challs/infra
 docker compose --env-file secrets/.env.prod -f docker-compose.prod.yml restart ctfd
 ```
+
+---
+
+# Section 13 - Aachen scoring rollout (terminal-agent flow)
+
+Use this when the repository includes the Aachen scoring plugin and dynamic
+challenge metadata updates.
+
+## 13.1 Pull + restart CTFd
+
+```bash
+ssh ctf@<HETZNER_IP>
+cd /opt/fantasy_ctf_challs
+bash infra/scripts/aachen_rollout_vps.sh feat/hosting
+```
+
+Expected:
+
+- Script checks out and pulls `feat/hosting`.
+- CTFd restarts.
+- Healthcheck probe inside container succeeds.
+
+## 13.2 Verify plugin registration and runtime registry
+
+```bash
+cd /opt/fantasy_ctf_challs
+bash infra/scripts/aachen_verify_vps.sh
+```
+
+Expected:
+
+- Finds `infra/ctfd/plugins/dynamic_challenges_aachen`.
+- CTFd logs include the Aachen registration line.
+- In-container Python prints `aachen` in `DECAY_FUNCTIONS`.
+
+## 13.3 Hand off to Jon for metadata sync
+
+After VPS verification is green, Jon should run ctfcli sync from the laptop for
+the 22 dynamic challenges that now contain `extra.function: aachen`.
+
+If verification fails:
+
+- Re-run `docker compose -f infra/docker-compose.prod.yml logs ctfd --tail=500`.
+- Confirm plugin files exist at `/opt/fantasy_ctf_challs/infra/ctfd/plugins/dynamic_challenges_aachen`.
+- Re-run `aachen_rollout_vps.sh`, then `aachen_verify_vps.sh`.
 
 ---
 

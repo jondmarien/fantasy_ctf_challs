@@ -18,6 +18,7 @@ extra:
   initial: 50
   minimum: 30
   decay: 30
+  function: aachen
 
 image: .
 protocol: http

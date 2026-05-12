@@ -1,0 +1,6 @@
+{
+  "name": "Aachen Scoring",
+  "description": "Adds Aachen 34C3-style convex decay for dynamic challenges.",
+  "version": "1.0.0",
+  "author": "Jon Marien"
+}
