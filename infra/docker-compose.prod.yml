@@ -125,6 +125,15 @@ services:
       - traefik.http.routers.ctfd.rule=Host(`api.ctf.chron0.tech`)
       - traefik.http.routers.ctfd.entrypoints=websecure
       - traefik.http.routers.ctfd.tls.certresolver=cloudflare
+      - traefik.http.routers.ctfd.middlewares=ctfd-security@docker
+      - traefik.http.middlewares.ctfd-security.headers.forceSTSHeader=true
+      - traefik.http.middlewares.ctfd-security.headers.stsSeconds=31536000
+      - traefik.http.middlewares.ctfd-security.headers.stsIncludeSubdomains=true
+      - traefik.http.middlewares.ctfd-security.headers.stsPreload=true
+      - traefik.http.middlewares.ctfd-security.headers.frameDeny=true
+      - traefik.http.middlewares.ctfd-security.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.ctfd-security.headers.referrerPolicy=strict-origin-when-cross-origin
+      - "traefik.http.middlewares.ctfd-security.headers.customResponseHeaders.Content-Security-Policy=frame-ancestors 'none'"
       - traefik.http.services.ctfd.loadbalancer.server.port=8000
 
   litellm:
